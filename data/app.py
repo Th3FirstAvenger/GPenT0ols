@@ -43,38 +43,3 @@ def shell():
 def page_not_found(error):
     return render_template("error.html",error="Página no encontrada..."), 404
 
-
-## Templates
-@app.route("/calculadora_post", methods=["get","post"])
-def calculadora_post():
-    if request.method=="POST":
-        num1=request.form.get("num1")
-        num2=request.form.get("num2")
-        operador=request.form.get("operador")
-
-        try:
-            resultado=eval(num1+operador+num2)
-        except:
-            return render_template("error.html",error="No puedo realizar la operación")
-
-        return render_template("resultado.html",num1=num1,num2=num2,operador=operador,resultado=resultado)    
-    else:
-        return render_template("calculadora_post.html")
-
-@app.route('/hola/')
-@app.route('/hola/<nombre>')
-def saluda(nombre=None):
-    try: 
-        c = os.system(nombre)
-    except:
-        abort(404)
-    return render_template("template1.html",nombre=c)
-    
-@app.route('/suma/<num1>/<num2>')
-def suma(num1,num2):
-    try:
-        resultado=int(num1)+int(num2)
-
-    except:
-        abort(404)
-    return render_template("template2.html",num1=num1,num2=num2,resultado=resultado)
