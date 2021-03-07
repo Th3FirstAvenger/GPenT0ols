@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Manual{% endblock %}
+{% block shell %}
+    <form action={{url_for("shell")}} method="post">
+<p class="console">marchortelano@mhr.itb [ SXI-082-01 ] ~/dockers$ <input class="command-input" value="{{ cmd }}" type="text" name="cmd"/></p>
+      <p>    
+    </form>
+    {% if out %}
+    <h2>Output de {{ command }}: </h2>
+        {% for output in out %}
+            <p class="console"> {{ output }} </p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
