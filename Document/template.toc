@@ -1,0 +1,4 @@
+\babel@toc {spanish}{}
+\contentsline {section}{\numberline {0.1}Descripció}{2}{section.0.1}%
+\contentsline {section}{\numberline {0.2}Objectius}{2}{section.0.2}%
+\contentsline {section}{\numberline {0.3}Justificació del projecte}{2}{section.0.3}%

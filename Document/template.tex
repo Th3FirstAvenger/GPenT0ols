@@ -1,0 +1,93 @@
+\documentclass[a4paper,openright,12pt]{report}
+\usepackage[spanish]{babel} % espanol
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % graficos
+\usepackage{fancyhdr}
+\usepackage[margin=2cm, top=2cm, includefoot]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage[table,xcdraw]{xcolor}
+
+
+
+% VARIABLES 
+\newcommand{\logoITB}{./data/img/ITB_Logo_417.png}
+\newcommand{\autor}{Marc Hortelano}
+\newcommand{\startDate}{Abril 2021}
+
+% ADICIONALES
+%\renewcommand{\contentsname}{Index}
+\setlength{\headheight}{40.2pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\includegraphics[width=4cm]{\logoITB}}
+
+% DOCUMENT START
+\begin{document}
+
+\begin{titlepage}
+
+    \begin{center}
+        \vspace*{1in}
+        \begin{figure}[htb]
+            \begin{center}
+                \includegraphics[width=6cm]{\logoITB}
+            \end{center}
+        \end{figure}
+
+        \vspace*{0.2in}
+        \begin{Large}
+            \textbf{GPenT0ols} \\
+        \end{Large}
+        \vspace*{0.3in}
+        \begin{large}
+            Aquest projecte esta creat per en \autor en el curs de Grau Superior\\
+            \vspace*{0.3in}
+            \startDate \\
+        \end{large}
+        \vspace*{0.3in}
+        \rule{80mm}{0.1mm}\\
+        \vspace*{0.1in}
+        \begin{large}
+        Tutor: \\
+        - \\
+        \end{large}
+            Grau Superior - Administració de Sistemes Informàtics en Xarxa\\
+        \vspace*{0.15in}
+            especialitat en Ciberseguretat \\
+        \vspace*{0.6in}
+    \end{center}
+
+    \end{titlepage}
+    % ---- %
+    \clearpage
+    \tableofcontents
+    \clearpage
+    % ----- %
+    \section{Descripció}
+   
+Feia temps que volia crear-me una eina automatitzada per poder realitzar pentestings, a més a més treballar una mica el desenvolupament web i conèixer noves tecnologies també estava dins el meu pla.
+La idea del projecte es realitzar un entorn de pentesting de forma gràfic mitjançant una web. Aquest entorn és una infraestructura en Docker on recolliré totes les eines que son útils per a mi i poder realitzar una auditoria de pentesting i desplegar-la de forma còmode i ràpida.
+La idea s'origina en la necessitat d'automatitzar i les ganes d'aprendre o millorar un llenguatge de programació, concretament Python. Com he comentat anteriorment aquest projecte no ha set la primera idea que he tingut, ja que abans han passat varies molt similars i molt interessants. Una d'aquestes i que m'ha ajudat molt a obtenir aquesta idea final, era crear un plugin del Framework caldera.
+Caldera és un framework que utilitza les tàctiques de MITRE AT\&TCK, i s'utilitza tant per red team com per blue. Aquest inici em va permetre entendre una mica el funcionament de com estava programat.
+Però aquesta idea no m'acabava de convecer, ja que principalment volia crear una eina per realitzar pentesting i no de red team. Molta gent ho engloba tot i realment són metodologies diferents. Més endavant explicaré que signifiquen aquests conceptes, però detallar aquesta part ho he trobat important perquè ha set de gran ajuda per obtenir la idea final.
+Finalment vaig decidir crear la meva pròpia eina des de zero, anomenada GPenTools. Com he dit, ho escriure principalment amb Python tant l'entorn gràfic com la majoria de scripts. El que faré serà una web on hi hagui una shell interactiva i tindré totes les eines de pentesting que consideri. Aquesta web et permetrà modificar ràpidament el script i també crear tasques automatitzades.
+Tota la informació la compartiré en el meu repositori de Github, ja que ho vull fer de forma pública i que qualsevol persona la pugui utilitzar. \\
+
+    \begin{center}
+        Enllaç del repositori: \href{https://github.com/Th3FirstAvenger/GPenT0ols}{\color{blue}https://github.com/Th3FirstAvenger/GPenT0ols}\\
+    \end{center}
+
+    \section{Objectius}
+
+    \section{Justificació del projecte}
+    Per realitzar aquest projecte obviamente he necessitat tenir una base prèvia i també m’ajudarà a expandir els coneixements apresos en les següents unitats formatives: 
+
+La major part ho hem treballat a la uf2 de hacking étic. El fet de crear una eina automatizada que fa un reconeixement inicial del serveis i vulnerabilitats actives a la xarxa, també et permetrà enumerar vulnerabilitats a nivell de web, linux i windows. Al final fare un recull d’eines funcionals i que aconsegueixin fer un report de forma automatizada.  
+Aquest recull d’eines es trobaran en un contanidor dockeritzat. Aquest tema ho hem treballat sobretot en la UF d’en Jordi. 
+
+Finalment també m’agradaria tenir-ho a un web. Aquesta web estarà feta en un framework de python3. Estic aprenent flask, i es una webshell i em premet executar les comandes i falta mostra el output i sigui molt més visual. Apart també vull mostrar la checklist de la metodologia.
+
+
+\end{document}
+
+
