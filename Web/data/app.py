@@ -23,17 +23,19 @@ def shell():
             p = subprocess.Popen(cmd.split(), stdout=myoutput, stderr=subprocess.PIPE, universal_newlines=True) 
             output, errors = p.communicate()
             
-            pid = p.pid()
+            #pid = p.pid()
             
             t='' # Save output into array 
             # stdout has been written to this file
             with open(path_to_output_file,"r") as f:
                 t+=f.read()
                 print(f.read())
+                out = t.splitlines()
+                return render_template("shell.html",cmd=cmd, command=command[0], out=out, path=path_to_output_file)    
             out = t.splitlines()
-            
-        except:
+        except :
             return render_template("error.html",error="No puedo realizar la operación")
+
         return render_template("shell.html",cmd=cmd, command=command[0], out=out, path=path_to_output_file)    
     else:
         return render_template("shell.html", cmd=cmd)

@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1619294439 "template.tex" "template.pdf" "template" 1619294440
+["pdflatex"] 1619294439 "template.tex" "template.pdf" "template" 1619705391
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1616952564 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1616952564 1324 c910af8c371558dc20f2d7822f66fe64 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1616952564 1524 4414a8315f39513458b80dfc63bff03a ""
@@ -72,11 +72,11 @@
   "data/img/ITB_Logo_417.png" 1619289648 15338 8f361517dabb44a7c072e7a36e6babb2 ""
   "template.aux" 1619294440 1197 dec20ff424e26303f229578bf42b674f "pdflatex"
   "template.out" 1619294440 161 51de6917ed1453069c6576ffcee32a2f "pdflatex"
-  "template.tex" 1619294438 4836 e7ba4b26f3e1894222f9c58beb0885ad ""
+  "template.tex" 1619294682 4836 e7ba4b26f3e1894222f9c58beb0885ad ""
   "template.toc" 1619294440 249 f447f3636a248d4da063beb92c054157 "pdflatex"
   (generated)
-  "template.out"
-  "template.pdf"
   "template.toc"
   "template.log"
+  "template.pdf"
+  "template.out"
   "template.aux"
