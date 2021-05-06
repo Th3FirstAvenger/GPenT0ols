@@ -1,4 +1,4 @@
-FROM python
+FROM python:3.7
 
 
 RUN apt-get update && \
@@ -10,4 +10,4 @@ WORKDIR /GPenT0ols
 
 RUN pip install -r requirements.txt 
 
-ENTRYPOINT ["GPenT0ols"]
+#ENTRYPOINT ["GPenT0ols"]
