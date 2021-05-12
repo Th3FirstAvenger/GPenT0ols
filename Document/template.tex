@@ -1,4 +1,4 @@
-\documentclass[a4paper,openright,12pt]{report}
+\documentclass[a4paper,openright,12pt]{article}
 \usepackage[spanish]{babel} % espanol
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx} % graficos
@@ -63,7 +63,10 @@
     \tableofcontents
     \clearpage
     % ----- %
-    \section{Descripció}
+    \setcounter{page}{2}
+    \section{Abstract}
+
+    \section{Introducció}
    
 Feia temps que volia crear-me una eina automatitzada per poder realitzar pentestings, a més a més treballar una mica el desenvolupament web i conèixer noves tecnologies també estava dins el meu pla.
 La idea del projecte es realitzar un entorn de pentesting de forma gràfic mitjançant una web. Aquest entorn és una infraestructura en Docker on recolliré totes les eines que son útils per a mi i poder realitzar una auditoria de pentesting i desplegar-la de forma còmode i ràpida.
@@ -78,14 +81,15 @@ Tota la informació la compartiré en el meu repositori de Github, ja que ho vul
     \end{center}
 
     \section{Objectius}
+    El meu objectiu final es aconseguir implamentar aquesta eina a la hora de realitzar un pentest 
+    \section{Anàlisi de la programació}
 
-    \section{Justificació del projecte}
-    Per realitzar aquest projecte obviamente he necessitat tenir una base prèvia i també m’ajudarà a expandir els coneixements apresos en les següents unitats formatives: 
+    \section{Resultats}
 
-La major part ho hem treballat a la uf2 de hacking étic. El fet de crear una eina automatizada que fa un reconeixement inicial del serveis i vulnerabilitats actives a la xarxa, també et permetrà enumerar vulnerabilitats a nivell de web, linux i windows. Al final fare un recull d’eines funcionals i que aconsegueixin fer un report de forma automatizada.  
-Aquest recull d’eines es trobaran en un contanidor dockeritzat. Aquest tema ho hem treballat sobretot en la UF d’en Jordi. 
+    \section{Conclusions}
 
-Finalment també m’agradaria tenir-ho a un web. Aquesta web estarà feta en un framework de python3. Estic aprenent flask, i es una webshell i em premet executar les comandes i falta mostra el output i sigui molt més visual. Apart també vull mostrar la checklist de la metodologia.
+    \section{Referecies bibliografiques}
+
 
 
 \end{document}

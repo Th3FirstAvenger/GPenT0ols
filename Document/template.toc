@@ -1,4 +1,8 @@
 \babel@toc {spanish}{}
-\contentsline {section}{\numberline {0.1}Descripció}{2}{section.0.1}%
-\contentsline {section}{\numberline {0.2}Objectius}{2}{section.0.2}%
-\contentsline {section}{\numberline {0.3}Justificació del projecte}{2}{section.0.3}%
+\contentsline {section}{\numberline {1}Abstract}{2}{section.1}%
+\contentsline {section}{\numberline {2}Introducció}{2}{section.2}%
+\contentsline {section}{\numberline {3}Objectius}{2}{section.3}%
+\contentsline {section}{\numberline {4}Anàlisi de la programació}{2}{section.4}%
+\contentsline {section}{\numberline {5}Resultats}{2}{section.5}%
+\contentsline {section}{\numberline {6}Conclusions}{2}{section.6}%
+\contentsline {section}{\numberline {7}Referecies bibliografiques}{2}{section.7}%
