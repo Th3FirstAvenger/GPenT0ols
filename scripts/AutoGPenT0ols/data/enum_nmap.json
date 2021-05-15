@@ -1,0 +1,7 @@
+{
+    "name" : "nmap",
+    "commands" : [
+        "nmap -p- --min-rate 5000 -n -oG allports",
+        "nmap -p 21"
+    ]
+}

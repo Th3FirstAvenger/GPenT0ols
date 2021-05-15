@@ -2,24 +2,26 @@
 
 ##
 
-from pwn import *
 import json
 import os
 import time
 import subprocess
+from pwn import *
+from gptools_cli import gen_cli_args
 from recon import *
 
 
 # Vars 
 
 PATH="/tmp/autorecon/" # demo path
-
-nmap_p = '{"name":"nmap", "commands":["nmap -p- --min-rate 5000 -n -oG allports 127.0.0.1", "nmap -p 21 localhost"]}' # demo check 
+ip='127.0.0.1'
+nmap_p = '{"name":"nmap", "commands":["nmap -p- --min-rate 5000 -n -oG allports", "nmap -p 21"]}' # demo check 
 
 
 infra = log.progress("Build")
 
 def mdir(dir_name):
+
     try:
         os.makedirs(dir_name)
     except OSError:
@@ -36,7 +38,11 @@ def run(dir_file, command):
 
     with open(out,'w+') as fout:
         with open(err,'w+') as ferr:
-            out=subprocess.call(command.split(),stdout=fout,stderr=ferr)
+            
+            com = command.split()
+            com.append(ip)            
+            
+            out=subprocess.call(com,stdout=fout,stderr=ferr)
             # reset file to read from it
             fout.seek(0)
             # save output (if any) in variable
@@ -49,23 +55,31 @@ def run(dir_file, command):
 
 def main():
     
-    mdir(PATH)
+    args = gen_cli_args()
+    
+    print(args)
+    
     infra.status("Building structure on {}".format(PATH))
     
-    data = json.loads(nmap_p)
-    
-    recon = log.progress("Recon")
-    
-    recon.status("Enum with {}".format(data['name']))
-    dir_name = PATH + data['name'] + "/"
-    dir_tmp = "tmp/" + data['name']
-    mdir(dir_name) 
-    mdir(dir_tmp) 
-        
-    for command in data['commands']: 
-
-       run(dir_name,command)
-       time.sleep(2)
+#    data = json.loads(nmap_p)
+#    
+#    recon = log.progress("Recon")
+#    recon.status("Enum with {}".format(data['name']))
+#    
+#    dir_name = PATH + data['name'] + "/"
+#    dir_tmp = "tmp/" + data['name']
+#    
+#    if not os.path.exists(dir_name):
+#        mdir(dir_name) 
+#    
+#    if not os.path.exists(dir_name):
+#        mdir(dir_tmp) 
+#       
+#
+#    for command in data['commands']: 
+#
+#       run(dir_name,command)
+#       time.sleep(2)
 
 
 if __name__ == '__main__':
