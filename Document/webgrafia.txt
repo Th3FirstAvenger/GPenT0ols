@@ -1,0 +1,11 @@
+Help code: 
+https://github.com/Tib3rius/AutoRecon
+https://github.com/codingo/Reconnoitre
+https://github.com/RoliSoft/ReconScan
+https://github.com/byt3bl33d3r/CrackMapExec
+
+
+# Python3 Lib
+argparse — Parser for command-line options, arguments and sub-commands : https://docs.python.org/3/library/argparse.html
+subprocess — Subprocess management : https://docs.python.org/3/library/subprocess.html
+os.path — Common pathname manipulations : https://docs.python.org/3/library/os.path.html

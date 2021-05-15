@@ -30,11 +30,11 @@ def gen_cli_args():
            highlight(CODENAME)),
 
                                     formatter_class=RawTextHelpFormatter,
-                                    epilog="Ya feelin' a bit buggy all of a sudden?")
+                                    epilog="We are in... Let the hacking begin!")
 
     parser.add_argument("-t", type=int, dest="threads", default=100, help="set how many concurrent threads to use (default: 100)")
     parser.add_argument("--verbose", action='store_true', help="enable verbose output")
-    
+    parser.add_argument("--path",dest="path", default='/tmp/autorecon/', help="Destination path (default: /tmp/autorecon)")
 
     std_parser = argparse.ArgumentParser(add_help=False)
     std_parser.add_argument("target", nargs='*', type=str, help="the target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets, NMap XML or .Nessus file(s)")
@@ -43,7 +43,7 @@ def gen_cli_args():
     cred_parser.add_argument("-u", metavar="USERNAME", dest='username', nargs='+', default=[], help="username(s) or file(s) containing usernames")
     cred_parser.add_argument("-p", metavar="PASSWORD", dest='password', nargs='+', default=[], help="password(s) or file(s) containing passwords")
 
-    subparsers = parser.add_subparsers(title='services', dest='services', description='available protocols')
+    subparsers = parser.add_subparsers(title='services', dest='services', description='available options')
 
 
     # Arguments Recon
@@ -55,14 +55,20 @@ def gen_cli_args():
             action='store_true'
             )
 
+    recon.add_argument(
+            '--ports',
+            help='scan specific ports',
+            nargs='?'
+            )
 
     # Arguments WEB
 
-    web = subparsers.add_parser('web', help='Web enumeration')
+    web = subparsers.add_parser('web', help='Web server scanner', parents = [cred_parser,std_parser])
+
 
     # Arguments SMTP
 
-    smtp = subparsers.add_parser('smtp', help='Web enumeration')
+    smtp = subparsers.add_parser('smtp', help='smtp enumeration')
 
     # Arguments SMB
 
@@ -75,20 +81,15 @@ def gen_cli_args():
     
     # Arguments FTP
     
+    ftp = subparsers.add_parser('ftp', help='FTP enum', parents = [cred_parser,std_parser])
 
     # Argumets LDAP
 
+    ldap = subparsers.add_parser('ldap', help='LDAP enum', parents = [cred_parser,std_parser])
+    
     # Arguments SNMP
-
-
-
-
-
-
-
-
-
-
+    
+    snmp = subparsers.add_parser('snmp', help='Enum SNMP', parents = [cred_parser,std_parser])
 
     if len(sys.argv) == 1:
         parser.print_help()

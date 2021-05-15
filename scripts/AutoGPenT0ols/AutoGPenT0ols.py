@@ -1,5 +1,13 @@
 ## 
-
+                           #                                                                                                                                                                                         
+                           ##                                ###                                                                                                                                                     
+  ###### #######  ######## ###  ## ######## ####### #######  ###         ####                                                                                                                                        
+ ###           ##          #### ##    ###   ##   ##       ## ###        ###                                                                                                                                          
+ ###  ##  ######   ####### #######    ###   ##   ##  ##   ## ###        ###                                                                                                                                          
+ ###  ##  ###      ###     ### ###    ###   ##   ##  ##   ## ###        ###                                                                                                                                          
+  ######  ###      ####### ###  ##    ###   #######   #####  ####### #####                                                                                                                                           
+                                 #                                                                                                                                                                                   
+# Author : CapitanJ4ck
 ##
 
 import json
@@ -13,24 +21,38 @@ from recon import *
 
 # Vars 
 
-PATH="/tmp/autorecon/" # demo path
-ip='127.0.0.1'
-nmap_p = '{"name":"nmap", "commands":["nmap -p- --min-rate 5000 -n -oG allports", "nmap -p 21"]}' # demo check 
+# Make directories
 
-
-infra = log.progress("Build")
-
-def mdir(dir_name):
+def mdir(progress, dir_name):
+    
+    directory_created = True
 
     try:
         os.makedirs(dir_name)
-    except OSError:
-        infra.failure("Creation of the directory {} failed".format(dir_name))
-    except: 
-        infra.status("Succes")
-    else: 
-        infra.status("Succesfully created the directory {}".format(dir_name))
     
+    except OSError:
+        directory_created = False
+    
+    return directory_created
+
+# Managment function, we can build directories for save outputs
+
+def build_infraestucture(out_path, services):
+
+    infra = log.progress("Managment")
+    
+    infra.status("Building structure on {}".format(out_path))
+
+    dir_name = os.path.join(out_path,services)
+    
+    if not os.path.exists(dir_name):
+        directory_created = mdir(infra, dir_name) 
+        if directory_created: 
+            infra.success("Succesfully created the directory {}".format(dir_name))
+        else: 
+            infra.failure("Creation of the directory {} failed".format(dir_name))
+    else: 
+        infra.success("Directory {} already exist".format(dir_name))
 
 def run(dir_file, command):
     out = dir_file + "out.txt"
@@ -39,10 +61,7 @@ def run(dir_file, command):
     with open(out,'w+') as fout:
         with open(err,'w+') as ferr:
             
-            com = command.split()
-            com.append(ip)            
-            
-            out=subprocess.call(com,stdout=fout,stderr=ferr)
+            out=subprocess.call(command,stdout=fout,stderr=ferr)
             # reset file to read from it
             fout.seek(0)
             # save output (if any) in variable
@@ -55,25 +74,33 @@ def run(dir_file, command):
 
 def main():
     
-    args = gen_cli_args()
+    # Get args from Namespace type 
+    args = vars(gen_cli_args())
     
-    print(args)
+    # Get service
+    service = args['services']
+    target = args['target'] 
+    out_path = args['path']
+
+    build_infraestucture(out_path, service)
+
+    print(args) # debug
+
+    # Build infraestucture for save output
+
     
-    infra.status("Building structure on {}".format(PATH))
+    # Start progress
+    service_progress = log.progress(service)
+
+    if 'recon' == service: 
+        service_progress.status("Enum with service {}".format(service))
     
+
+
+
 #    data = json.loads(nmap_p)
 #    
-#    recon = log.progress("Recon")
-#    recon.status("Enum with {}".format(data['name']))
 #    
-#    dir_name = PATH + data['name'] + "/"
-#    dir_tmp = "tmp/" + data['name']
-#    
-#    if not os.path.exists(dir_name):
-#        mdir(dir_name) 
-#    
-#    if not os.path.exists(dir_name):
-#        mdir(dir_tmp) 
 #       
 #
 #    for command in data['commands']: 
