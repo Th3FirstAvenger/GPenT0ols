@@ -17,7 +17,7 @@ import time
 import subprocess
 from pwn import *
 from gptools_cli import gen_cli_args
-from recon import *
+from services.recon import *
 
 
 # Vars 
@@ -38,13 +38,12 @@ def mdir(progress, dir_name):
 
 # Managment function, we can build directories for save outputs
 
-def build_infraestucture(out_path, services):
+def build_infraestucture(dir_name):
 
     infra = log.progress("Managment")
     
-    infra.status("Building structure on {}".format(out_path))
+    infra.status("Building structure on {}".format(dir_name))
 
-    dir_name = os.path.join(out_path,services)
     
     if not os.path.exists(dir_name):
         directory_created = mdir(infra, dir_name) 
@@ -81,19 +80,21 @@ def main():
     # Get service
     service = args['services']
     target = args['target'] 
-    out_path = args['path']
 
-    build_infraestucture(out_path, service)
-
-    print(args) # debug
+    out_path = os.path.join(args['path'],service)
+    config_path = os.path.join(os.getcwd(), os.path.join("data",service))
 
     # Build infraestucture for save output
+    build_infraestucture(out_path)
+    build_infraestucture(config_path)
 
+#    print(args) # debug
     
     # Start progress
     service_progress = log.progress(service)
 
     if 'recon' == service: 
+        print(recon(args,config_path,out_path))
         service_progress.status("Enum with service {}".format(service))
         
 

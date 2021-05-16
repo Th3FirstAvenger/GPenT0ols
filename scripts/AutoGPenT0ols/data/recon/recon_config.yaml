@@ -1,0 +1,10 @@
+nmap: 
+    attack_technique: nmap
+    display_name: "Scanning all ports with nmap"
+    commands: | 
+        nmap -p- --min-rate 5000 -n -oG ${{ out_dir }} ${{ target }} 
+    attack_technique: nmap
+    display_name: "Scanning specific ports with nmap"
+    commands: |  
+        nmap -p- --min-rate 5000 -n -oG ${{ out_dir }} ${{ target }} 
+
