@@ -1,10 +1,33 @@
-nmap: 
+full_scanner:
+  nmap_quick:
+    description: "Quick scan with nmap"
+    commands: | 
+        nmap -sV -sC --version-all -oN ${{ out_dir }} ${{ target }} 
+  
+  nmap_full: 
     attack_technique: nmap
-    display_name: "Scanning all ports with nmap"
+    description: "Scanning all ports with nmap and return service information"
+    commands: | 
+        nmap -sS -sV -sC -O -p - -oN ${{ out_dir }} ${{ target }} 
+
+  nmap_fast_udp:
+    attack_technique: nmap
+    description: "Scanning udp ports"
+    commands: |  
+        nmap -F -sU -sV -T 4 -oN ${{ out_dir }} ${{ target }} 
+
+
+nmap_custom:
+  
+  nmap_allports:
+    attack_technique: nmap
+    description: "Scanning all ports with nmap"
     commands: | 
         nmap -p- --min-rate 5000 -n -oG ${{ out_dir }} ${{ target }} 
+  
+  nmap_ports:
     attack_technique: nmap
-    display_name: "Scanning specific ports with nmap"
+    description: "Scanning specific ports with nmap"
     commands: |  
-        nmap -p- --min-rate 5000 -n -oG ${{ out_dir }} ${{ target }} 
+        nmap -p ${{ ports }} -sC -sV ${{ out_dir }} ${{ target }} 
 

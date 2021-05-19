@@ -55,11 +55,26 @@ def gen_cli_args():
             action='store_true'
             )
 
+
+    recon.add_argument(
+            '--scanner',
+            help='Select scanner',
+            nargs='?',
+            default = 'full_scanner'
+            )
+    
     recon.add_argument(
             '--ports',
             help='scan specific ports',
             nargs='?'
             )
+    
+    recon.add_argument(
+            '--full',
+            help='Full recon scan',
+            action='store_true'
+            )
+
 
     # Arguments WEB
 

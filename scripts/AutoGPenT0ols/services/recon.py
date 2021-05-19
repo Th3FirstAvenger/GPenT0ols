@@ -11,21 +11,25 @@ import os
 def recon(all_info, recon_path, out_path):
     target = all_info['target'][0]
     out_path = all_info['path']
-    
-    recon_commands = []
+    info_data = all_info['scanner']
 
     # get path information
     recon_data = os.path.join(recon_path, "recon_config.yaml")
-    cmd = 1
-    
+    command_info = {} 
     with open(recon_data, 'r') as unparsed:
         try:
-            print(yaml.safe_load(unparsed))
+            recon_data = yaml.safe_load(unparsed)
         except yaml.YAMLError as exc:
             print(exc)
+        print(recon_data) 
+        
+        list_data = recon_data[info_data].keys()
+        print(list_data) 
+        
+        for options in list_data: 
+            descr = recon_data[info_data][options]['description']
+            cmd = (recon_data[info_data][options]['commands'].replace('${{ out_dir }}', out_path).replace('${{ target }}', target))
+            command_info[descr] = cmd 
     
-        #cmd = (data['commands'].replace('${{ out_dir }}', target)
-         #                 .replace('${{ target }}', target))
-    
-    return cmd
+    return command_info
 

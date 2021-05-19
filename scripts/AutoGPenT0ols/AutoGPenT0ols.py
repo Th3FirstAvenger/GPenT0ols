@@ -88,7 +88,7 @@ def main():
     build_infraestucture(out_path)
     build_infraestucture(config_path)
 
-#    print(args) # debug
+    print(args) # debug
     
     # Start progress
     service_progress = log.progress(service)
