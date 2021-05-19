@@ -1,14 +1,15 @@
 full_scanner:
-  nmap_quick:
-    description: "Quick scan with nmap"
-    commands: | 
-        nmap -sV -sC --open --version-all -oN ${{ out_dir }} ${{ target }} 
-  
-  nmap_full: 
+  nmap_scan:
     attack_technique: nmap
+    description: "Scanning nmap with scripts banner,(http* or ssl*) and not (brute or broadcast or dos or external or http-slowloris* or fuzzer)"
+    commands: |
+        nmap -sV -p ${{ port }} --script="banner,(http* or ssl*) and not (brute or broadcast or dos or external or http-slowloris* or fuzzer)" -oN ${{ out_dir }} ${{ target }}
+  
+  curl_index: 
+    attack_technique: curl-index
     description: "Scanning all ports with nmap and return service information"
     commands: | 
-        nmap -sS -sV -sC -O -p- --min-rate 5000 -n -oN ${{ out_dir }} ${{ target }} 
+        curl -sSik ${{ layer }}://${{ target }}:${{ port }}/-m 10 2>&1 
 
   nmap_fast_udp:
     attack_technique: nmap

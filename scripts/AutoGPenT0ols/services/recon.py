@@ -10,9 +10,8 @@ import os
 
 def recon(all_info, recon_path, out_path):
     target = all_info['target'][0]
-    out_path = all_info['path']
     info_data = all_info['scanner']
-
+    
     # get path information
     recon_data = os.path.join(recon_path, "recon_config.yaml")
     command_info = {} 
@@ -21,14 +20,13 @@ def recon(all_info, recon_path, out_path):
             recon_data = yaml.safe_load(unparsed)
         except yaml.YAMLError as exc:
             print(exc)
-        print(recon_data) 
         
         list_data = recon_data[info_data].keys()
-        print(list_data) 
-        
+
         for options in list_data: 
             descr = recon_data[info_data][options]['description']
-            cmd = (recon_data[info_data][options]['commands'].replace('${{ out_dir }}', out_path).replace('${{ target }}', target))
+            out_file = os.path.join(out_path, '.'.join((options, 'txt')))
+            cmd = (recon_data[info_data][options]['commands'].replace('${{ out_dir }}', out_file).replace('${{ target }}', target))
             command_info[descr] = cmd 
     
     return command_info

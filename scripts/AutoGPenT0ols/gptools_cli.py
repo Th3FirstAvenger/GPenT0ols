@@ -48,7 +48,7 @@ def gen_cli_args():
 
     # Arguments Recon
 
-    recon = subparsers.add_parser('recon', help='Initial recon', parents=[std_parser])
+    recon = subparsers.add_parser('recon', help='Initial recon', parents=[std_parser]) ## Get new arguments and can introduce std_parser arguments
     recon.add_argument(
             '--all-ports',
             help='scan all ports',
@@ -58,7 +58,7 @@ def gen_cli_args():
 
     recon.add_argument(
             '--scanner',
-            help='Select scanner',
+            help='Select scanner (default : full_scanner)',
             nargs='?',
             default = 'full_scanner'
             )

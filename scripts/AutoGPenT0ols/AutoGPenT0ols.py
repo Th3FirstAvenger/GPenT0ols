@@ -11,6 +11,8 @@
 # Author : CapitanJ4ck
 ##
 
+import signal
+from sys import exit
 import json
 import os
 import time
@@ -18,13 +20,25 @@ import subprocess
 from pwn import *
 from gptools_cli import gen_cli_args
 from services.recon import *
+from services.web import *
+
+## Detect Contrl + C 
+def signal_handler(key, frame):
+    # Handle any cleanup here
+    exit = log.progress("SIGINT or CTRL-C detected.")
+    exit.status("Exiting...")
+    time.sleep(1)
+    exit.failure("Exiting gracefully")
+    sys.exit(1)
+
+signal = signal.signal(signal.SIGINT, signal_handler)
 
 
 # Vars 
 
 # Make directories
 
-def mdir(progress, dir_name):
+def mdir(dir_name):
     
     directory_created = True
 
@@ -46,7 +60,7 @@ def build_infraestucture(dir_name):
 
     
     if not os.path.exists(dir_name):
-        directory_created = mdir(infra, dir_name) 
+        directory_created = mdir(dir_name) 
         if directory_created: 
             infra.success("Succesfully created the directory {}".format(dir_name))
         else: 
@@ -80,7 +94,7 @@ def main():
     # Get service
     service = args['services']
     target = args['target'] 
-
+    
     out_path = os.path.join(args['path'],service)
     config_path = os.path.join(os.getcwd(), os.path.join("data",service))
 
@@ -89,27 +103,17 @@ def main():
     build_infraestucture(config_path)
 
     print(args) # debug
-    
     # Start progress
     service_progress = log.progress(service)
-
+    
+    ## Recon scanner
     if 'recon' == service: 
-        print(recon(args,config_path,out_path))
-        service_progress.status("Enum with service {}".format(service))
-        
-
-
-
-#    data = json.loads(nmap_p)
-#    
-#    
-#       
-#
-#    for command in data['commands']: 
-#
-#       run(dir_name,command)
-#       time.sleep(2)
-
+        scanner = recon(args,config_path,out_path)
+        for description, command in scanner.items():
+            service_progress.status("{}".format(description))
+#            run(web_path,command.split()) # WEB PATH 
+            time.sleep(2) # Check without exec 
+            print(command.split())
 
 if __name__ == '__main__':
     main()
