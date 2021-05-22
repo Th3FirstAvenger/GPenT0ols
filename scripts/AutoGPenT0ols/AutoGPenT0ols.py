@@ -52,15 +52,15 @@ def mdir(dir_name):
 
 # Managment function, we can build directories for save outputs
 
-def build_infraestucture(dir_name):
+def build_infraestucture(dir_name,output):
 
     infra = log.progress("Managment")
     
-    infra.status("Building structure on {}".format(dir_name))
+    infra.status("Building structure on ")
 
     
     if not os.path.exists(dir_name):
-        directory_created = mdir(dir_name) 
+        directory_created = mdir(dir_name)
         if directory_created: 
             infra.success("Succesfully created the directory {}".format(dir_name))
         else: 
@@ -99,8 +99,7 @@ def main():
     config_path = os.path.join(os.getcwd(), os.path.join("data",service))
 
     # Build infraestucture for save output
-    build_infraestucture(out_path)
-    build_infraestucture(config_path)
+    build_infraestucture(out_path,config_path)
 
     print(args) # debug
     # Start progress
