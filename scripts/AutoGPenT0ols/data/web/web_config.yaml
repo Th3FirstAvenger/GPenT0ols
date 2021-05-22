@@ -7,28 +7,27 @@ full_scanner:
   
   curl_index: 
     attack_technique: curl-index
-    description: "Scanning all ports with nmap and return service information"
+    description: "Enum index web content"
     commands: | 
-        curl -sSik ${{ layer }}://${{ target }}:${{ port }}/-m 10 2>&1 
+        curl -sSik ${{ url }} -m 10 2>&1 
 
-  nmap_fast_udp:
-    attack_technique: nmap
-    description: "Scanning udp ports"
+  nikto_scanenr:
+    attack_technique: nikto
+    description: "Nikto detect misconfiguration, risky files, etc."
     commands: |  
-        nmap -F -sU -sV -T 4 -oN ${{ out_dir }} ${{ target }} 
-
-## Not ready yet
-nmap_custom:
+        nikto -h ${{ url }}  
   
-  nmap_allports:
-    attack_technique: nmap
-    description: "Scanning all ports with nmap"
-    commands: | 
-        nmap -p- --min-rate 5000 -n -oG ${{ out_dir }} ${{ target }} 
-  
-  nmap_ports:
-    attack_technique: nmap
-    description: "Scanning specific ports with nmap"
+  fuzzing_ffuf:
+    attack_technique: ffuf
+    description: "Fuzzing directories and files"
     commands: |  
-        nmap -p ${{ ports }} -sC -sV ${{ out_dir }} ${{ target }} 
+        ffuf -w ${{ wordlist }} -u ${{ url }}/FUZZ -c -e '.php,.asp,.aspx,.txt,.html,.zip'  
+    
+wordpress: 
+    wordpres_scanner: 
+        attack_technique: wpscan
+        description: "Fuzzing directories and files"
+        commands: |  
+            wpscan --url ${{ url }} -e vp,vt,tt,cb,dbe,u,m --plugins-detection aggressive --plugins-version-detection aggressive 
+    
 

@@ -19,8 +19,9 @@ import time
 import subprocess
 from pwn import *
 from gptools_cli import gen_cli_args
-from services.recon import *
-from services.web import *
+from services.recon import recon
+from services.web import web
+from services.smb import smb
 
 ## Detect Contrl + C 
 def signal_handler(key, frame):
@@ -108,11 +109,18 @@ def main():
     ## Recon scanner
     if 'recon' == service: 
         scanner = recon(args,config_path,out_path)
-        for description, command in scanner.items():
-            service_progress.status("{}".format(description))
+    ## Web scanner
+    elif 'web' == service: 
+        scanner = web(args,config_path,out_path)
+    ## smb scanner
+    elif 'smb' == service: 
+        scanner = smb(args,config_path,out_path) 
+
+#    for description, command in scanner.items():
+#        service_progress.status("{}".format(description))
 #            run(web_path,command.split()) # WEB PATH 
-            time.sleep(2) # Check without exec 
-            print(command.split())
+#        time.sleep(2) # Check without exec 
+ #       print(command.split())
 
 if __name__ == '__main__':
     main()

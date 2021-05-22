@@ -37,7 +37,17 @@ def gen_cli_args():
     parser.add_argument("--path",dest="path", default='/tmp/autorecon/', help="Destination path (default: /tmp/autorecon)")
 
     std_parser = argparse.ArgumentParser(add_help=False)
-    std_parser.add_argument("target", nargs='*', type=str, help="the target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets, NMap XML or .Nessus file(s)")
+    std_parser.add_argument("target", nargs='?', type=str, help="the target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets")
+    std_parser.add_argument(
+            '--scanner',
+            help='Select scanner (default : full_scanner)',
+            nargs='?',
+            default = 'full_scanner'
+            )
+
+
+    wlist_parser = argparse.ArgumentParser(add_help=False)
+    wlist_parser.add_argument("-w", metavar="WORDLIST", dest='wordlist', nargs='+', help="set wordlist  (Default SecList wordlist)")
     
     cred_parser = argparse.ArgumentParser(add_help=False)
     cred_parser.add_argument("-u", metavar="USERNAME", dest='username', nargs='+', default=[], help="username(s) or file(s) containing usernames")
@@ -53,14 +63,6 @@ def gen_cli_args():
             '--all-ports',
             help='scan all ports',
             action='store_true'
-            )
-
-
-    recon.add_argument(
-            '--scanner',
-            help='Select scanner (default : full_scanner)',
-            nargs='?',
-            default = 'full_scanner'
             )
     
     recon.add_argument(
@@ -78,8 +80,27 @@ def gen_cli_args():
 
     # Arguments WEB
 
-    web = subparsers.add_parser('web', help='Web server scanner', parents = [cred_parser,std_parser])
-
+    web = subparsers.add_parser('web', help='Web server scanner', parents = [cred_parser, std_parser,wlist_parser])
+    
+    web.add_argument(
+            '--port',
+            help='scan specific port (Default 80)',
+            nargs='?',
+            default = '80'
+            )
+    
+    web.add_argument(
+            '--file-path',
+            help='Specify to find the requested resource and start the enumeration with that route (Default / )',
+            nargs='?',
+            default = '/'
+            )
+    
+    web.add_argument(
+            '--ssl',
+            help='usage of SSL/HTTPS requests',
+            action='store_true'
+            )
 
     # Arguments SMTP
 

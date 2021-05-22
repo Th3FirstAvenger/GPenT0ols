@@ -1,0 +1,10 @@
+smb_null_session:
+    attack_technique: smbclient
+    description: "Samba null sessions enum directories"
+    tags: 
+        - no
+        - creds
+    commands: |
+        smbclient -L \\\\${{ target }}\\ -N
+
+       
