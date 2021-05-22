@@ -38,7 +38,8 @@ def gen_cli_args():
 
     std_parser = argparse.ArgumentParser(add_help=False)
     std_parser.add_argument("target", nargs='?', type=str, help="the target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets")
-    std_parser.add_argument(
+    scan_parser = argparse.ArgumentParser(add_help=False)
+    scan_parser.add_argument(
             '--scanner',
             help='Select scanner (default : full_scanner)',
             nargs='?',
@@ -50,15 +51,15 @@ def gen_cli_args():
     wlist_parser.add_argument("-w", metavar="WORDLIST", dest='wordlist', nargs='+', help="set wordlist  (Default SecList wordlist)")
     
     cred_parser = argparse.ArgumentParser(add_help=False)
-    cred_parser.add_argument("-u", metavar="USERNAME", dest='username', nargs='+', default=[], help="username(s) or file(s) containing usernames")
-    cred_parser.add_argument("-p", metavar="PASSWORD", dest='password', nargs='+', default=[], help="password(s) or file(s) containing passwords")
+    cred_parser.add_argument("-u", metavar="USERNAME", dest='username', nargs='?', default=[], help="username(s) or file(s) containing usernames")
+    cred_parser.add_argument("-p", metavar="PASSWORD", dest='password', nargs='?', default=[], help="password(s) or file(s) containing passwords")
 
     subparsers = parser.add_subparsers(title='services', dest='services', description='available options')
 
 
     # Arguments Recon
 
-    recon = subparsers.add_parser('recon', help='Initial recon', parents=[std_parser]) ## Get new arguments and can introduce std_parser arguments
+    recon = subparsers.add_parser('recon', help='Initial recon', parents=[std_parser,scan_parser]) ## Get new arguments and can introduce std_parser arguments
     recon.add_argument(
             '--all-ports',
             help='scan all ports',
@@ -80,7 +81,7 @@ def gen_cli_args():
 
     # Arguments WEB
 
-    web = subparsers.add_parser('web', help='Web server scanner', parents = [cred_parser, std_parser,wlist_parser])
+    web = subparsers.add_parser('web', help='Web server scanner', parents = [cred_parser, std_parser,wlist_parser,scan_parser])
     
     web.add_argument(
             '--port',
@@ -110,10 +111,19 @@ def gen_cli_args():
 
     smb = subparsers.add_parser('smb', help='Enum smb', parents = [cred_parser,std_parser])
     smb.add_argument(
-            '--null-session',
-            help='Null Sessions',
-            action='store_true'
+            '--tags',
+            help='What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)',
+            default = 'NoCreds',
+            nargs='?'
             )
+
+    smb.add_argument(
+            '--port',
+            help='scan specific port (Default 445)',
+            nargs='?',
+            default = '445'
+            )
+    
     
     # Arguments FTP
     

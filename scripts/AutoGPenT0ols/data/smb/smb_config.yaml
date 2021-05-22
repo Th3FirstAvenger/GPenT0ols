@@ -1,10 +1,28 @@
-smb_null_session:
+smbc_null_session:
     attack_technique: smbclient
     description: "Samba null sessions enum directories"
     tags: 
-        - no
+        - nocreds
+    commands: |
+        smbclient -L \\\\${{ target }}\\ -N -p ${{ port }}
+
+cme_null_session:
+    attack_technique: crackmapexec
+    description: "Enum null sessions with Crackmapexec"
+    tags: 
+        - nocreds
+    commands: |
+        crackmapexec smb ${{ target }} -u '' -p '' --shares
+
+cme_dsa_session:
+    attack_technique: crackmapexec
+    description: "Enum directories and see if have shell"
+    tags: 
         - creds
     commands: |
-        smbclient -L \\\\${{ target }}\\ -N
+        crackmapexec smb ${{ target }} -u '${{ username }}' -p '${{ password }}' --shares
+
+
+
 
        

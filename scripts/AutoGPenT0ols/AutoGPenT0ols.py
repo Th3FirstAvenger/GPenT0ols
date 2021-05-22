@@ -115,12 +115,12 @@ def main():
     ## smb scanner
     elif 'smb' == service: 
         scanner = smb(args,config_path,out_path) 
-
-#    for description, command in scanner.items():
-#        service_progress.status("{}".format(description))
+    
+    for description, command in scanner.items():
+        service_progress.status("{}".format(description))
 #            run(web_path,command.split()) # WEB PATH 
-#        time.sleep(2) # Check without exec 
- #       print(command.split())
+        time.sleep(2) # Check without exec 
+        print(command.split())
 
 if __name__ == '__main__':
     main()
