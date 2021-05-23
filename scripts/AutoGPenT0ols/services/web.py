@@ -21,7 +21,7 @@ def web(all_info, recon_path, out_path):
     wordlist = all_info['wordlist']
     
     if wordlist == None:
-        wordlist = '/usr/share/seclist/Discovery/Web-Content/big.txt'
+        wordlist = '/usr/share/seclists/Discovery/Web-Content/big.txt'
     
 
     # get path information

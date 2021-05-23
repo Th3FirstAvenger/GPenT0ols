@@ -9,7 +9,7 @@ import os
 #def reg_ports(ports):
 
 def recon(all_info, recon_path, out_path):
-    target = all_info['target'][0]
+    target = all_info['target']
     info_data = all_info['scanner']
     
     # get path information

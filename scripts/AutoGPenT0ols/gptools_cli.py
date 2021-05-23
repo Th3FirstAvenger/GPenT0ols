@@ -117,12 +117,6 @@ def gen_cli_args():
     # Arguments SMB
 
     smb = subparsers.add_parser('smb', help='Enum smb', parents = [cred_parser,std_parser,have_info_parser])
-    smb.add_argument(
-            '--tags',
-            help='What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)',
-            default = 'NoCreds',
-            nargs='?'
-            )
 
     smb.add_argument(
             '--port',

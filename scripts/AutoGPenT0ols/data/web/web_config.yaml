@@ -3,13 +3,14 @@ full_scanner:
     attack_technique: nmap
     description: "Scanning nmap with scripts banner,(http* or ssl*) and not (brute or broadcast or dos or external or http-slowloris* or fuzzer)"
     commands: |
-        nmap -sV -p ${{ port }} --script="banner,(http* or ssl*) and not (brute or broadcast or dos or external or http-slowloris* or fuzzer)" -oN ${{ out_dir }} ${{ target }}
+      nmap -sV -p ${{ port }} --script="banner,(http*·or·ssl*)·and·not·(brute·or·broadcast·or·dos·or·external·or·http-slowloris*·or·fuzzer)" -oN ${{ out_dir }} ${{ target }}
+
   
   curl_index: 
     attack_technique: curl-index
     description: "Enum index web content"
     commands: | 
-        curl -sSik ${{ url }} -m 10 2>&1 
+        curl -sSik ${{ url }} -m 10
 
   nikto_scanenr:
     attack_technique: nikto
