@@ -1,0 +1,13 @@
+ldap_nmap_session:
+    attack_technique: nmap
+    description: "Enum null sessions with nmap"
+    tags: 
+        - nocreds
+    commands: |
+        nmap -sV -p ${{ port }} --script="banner,(ldap* or ssl*) and not (brute or broadcast or dos or external or fuzzer)" -oN "${{ out_dir }}" ${{ target }}
+
+
+
+
+
+       

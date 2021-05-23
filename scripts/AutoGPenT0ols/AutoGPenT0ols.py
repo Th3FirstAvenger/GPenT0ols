@@ -22,6 +22,7 @@ from gptools_cli import gen_cli_args
 from services.recon import recon
 from services.web import web
 from services.smb import smb
+from services.ldap import ldap
 
 ## Detect Contrl + C 
 def signal_handler(key, frame):
@@ -95,7 +96,7 @@ def main():
     # Get service
     service = args['services']
     target = args['target'] 
-    
+
     out_path = os.path.join(args['path'],service)
     config_path = os.path.join(os.getcwd(), os.path.join("data",service))
 
@@ -115,6 +116,9 @@ def main():
     ## smb scanner
     elif 'smb' == service: 
         scanner = smb(args,config_path,out_path) 
+    ## ldap scanner
+    elif 'ldap' == service: 
+        scanner = ldap(args,config_path,out_path) 
     
     for description, command in scanner.items():
         service_progress.status("{}".format(description))

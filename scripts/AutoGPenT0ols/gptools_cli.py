@@ -37,7 +37,7 @@ def gen_cli_args():
     parser.add_argument("--path",dest="path", default='/tmp/autorecon/', help="Destination path (default: /tmp/autorecon)")
 
     std_parser = argparse.ArgumentParser(add_help=False)
-    std_parser.add_argument("target", nargs='?', type=str, help="the target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets")
+    std_parser.add_argument("target", nargs='?', type=str, help="(Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets ")
     scan_parser = argparse.ArgumentParser(add_help=False)
     scan_parser.add_argument(
             '--scanner',
@@ -46,6 +46,13 @@ def gen_cli_args():
             default = 'full_scanner'
             )
 
+    have_info_parser = argparse.ArgumentParser(add_help=False)
+    have_info_parser.add_argument(
+            '--tags',
+            help='What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)',
+            default = 'NoCreds',
+            nargs='?'
+            )
 
     wlist_parser = argparse.ArgumentParser(add_help=False)
     wlist_parser.add_argument("-w", metavar="WORDLIST", dest='wordlist', nargs='+', help="set wordlist  (Default SecList wordlist)")
@@ -109,7 +116,7 @@ def gen_cli_args():
 
     # Arguments SMB
 
-    smb = subparsers.add_parser('smb', help='Enum smb', parents = [cred_parser,std_parser])
+    smb = subparsers.add_parser('smb', help='Enum smb', parents = [cred_parser,std_parser,have_info_parser])
     smb.add_argument(
             '--tags',
             help='What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)',
@@ -131,8 +138,15 @@ def gen_cli_args():
 
     # Argumets LDAP
 
-    ldap = subparsers.add_parser('ldap', help='LDAP enum', parents = [cred_parser,std_parser])
+    ldap = subparsers.add_parser('ldap', help='LDAP enum', parents = [cred_parser,std_parser,have_info_parser])
     
+    ldap.add_argument(
+            '--port',
+            help='scan specific port (Default 389)',
+            nargs='?',
+            default = '389'
+            )
+
     # Arguments SNMP
     
     snmp = subparsers.add_parser('snmp', help='Enum SNMP', parents = [cred_parser,std_parser])
@@ -142,6 +156,28 @@ def gen_cli_args():
         sys.exit(1)
 
     args = parser.parse_args()
+    
+    check = vars(args)
+
+
+    if not check['target']:
+        if check['services'] == 'recon':
+            recon.print_help()
+        elif check['services'] == 'web':
+            web.print_help()
+        elif check['services'] == 'smb':
+            smb.print_help()
+        elif check['services'] == 'smtp':
+            smtp.print_help()
+        elif check['services'] == 'ftp':
+            ftp.print_help()
+        elif check['services'] == 'ldap':
+            ldap.print_help()
+        elif check['services'] == 'snmp':
+            snmp.print_help()
+        else: 
+            parser.print_help()
+        sys.exit(1)
 
     return args
 
