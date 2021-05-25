@@ -385,6 +385,24 @@ INPUT /usr/share/texmf-dist/tex/latex/tools/array.sty
 INPUT /usr/share/texmf-dist/tex/latex/tools/array.sty
 INPUT /usr/share/texmf-dist/tex/latex/tools/array.sty
 INPUT /usr/share/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.cfg
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.cfg
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.cfg
+INPUT /usr/share/texmf-dist/tex/latex/listings/listings.cfg
 INPUT /usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
@@ -459,6 +477,11 @@ OUTPUT template.pdf
 INPUT ./template.out
 INPUT ./template.out
 OUTPUT template.out
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
 INPUT ./data/img/ITB_Logo_417.png
 INPUT ./data/img/ITB_Logo_417.png
 INPUT ./data/img/ITB_Logo_417.png
@@ -477,10 +500,43 @@ INPUT ./data/img/ITB_Logo_417.png
 INPUT ./data/img/ITB_Logo_417.png
 INPUT ./data/img/ITB_Logo_417.png
 INPUT ./data/img/ITB_Logo_417.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
 INPUT ./data/img/ITB_Logo_417.png
 INPUT ./data/img/ITB_Logo_417.png
 INPUT ./data/img/ITB_Logo_417.png
 INPUT ./data/img/ITB_Logo_417.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Cronograma vertical.png
+INPUT ./data/img/Cronograma vertical.png
+INPUT ./data/img/Cronograma vertical.png
+INPUT ./data/img/Cronograma vertical.png
+INPUT ./data/img/Cronograma vertical.png
+INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT ./data/img/ITB_Logo_417.png
+INPUT ./data/img/ITB_Logo_417.png
+INPUT ./data/img/ITB_Logo_417.png
+INPUT ./data/img/ITB_Logo_417.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/ITB_Logo_417.png
+INPUT ./data/img/ITB_Logo_417.png
+INPUT ./data/img/ITB_Logo_417.png
+INPUT ./data/img/ITB_Logo_417.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
+INPUT ./data/img/Logo_ptls.png
 INPUT template.aux
 INPUT ./template.out
 INPUT ./template.out
