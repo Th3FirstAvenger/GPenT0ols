@@ -70,7 +70,7 @@ def build_infraestucture(dir_name,output):
     else: 
         infra.success("Directory {} already exist".format(dir_name))
 
-def run(dir_file, command,service):
+def run(dir_file, command,service,debug):
     out = dir_file + "out.txt"
     err = dir_file + "err.txt"
 #    parsed_command = command ## Util working other commands 
@@ -79,7 +79,6 @@ def run(dir_file, command,service):
     for c in command:
         parsed_command.append(c.replace('·',' '))
     
-    print(parsed_command)
 
     p = log.progress(service)
     
@@ -93,7 +92,8 @@ def run(dir_file, command,service):
                 fout.seek(0)
                 # save output (if any) in variable
                 output=fout.read()
-                
+                if debug:
+                    print(output) 
                 # reset file to read from it
                 ferr.seek(0) 
                 # save errors (if any) in variable
@@ -113,7 +113,7 @@ def main():
     # Get service
     service = args['services']
     target = args['target'] 
-    
+    debug = args['verbose'] 
     out_path = os.path.join(args['path'],(os.path.join(args['target'],service)))
     config_path = os.path.join(os.getcwd(), os.path.join("data",service))
     
@@ -140,11 +140,14 @@ def main():
         scanner = ldap(args,config_path,out_path) 
     
     print("-- 𝒞𝒽𝑒𝒸𝓀 𝒢𝒫𝑒𝓃𝒯𝒪𝑜𝓁𝓈 --")
-
     for description, command in scanner.items():
         service_progress.status("{}".format(command))
-        run(web_path,command.split(),description) # WEB PATH 
-#        time.sleep(2) # Check without exec 
+        if args['show_commands']:
+            print(command)
+            time.sleep(2) # Check without exec 
+        else: 
+            run(web_path,command.split(),description,debug)
+
 
 if __name__ == '__main__':
     main()

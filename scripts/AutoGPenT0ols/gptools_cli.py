@@ -34,6 +34,7 @@ def gen_cli_args():
 
     parser.add_argument("-t", type=int, dest="threads", default=100, help="set how many concurrent threads to use (default: 100)")
     parser.add_argument("--verbose", action='store_true', help="enable verbose output")
+    parser.add_argument("--show-commands", action='store_true', help="Just show commands")
     parser.add_argument("--path",dest="path", default='/tmp/autorecon/', help="Destination path (default: /tmp/autorecon)")
 
     std_parser = argparse.ArgumentParser(add_help=False)
@@ -60,6 +61,7 @@ def gen_cli_args():
     cred_parser = argparse.ArgumentParser(add_help=False)
     cred_parser.add_argument("-u", metavar="USERNAME", dest='username', nargs='?', default=[], help="username(s) or file(s) containing usernames")
     cred_parser.add_argument("-p", metavar="PASSWORD", dest='password', nargs='?', default=[], help="password(s) or file(s) containing passwords")
+    cred_parser.add_argument("-H", metavar="HASH", dest='HASH', nargs='?', default=[], help="Pass The hash")
 
     subparsers = parser.add_subparsers(title='services', dest='services', description='available options')
 
@@ -110,6 +112,12 @@ def gen_cli_args():
             action='store_true'
             )
 
+    web.add_argument(
+            '--cms',
+            help='What do you have? [Wordpress, Joombla, Drupal] (Default: NoCreds)',
+            default = 'NoCreds',
+            nargs='?'
+            )
     # Arguments SMTP
 
     smtp = subparsers.add_parser('smtp', help='smtp enumeration')

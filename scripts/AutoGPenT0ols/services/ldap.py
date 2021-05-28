@@ -2,7 +2,16 @@
 ### This script enum all ports, services and vulnerabilities with nmap
 import yaml
 import os 
+import ldap3
 
+# Not ready yet
+def enum_ldap(server, port):
+    server = ldap3.Server(server,port, use_ssl = True)
+    connection = ldap3.Connection(server)
+    if connection.bind(): 
+        info = server.info
+    else:
+        info = False
 
 def get_tags(ldap_data, tags):
     

@@ -9,6 +9,8 @@ def web(all_info, recon_path, out_path):
     info_data = all_info['scanner']
     port = all_info['port']
     url_path = all_info['file_path']
+    cms = all_info['cms']
+
 
     # Check https or http scheme 
     scheme = 'http'
@@ -27,7 +29,9 @@ def web(all_info, recon_path, out_path):
     # get path information
     web_data = os.path.join(recon_path, "web_config.yaml")
     command_info = {} 
-   
+    
+
+
     with open(web_data, 'r') as unparsed:
         try:
             web_data = yaml.safe_load(unparsed)
@@ -35,7 +39,7 @@ def web(all_info, recon_path, out_path):
             print(exc)
         
         list_data = web_data[info_data].keys()
-
+        
         for options in list_data:
             descr = web_data[info_data][options]['description']
             out_file = os.path.join(out_path, '.'.join((options, 'txt')))

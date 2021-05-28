@@ -12,7 +12,15 @@ cme_null_session:
     tags: 
         - nocreds
     commands: |
-        crackmapexec smb ${{ target }} -u '' -p '' --shares
+        crackmapexec smb ${{ target }} -u '' -p '' --shares --timeout 5
+
+enum4linux_null_session:
+    attack_technique: Enum4linux
+    description: "Enum null sessions with enum4linux"
+    tags: 
+        - nocreds
+    commands: |
+        enum4linux 
 
 cme_dsa_session:
     attack_technique: crackmapexec
@@ -20,7 +28,16 @@ cme_dsa_session:
     tags: 
         - creds
     commands: |
-        crackmapexec smb ${{ target }} -u '${{ username }}' -p '${{ password }}' --shares
+        crackmapexec smb ${{ target }} -u '${{ username }}' -p '${{ password }}' --shares --timeout 5
+
+
+cme_passthehash:
+    attack_technique: crackmapexec
+    description: "Enum directories and see if have shell"
+    tags: 
+        - hash
+    commands: |
+        crackmapexec smb ${{ target }} -u '${{ username }}' -H '${{ hash }}' --shares --timeout 5
 
 
 
