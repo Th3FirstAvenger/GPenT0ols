@@ -1,0 +1,193 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{argparse}
+\PYG{k+kn}{import} \PYG{n+nn}{sys}
+\PYG{k+kn}{from} \PYG{n+nn}{argparse} \PYG{k+kn}{import} \PYG{n}{RawTextHelpFormatter}
+\PYG{k+kn}{from} \PYG{n+nn}{lib.core.\PYGZus{}\PYGZus{}version\PYGZus{}\PYGZus{}} \PYG{k+kn}{import} \PYG{n}{\PYGZus{}\PYGZus{}version\PYGZus{}\PYGZus{}}
+\PYG{k+kn}{from} \PYG{n+nn}{helpers.logger} \PYG{k+kn}{import} \PYG{n}{highlight}
+
+\PYG{k}{def} \PYG{n+nf}{gen\PYGZus{}cli\PYGZus{}args}\PYG{p}{():}
+
+    \PYG{n}{VERSION}  \PYG{o}{=} \PYG{n}{\PYGZus{}\PYGZus{}version\PYGZus{}\PYGZus{}}
+    \PYG{n}{CODENAME} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}CapitanJ4ck\PYGZsq{}}
+
+
+    \PYG{n}{parser} \PYG{o}{=} \PYG{n}{argparse}\PYG{o}{.}\PYG{n}{ArgumentParser}\PYG{p}{(}\PYG{n}{description}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+s2}{                           \PYGZsh{}}
+\PYG{l+s+s2}{                           \PYGZsh{}\PYGZsh{}                                \PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{l+s+s2}{  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}         \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{l+s+s2}{ \PYGZsh{}\PYGZsh{}\PYGZsh{}           \PYGZsh{}\PYGZsh{}          \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}       \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}        \PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{l+s+s2}{ \PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}        \PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{l+s+s2}{ \PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}      \PYGZsh{}\PYGZsh{}\PYGZsh{}     \PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}        \PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{l+s+s2}{  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}      \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{l+s+s2}{                                 \PYGZsh{}}
+\PYG{l+s+s2}{                                 }\PYG{l+s+si}{\PYGZob{}\PYGZcb{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}\PYGZcb{}}
+\PYG{l+s+s2}{                                 }\PYG{l+s+si}{\PYGZob{}\PYGZcb{}}\PYG{l+s+s2}{: }\PYG{l+s+si}{\PYGZob{}\PYGZcb{}}
+\PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{highlight}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Version\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}red\PYGZsq{}}\PYG{p}{),}
+           \PYG{n}{highlight}\PYG{p}{(}\PYG{n}{VERSION}\PYG{p}{),}
+           \PYG{n}{highlight}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Codename\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}red\PYGZsq{}}\PYG{p}{),}
+           \PYG{n}{highlight}\PYG{p}{(}\PYG{n}{CODENAME}\PYG{p}{)),}
+
+                                    \PYG{n}{formatter\PYGZus{}class}\PYG{o}{=}\PYG{n}{RawTextHelpFormatter}\PYG{p}{,}
+                                    \PYG{n}{epilog}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}We are in... Let the hacking begin!\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}t\PYGZdq{}}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{n+nb}{int}\PYG{p}{,} \PYG{n}{dest}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}threads\PYGZdq{}}\PYG{p}{,} \PYG{n}{default}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}set how many concurrent threads to use (default: 100)\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZhy{}verbose\PYGZdq{}}\PYG{p}{,} \PYG{n}{action}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}store\PYGZus{}true\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}enable verbose output\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZhy{}show\PYGZhy{}commands\PYGZdq{}}\PYG{p}{,} \PYG{n}{action}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}store\PYGZus{}true\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Just show commands\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZhy{}path\PYGZdq{}}\PYG{p}{,}\PYG{n}{dest}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}path\PYGZdq{}}\PYG{p}{,} \PYG{n}{default}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}/tmp/gpt\PYGZus{}report/\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Destination path (default: /tmp/gpt\PYGZus{}report)\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{n}{std\PYGZus{}parser} \PYG{o}{=} \PYG{n}{argparse}\PYG{o}{.}\PYG{n}{ArgumentParser}\PYG{p}{(}\PYG{n}{add\PYGZus{}help}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+    \PYG{n}{std\PYGZus{}parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}target\PYGZdq{}}\PYG{p}{,} \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{n+nb}{str}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}(Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets \PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{scan\PYGZus{}parser} \PYG{o}{=} \PYG{n}{argparse}\PYG{o}{.}\PYG{n}{ArgumentParser}\PYG{p}{(}\PYG{n}{add\PYGZus{}help}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+    \PYG{n}{scan\PYGZus{}parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}scanner\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Select scanner (default : full\PYGZus{}scanner)\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{default} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}full\PYGZus{}scanner\PYGZsq{}}
+            \PYG{p}{)}
+
+    \PYG{n}{have\PYGZus{}info\PYGZus{}parser} \PYG{o}{=} \PYG{n}{argparse}\PYG{o}{.}\PYG{n}{ArgumentParser}\PYG{p}{(}\PYG{n}{add\PYGZus{}help}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+    \PYG{n}{have\PYGZus{}info\PYGZus{}parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}tags\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{default} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}NoCreds\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}
+            \PYG{p}{)}
+
+    \PYG{n}{wlist\PYGZus{}parser} \PYG{o}{=} \PYG{n}{argparse}\PYG{o}{.}\PYG{n}{ArgumentParser}\PYG{p}{(}\PYG{n}{add\PYGZus{}help}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+    \PYG{n}{wlist\PYGZus{}parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}w\PYGZdq{}}\PYG{p}{,} \PYG{n}{metavar}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}WORDLIST\PYGZdq{}}\PYG{p}{,} \PYG{n}{dest}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}wordlist\PYGZsq{}}\PYG{p}{,} \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}+\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}set wordlist  (Default SecList wordlist)\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{n}{ssl\PYGZus{}parser} \PYG{o}{=} \PYG{n}{argparse}\PYG{o}{.}\PYG{n}{ArgumentParser}\PYG{p}{(}\PYG{n}{add\PYGZus{}help}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+    \PYG{n}{ssl\PYGZus{}parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}ssl\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}usage of SSL/TLS requests\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{action}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}store\PYGZus{}true\PYGZsq{}}
+            \PYG{p}{)}
+
+    \PYG{n}{cred\PYGZus{}parser} \PYG{o}{=} \PYG{n}{argparse}\PYG{o}{.}\PYG{n}{ArgumentParser}\PYG{p}{(}\PYG{n}{add\PYGZus{}help}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+    \PYG{n}{cred\PYGZus{}parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}u\PYGZdq{}}\PYG{p}{,} \PYG{n}{metavar}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}USERNAME\PYGZdq{}}\PYG{p}{,} \PYG{n}{dest}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}username\PYGZsq{}}\PYG{p}{,} \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}\PYG{p}{,} \PYG{n}{default}\PYG{o}{=}\PYG{p}{[],} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}username(s) or file(s) containing usernames\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{cred\PYGZus{}parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}p\PYGZdq{}}\PYG{p}{,} \PYG{n}{metavar}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}PASSWORD\PYGZdq{}}\PYG{p}{,} \PYG{n}{dest}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}password\PYGZsq{}}\PYG{p}{,} \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}\PYG{p}{,} \PYG{n}{default}\PYG{o}{=}\PYG{p}{[],} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}password(s) or file(s) containing passwords\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{cred\PYGZus{}parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}H\PYGZdq{}}\PYG{p}{,} \PYG{n}{metavar}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}HASH\PYGZdq{}}\PYG{p}{,} \PYG{n}{dest}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}HASH\PYGZsq{}}\PYG{p}{,} \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}\PYG{p}{,} \PYG{n}{default}\PYG{o}{=}\PYG{p}{[],} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Pass The hash\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{n}{subparsers} \PYG{o}{=} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}subparsers}\PYG{p}{(}\PYG{n}{title}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}services\PYGZsq{}}\PYG{p}{,} \PYG{n}{dest}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}services\PYGZsq{}}\PYG{p}{,} \PYG{n}{description}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}available options\PYGZsq{}}\PYG{p}{)}
+
+
+    \PYG{c+c1}{\PYGZsh{} Arguments Recon}
+
+    \PYG{n}{recon} \PYG{o}{=} \PYG{n}{subparsers}\PYG{o}{.}\PYG{n}{add\PYGZus{}parser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}recon\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Initial recon\PYGZsq{}}\PYG{p}{,} \PYG{n}{parents}\PYG{o}{=}\PYG{p}{[}\PYG{n}{std\PYGZus{}parser}\PYG{p}{,}\PYG{n}{scan\PYGZus{}parser}\PYG{p}{])} \PYG{c+c1}{\PYGZsh{}\PYGZsh{} Get new arguments and can introduce std\PYGZus{}parser arguments}
+    \PYG{n}{recon}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}all\PYGZhy{}ports\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}scan all ports\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{action}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}store\PYGZus{}true\PYGZsq{}}
+            \PYG{p}{)}
+
+    \PYG{n}{recon}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}ports\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}scan specific ports\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}
+            \PYG{p}{)}
+
+    \PYG{n}{recon}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}full\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Full recon scan\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{action}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}store\PYGZus{}true\PYGZsq{}}
+            \PYG{p}{)}
+
+
+    \PYG{c+c1}{\PYGZsh{} Arguments WEB}
+
+    \PYG{n}{web} \PYG{o}{=} \PYG{n}{subparsers}\PYG{o}{.}\PYG{n}{add\PYGZus{}parser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}web\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Web server scanner\PYGZsq{}}\PYG{p}{,} \PYG{n}{parents} \PYG{o}{=} \PYG{p}{[}\PYG{n}{cred\PYGZus{}parser}\PYG{p}{,} \PYG{n}{std\PYGZus{}parser}\PYG{p}{,}\PYG{n}{wlist\PYGZus{}parser}\PYG{p}{,}\PYG{n}{scan\PYGZus{}parser}\PYG{p}{,}\PYG{n}{ssl\PYGZus{}parser}\PYG{p}{])}
+
+    \PYG{n}{web}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}port\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}scan specific port (Default 80)\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{default} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}80\PYGZsq{}}
+            \PYG{p}{)}
+
+    \PYG{n}{web}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}file\PYGZhy{}path\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Specify to find the requested resource and start the enumeration with that route (Default / )\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{default} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}/\PYGZsq{}}
+            \PYG{p}{)}
+
+
+    \PYG{n}{web}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}cms\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}What do you have? [Wordpress, Joombla, Drupal] (Default: NoCreds)\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{default} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}NoCreds\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}
+            \PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{} Arguments SMTP}
+
+    \PYG{n}{smtp} \PYG{o}{=} \PYG{n}{subparsers}\PYG{o}{.}\PYG{n}{add\PYGZus{}parser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}smtp\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}smtp enumeration\PYGZsq{}}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Arguments SMB}
+
+    \PYG{n}{smb} \PYG{o}{=} \PYG{n}{subparsers}\PYG{o}{.}\PYG{n}{add\PYGZus{}parser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}smb\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Enum smb\PYGZsq{}}\PYG{p}{,} \PYG{n}{parents} \PYG{o}{=} \PYG{p}{[}\PYG{n}{cred\PYGZus{}parser}\PYG{p}{,}\PYG{n}{std\PYGZus{}parser}\PYG{p}{,}\PYG{n}{have\PYGZus{}info\PYGZus{}parser}\PYG{p}{])}
+
+    \PYG{n}{smb}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}port\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}scan specific port (Default 445)\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{default} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}445\PYGZsq{}}
+            \PYG{p}{)}
+
+
+    \PYG{c+c1}{\PYGZsh{} Arguments FTP}
+
+    \PYG{n}{ftp} \PYG{o}{=} \PYG{n}{subparsers}\PYG{o}{.}\PYG{n}{add\PYGZus{}parser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}ftp\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}FTP enum\PYGZsq{}}\PYG{p}{,} \PYG{n}{parents} \PYG{o}{=} \PYG{p}{[}\PYG{n}{cred\PYGZus{}parser}\PYG{p}{,}\PYG{n}{std\PYGZus{}parser}\PYG{p}{,}\PYG{n}{have\PYGZus{}info\PYGZus{}parser}\PYG{p}{,}\PYG{n}{ssl\PYGZus{}parser}\PYG{p}{])}
+
+    \PYG{n}{ftp}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}port\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}scan specific port (Default 22)\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{default} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}22\PYGZsq{}}
+            \PYG{p}{)}
+
+
+    \PYG{c+c1}{\PYGZsh{} Argumets LDAP}
+
+    \PYG{n}{ldap} \PYG{o}{=} \PYG{n}{subparsers}\PYG{o}{.}\PYG{n}{add\PYGZus{}parser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}ldap\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}LDAP enum\PYGZsq{}}\PYG{p}{,} \PYG{n}{parents} \PYG{o}{=} \PYG{p}{[}\PYG{n}{cred\PYGZus{}parser}\PYG{p}{,}\PYG{n}{std\PYGZus{}parser}\PYG{p}{,}\PYG{n}{have\PYGZus{}info\PYGZus{}parser}\PYG{p}{])}
+
+    \PYG{n}{ldap}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}
+            \PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}port\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}scan specific port (Default 389)\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{nargs}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}?\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{default} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}389\PYGZsq{}}
+            \PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Arguments SNMP}
+
+    \PYG{n}{snmp} \PYG{o}{=} \PYG{n}{subparsers}\PYG{o}{.}\PYG{n}{add\PYGZus{}parser}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}snmp\PYGZsq{}}\PYG{p}{,} \PYG{n}{help}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}Enum SNMP\PYGZsq{}}\PYG{p}{,} \PYG{n}{parents} \PYG{o}{=} \PYG{p}{[}\PYG{n}{cred\PYGZus{}parser}\PYG{p}{,}\PYG{n}{std\PYGZus{}parser}\PYG{p}{])}
+
+    \PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{sys}\PYG{o}{.}\PYG{n}{argv}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{:}
+        \PYG{n}{parser}\PYG{o}{.}\PYG{n}{print\PYGZus{}help}\PYG{p}{()}
+        \PYG{n}{sys}\PYG{o}{.}\PYG{n}{exit}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+
+    \PYG{n}{args} \PYG{o}{=} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{parse\PYGZus{}args}\PYG{p}{()}
+
+    \PYG{n}{check} \PYG{o}{=} \PYG{n+nb}{vars}\PYG{p}{(}\PYG{n}{args}\PYG{p}{)}
+
+
+    \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{check}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}target\PYGZsq{}}\PYG{p}{]:}
+        \PYG{k}{if} \PYG{n}{check}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}services\PYGZsq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}recon\PYGZsq{}}\PYG{p}{:}
+            \PYG{n}{recon}\PYG{o}{.}\PYG{n}{print\PYGZus{}help}\PYG{p}{()}
+        \PYG{k}{elif} \PYG{n}{check}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}services\PYGZsq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}web\PYGZsq{}}\PYG{p}{:}
+            \PYG{n}{web}\PYG{o}{.}\PYG{n}{print\PYGZus{}help}\PYG{p}{()}
+        \PYG{k}{elif} \PYG{n}{check}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}services\PYGZsq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}smb\PYGZsq{}}\PYG{p}{:}
+            \PYG{n}{smb}\PYG{o}{.}\PYG{n}{print\PYGZus{}help}\PYG{p}{()}
+        \PYG{k}{elif} \PYG{n}{check}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}services\PYGZsq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}smtp\PYGZsq{}}\PYG{p}{:}
+            \PYG{n}{smtp}\PYG{o}{.}\PYG{n}{print\PYGZus{}help}\PYG{p}{()}
+        \PYG{k}{elif} \PYG{n}{check}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}services\PYGZsq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}ftp\PYGZsq{}}\PYG{p}{:}
+            \PYG{n}{ftp}\PYG{o}{.}\PYG{n}{print\PYGZus{}help}\PYG{p}{()}
+        \PYG{k}{elif} \PYG{n}{check}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}services\PYGZsq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}ldap\PYGZsq{}}\PYG{p}{:}
+            \PYG{n}{ldap}\PYG{o}{.}\PYG{n}{print\PYGZus{}help}\PYG{p}{()}
+        \PYG{k}{elif} \PYG{n}{check}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}services\PYGZsq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}snmp\PYGZsq{}}\PYG{p}{:}
+            \PYG{n}{snmp}\PYG{o}{.}\PYG{n}{print\PYGZus{}help}\PYG{p}{()}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n}{parser}\PYG{o}{.}\PYG{n}{print\PYGZus{}help}\PYG{p}{()}
+        \PYG{n}{sys}\PYG{o}{.}\PYG{n}{exit}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{args}
+\end{Verbatim}

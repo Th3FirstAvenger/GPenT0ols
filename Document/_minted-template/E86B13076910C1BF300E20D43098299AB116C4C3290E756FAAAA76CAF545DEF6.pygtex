@@ -1,0 +1,158 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/usr/bin/python3}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}}
+                           \PYG{c+c1}{\PYGZsh{}}
+                           \PYG{c+c1}{\PYGZsh{}\PYGZsh{}                                \PYGZsh{}\PYGZsh{}\PYGZsh{}}
+  \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}         \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+ \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}           \PYGZsh{}\PYGZsh{}          \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}       \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}        \PYGZsh{}\PYGZsh{}\PYGZsh{}}
+ \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}        \PYGZsh{}\PYGZsh{}\PYGZsh{}}
+ \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}      \PYGZsh{}\PYGZsh{}\PYGZsh{}     \PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}        \PYGZsh{}\PYGZsh{}\PYGZsh{}}
+  \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}      \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+                                 \PYG{c+c1}{\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} Author : CapitanJ4ck}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}}
+
+\PYG{k+kn}{import} \PYG{n+nn}{signal}
+\PYG{k+kn}{from} \PYG{n+nn}{sys} \PYG{k+kn}{import} \PYG{n}{exit}
+\PYG{k+kn}{import} \PYG{n+nn}{os}
+\PYG{k+kn}{import} \PYG{n+nn}{time}
+\PYG{k+kn}{import} \PYG{n+nn}{subprocess}
+\PYG{k+kn}{from} \PYG{n+nn}{pwn} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{k+kn}{from} \PYG{n+nn}{gptools\PYGZus{}cli} \PYG{k+kn}{import} \PYG{n}{gen\PYGZus{}cli\PYGZus{}args}
+\PYG{k+kn}{from} \PYG{n+nn}{services.recon} \PYG{k+kn}{import} \PYG{n}{recon}
+\PYG{k+kn}{from} \PYG{n+nn}{services.web} \PYG{k+kn}{import} \PYG{n}{web}
+\PYG{k+kn}{from} \PYG{n+nn}{services.smb} \PYG{k+kn}{import} \PYG{n}{smb}
+\PYG{k+kn}{from} \PYG{n+nn}{services.ldap} \PYG{k+kn}{import} \PYG{n}{ldap}
+\PYG{k+kn}{from} \PYG{n+nn}{services.ftp} \PYG{k+kn}{import} \PYG{n}{ftp}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{} Detect Contrl + C}
+\PYG{k}{def} \PYG{n+nf}{signal\PYGZus{}handler}\PYG{p}{(}\PYG{n}{key}\PYG{p}{,} \PYG{n}{frame}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} Handle any cleanup here}
+    \PYG{n}{exit} \PYG{o}{=} \PYG{n}{log}\PYG{o}{.}\PYG{n}{progress}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}SIGINT or CTRL\PYGZhy{}C detected.\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{exit}\PYG{o}{.}\PYG{n}{status}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Exiting...\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{time}\PYG{o}{.}\PYG{n}{sleep}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{n}{exit}\PYG{o}{.}\PYG{n}{failure}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Exiting gracefully\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{sys}\PYG{o}{.}\PYG{n}{exit}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+
+\PYG{n}{signal} \PYG{o}{=} \PYG{n}{signal}\PYG{o}{.}\PYG{n}{signal}\PYG{p}{(}\PYG{n}{signal}\PYG{o}{.}\PYG{n}{SIGINT}\PYG{p}{,} \PYG{n}{signal\PYGZus{}handler}\PYG{p}{)}
+
+
+\PYG{c+c1}{\PYGZsh{} Vars}
+
+\PYG{c+c1}{\PYGZsh{} Make directories}
+
+\PYG{k}{def} \PYG{n+nf}{mdir}\PYG{p}{(}\PYG{n}{dir\PYGZus{}name}\PYG{p}{):}
+
+    \PYG{n}{directory\PYGZus{}created} \PYG{o}{=} \PYG{k+kc}{True}
+
+    \PYG{k}{try}\PYG{p}{:}
+        \PYG{n}{os}\PYG{o}{.}\PYG{n}{makedirs}\PYG{p}{(}\PYG{n}{dir\PYGZus{}name}\PYG{p}{)}
+
+    \PYG{k}{except} \PYG{n+ne}{OSError}\PYG{p}{:}
+        \PYG{n}{directory\PYGZus{}created} \PYG{o}{=} \PYG{k+kc}{False}
+
+    \PYG{k}{return} \PYG{n}{directory\PYGZus{}created}
+
+\PYG{c+c1}{\PYGZsh{} Managment function, we can build directories for save outputs}
+
+\PYG{k}{def} \PYG{n+nf}{build\PYGZus{}infraestucture}\PYG{p}{(}\PYG{n}{dir\PYGZus{}name}\PYG{p}{,}\PYG{n}{output}\PYG{p}{):}
+
+    \PYG{n}{infra} \PYG{o}{=} \PYG{n}{log}\PYG{o}{.}\PYG{n}{progress}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Managment\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{n}{infra}\PYG{o}{.}\PYG{n}{status}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Building structure on \PYGZdq{}}\PYG{p}{)}
+
+
+    \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{exists}\PYG{p}{(}\PYG{n}{dir\PYGZus{}name}\PYG{p}{):}
+        \PYG{n}{directory\PYGZus{}created} \PYG{o}{=} \PYG{n}{mdir}\PYG{p}{(}\PYG{n}{dir\PYGZus{}name}\PYG{p}{)}
+        \PYG{k}{if} \PYG{n}{directory\PYGZus{}created}\PYG{p}{:}
+            \PYG{n}{infra}\PYG{o}{.}\PYG{n}{success}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Succesfully created the directory }\PYG{l+s+si}{\PYGZob{}\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{dir\PYGZus{}name}\PYG{p}{))}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n}{infra}\PYG{o}{.}\PYG{n}{failure}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Creation of the directory }\PYG{l+s+si}{\PYGZob{}\PYGZcb{}}\PYG{l+s+s2}{ failed\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{dir\PYGZus{}name}\PYG{p}{))}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{infra}\PYG{o}{.}\PYG{n}{success}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Directory }\PYG{l+s+si}{\PYGZob{}\PYGZcb{}}\PYG{l+s+s2}{ already exist\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{dir\PYGZus{}name}\PYG{p}{))}
+
+\PYG{k}{def} \PYG{n+nf}{run}\PYG{p}{(}\PYG{n}{dir\PYGZus{}file}\PYG{p}{,} \PYG{n}{command}\PYG{p}{,}\PYG{n}{service}\PYG{p}{,}\PYG{n}{debug}\PYG{p}{):}
+    \PYG{n}{out} \PYG{o}{=} \PYG{n}{dir\PYGZus{}file} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}out.txt\PYGZdq{}}
+    \PYG{n}{err} \PYG{o}{=} \PYG{n}{dir\PYGZus{}file} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}err.txt\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{}    parsed\PYGZus{}command = command \PYGZsh{}\PYGZsh{} Util working other commands}
+    \PYG{n}{parsed\PYGZus{}command} \PYG{o}{=} \PYG{p}{[]}
+
+    \PYG{k}{for} \PYG{n}{c} \PYG{o+ow}{in} \PYG{n}{command}\PYG{p}{:}
+        \PYG{n}{parsed\PYGZus{}command}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{c}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}·\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{} \PYGZsq{}}\PYG{p}{))}
+
+
+    \PYG{n}{p} \PYG{o}{=} \PYG{n}{log}\PYG{o}{.}\PYG{n}{progress}\PYG{p}{(}\PYG{n}{service}\PYG{p}{)}
+
+    \PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{out}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}w+\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{fout}\PYG{p}{:}
+        \PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{err}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}w+\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{ferr}\PYG{p}{:}
+
+            \PYG{n}{p}\PYG{o}{.}\PYG{n}{status}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Running\PYGZdq{}}\PYG{p}{)}
+            \PYG{k}{try}\PYG{p}{:}
+                \PYG{n}{out}\PYG{o}{=}\PYG{n}{subprocess}\PYG{o}{.}\PYG{n}{call}\PYG{p}{(}\PYG{n}{parsed\PYGZus{}command}\PYG{p}{,}\PYG{n}{stdout}\PYG{o}{=}\PYG{n}{fout}\PYG{p}{,}\PYG{n}{stderr}\PYG{o}{=}\PYG{n}{ferr}\PYG{p}{)}
+                \PYG{c+c1}{\PYGZsh{} reset file to read from it}
+                \PYG{n}{fout}\PYG{o}{.}\PYG{n}{seek}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+                \PYG{c+c1}{\PYGZsh{} save output (if any) in variable}
+                \PYG{n}{output}\PYG{o}{=}\PYG{n}{fout}\PYG{o}{.}\PYG{n}{read}\PYG{p}{()}
+                \PYG{k}{if} \PYG{n}{debug}\PYG{p}{:}
+                    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{output}\PYG{p}{)}
+
+                \PYG{c+c1}{\PYGZsh{} reset file to read from it}
+                \PYG{n}{ferr}\PYG{o}{.}\PYG{n}{seek}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+                \PYG{c+c1}{\PYGZsh{} save errors (if any) in variable}
+                \PYG{n}{errors} \PYG{o}{=} \PYG{n}{ferr}\PYG{o}{.}\PYG{n}{read}\PYG{p}{()}
+                \PYG{k}{if} \PYG{n}{out} \PYG{o}{!=} \PYG{l+m+mi}{0}\PYG{p}{:}
+                    \PYG{n}{p}\PYG{o}{.}\PYG{n}{failure}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Something wrong\PYGZdq{}}\PYG{p}{)}
+                \PYG{k}{else}\PYG{p}{:}
+                    \PYG{n}{p}\PYG{o}{.}\PYG{n}{success}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Succesfully!\PYGZdq{}}\PYG{p}{)}
+            \PYG{k}{except}\PYG{p}{:}
+                \PYG{n}{p}\PYG{o}{.}\PYG{n}{failure}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Command timeout\PYGZdq{}}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{main}\PYG{p}{():}
+
+    \PYG{c+c1}{\PYGZsh{} Get args from Namespace type}
+    \PYG{n}{args} \PYG{o}{=} \PYG{n+nb}{vars}\PYG{p}{(}\PYG{n}{gen\PYGZus{}cli\PYGZus{}args}\PYG{p}{())}
+
+    \PYG{c+c1}{\PYGZsh{} Get service}
+    \PYG{n}{service} \PYG{o}{=} \PYG{n}{args}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}services\PYGZsq{}}\PYG{p}{]}
+    \PYG{n}{target} \PYG{o}{=} \PYG{n}{args}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}target\PYGZsq{}}\PYG{p}{]}
+    \PYG{n}{debug} \PYG{o}{=} \PYG{n}{args}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}verbose\PYGZsq{}}\PYG{p}{]}
+    \PYG{n}{out\PYGZus{}path} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{args}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}path\PYGZsq{}}\PYG{p}{],(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{args}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}target\PYGZsq{}}\PYG{p}{],}\PYG{n}{service}\PYG{p}{)))}
+    \PYG{n}{config\PYGZus{}path} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{os}\PYG{o}{.}\PYG{n}{getcwd}\PYG{p}{(),} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}data\PYGZdq{}}\PYG{p}{,}\PYG{n}{service}\PYG{p}{))}
+
+    \PYG{n}{web\PYGZus{}path} \PYG{o}{=} \PYG{n}{out\PYGZus{}path} \PYG{c+c1}{\PYGZsh{} CHANGE WHEN WEB WORKS}
+
+    \PYG{c+c1}{\PYGZsh{} Build infraestucture for save output}
+    \PYG{n}{build\PYGZus{}infraestucture}\PYG{p}{(}\PYG{n}{out\PYGZus{}path}\PYG{p}{,}\PYG{n}{config\PYGZus{}path}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{}print(args) \PYGZsh{} debug}
+    \PYG{c+c1}{\PYGZsh{} Start progress}
+    \PYG{n}{service\PYGZus{}progress} \PYG{o}{=} \PYG{n}{log}\PYG{o}{.}\PYG{n}{progress}\PYG{p}{(}\PYG{n}{service}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{}\PYGZsh{} Recon scanner}
+    \PYG{k}{if} \PYG{l+s+s1}{\PYGZsq{}recon\PYGZsq{}} \PYG{o}{==} \PYG{n}{service}\PYG{p}{:}
+        \PYG{n}{scanner} \PYG{o}{=} \PYG{n}{recon}\PYG{p}{(}\PYG{n}{args}\PYG{p}{,}\PYG{n}{config\PYGZus{}path}\PYG{p}{,}\PYG{n}{out\PYGZus{}path}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{}\PYGZsh{} Web scanner}
+    \PYG{k}{elif} \PYG{l+s+s1}{\PYGZsq{}web\PYGZsq{}} \PYG{o}{==} \PYG{n}{service}\PYG{p}{:}
+        \PYG{n}{scanner} \PYG{o}{=} \PYG{n}{web}\PYG{p}{(}\PYG{n}{args}\PYG{p}{,}\PYG{n}{config\PYGZus{}path}\PYG{p}{,}\PYG{n}{out\PYGZus{}path}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{}\PYGZsh{} smb scanner}
+    \PYG{k}{elif} \PYG{l+s+s1}{\PYGZsq{}smb\PYGZsq{}} \PYG{o}{==} \PYG{n}{service}\PYG{p}{:}
+        \PYG{n}{scanner} \PYG{o}{=} \PYG{n}{smb}\PYG{p}{(}\PYG{n}{args}\PYG{p}{,}\PYG{n}{config\PYGZus{}path}\PYG{p}{,}\PYG{n}{out\PYGZus{}path}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{}\PYGZsh{} ldap scanner}
+    \PYG{k}{elif} \PYG{l+s+s1}{\PYGZsq{}ldap\PYGZsq{}} \PYG{o}{==} \PYG{n}{service}\PYG{p}{:}
+        \PYG{n}{scanner} \PYG{o}{=} \PYG{n}{ldap}\PYG{p}{(}\PYG{n}{args}\PYG{p}{,}\PYG{n}{config\PYGZus{}path}\PYG{p}{,}\PYG{n}{out\PYGZus{}path}\PYG{p}{)}
+    \PYG{c+c1}{\PYGZsh{}\PYGZsh{} ftp scanner}
+    \PYG{k}{elif} \PYG{l+s+s1}{\PYGZsq{}ftp\PYGZsq{}} \PYG{o}{==} \PYG{n}{service}\PYG{p}{:}
+        \PYG{n}{scanner} \PYG{o}{=} \PYG{n}{ftp}\PYG{p}{(}\PYG{n}{args}\PYG{p}{,}\PYG{n}{config\PYGZus{}path}\PYG{p}{,}\PYG{n}{out\PYGZus{}path}\PYG{p}{)}
+
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}\PYGZhy{}\PYGZhy{} 𝒞𝒽𝑒𝒸𝓀 𝒢𝒫𝑒𝓃𝒯𝒪𝑜𝓁𝓈 \PYGZhy{}\PYGZhy{}\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{description}\PYG{p}{,} \PYG{n}{command} \PYG{o+ow}{in} \PYG{n}{scanner}\PYG{o}{.}\PYG{n}{items}\PYG{p}{():}
+        \PYG{n}{service\PYGZus{}progress}\PYG{o}{.}\PYG{n}{status}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{o}{.}\PYG{n}{format}\PYG{p}{(}\PYG{n}{command}\PYG{p}{))}
+        \PYG{k}{if} \PYG{n}{args}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}show\PYGZus{}commands\PYGZsq{}}\PYG{p}{]:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{command}\PYG{p}{)}
+            \PYG{n}{time}\PYG{o}{.}\PYG{n}{sleep}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Check without exec}
+        \PYG{k}{else}\PYG{p}{:}
+            \PYG{n}{run}\PYG{p}{(}\PYG{n}{web\PYGZus{}path}\PYG{p}{,}\PYG{n}{command}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(),}\PYG{n}{description}\PYG{p}{,}\PYG{n}{debug}\PYG{p}{)}
+
+\PYG{k}{if} \PYG{n+nv+vm}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}\PYGZus{}\PYGZus{}main\PYGZus{}\PYGZus{}\PYGZsq{}}\PYG{p}{:}
+    \PYG{n}{main}\PYG{p}{()}
+\end{Verbatim}

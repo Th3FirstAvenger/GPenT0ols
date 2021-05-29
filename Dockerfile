@@ -13,6 +13,7 @@ RUN apt-get update && \
     whatweb \
     snmp \
     wget \
+    masscan \
     nbtscan \
     wpscan \
     enum4linux \ 

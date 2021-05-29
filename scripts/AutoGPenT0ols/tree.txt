@@ -1,0 +1,45 @@
+.
+├── AutoGPenT0ols.py
+├── data
+│   ├── enum_nmap.json
+│   ├── ftp
+│   │   └── ftp_config.yaml
+│   ├── ldap
+│   │   └── ldap_config.yaml
+│   ├── recon
+│   │   └── recon_config.yaml
+│   ├── smb
+│   │   └── smb_config.yaml
+│   └── web
+│       ├── web_config.yaml
+│       └── web_config.yaml.bk
+├── gptools_cli.py
+├── helpers
+│   ├── logger.py
+│   └── __pycache__
+│       └── logger.cpython-39.pyc
+├── lib
+│   └── core
+│       ├── __pycache__
+│       │   └── __version__.cpython-39.pyc
+│       └── __version__.py
+├── __pycache__
+│   ├── AutoGPenT0ols.cpython-39.pyc
+│   ├── gptools_cli.cpython-39.pyc
+│   └── recon.cpython-39.pyc
+├── README.md
+├── services
+│   ├── ftp.py
+│   ├── ldap.py
+│   ├── __pycache__
+│   │   ├── ftp.cpython-39.pyc
+│   │   ├── ldap.cpython-39.pyc
+│   │   ├── recon.cpython-39.pyc
+│   │   ├── smb.cpython-39.pyc
+│   │   └── web.cpython-39.pyc
+│   ├── recon.py
+│   ├── smb.py
+│   └── web.py
+└── tree.txt
+
+14 directories, 28 files

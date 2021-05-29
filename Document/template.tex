@@ -3,10 +3,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx} % graficos
 \usepackage{fancyhdr}
-\usepackage[margin=2.5cm, top=2.5cm, bottom=2.5cm, includefoot]{geometry}
+\usepackage[margin=2.5cm, top=2.5cm,includefoot]{geometry}
 \usepackage[hidelinks]{hyperref}
 \usepackage[table,xcdraw]{xcolor}
-\usepackage{listings}
+\usepackage{minted}
 
 % VARIABLES 
 \newcommand{\logoITB}{./data/img/ITB_Logo_417.png}
@@ -16,18 +16,20 @@
 \newcommand{\LogoGPTS}{./data/img/Logo_ptls.png}
 
 \newcommand{\cronologia}{./data/img/Cronograma vertical.png}
+\newcommand{\scriptEstruc}{./data/img/Estructura_Script.png}
 
 % ADICIONALES
 %\renewcommand{\contentsname}{Index}
-\setlength{\headheight}{40.2pt}
+\setlength{\headheight}{50.2pt}
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{\includegraphics[width=4cm]{\logoITB}}
 \rhead{\includegraphics[width=2cm]{\LogoGPTS}}
 \rfoot{\thepage}
 \lfoot{\autor}
-
-
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{blue}\leaders\hrule height \headrulewidth\hfill}}
+\setlength\parindent{0pt}
 
 
 % DOCUMENT START
@@ -84,42 +86,562 @@ Then I would like to show how I have done the project, the steps I have followed
 
 As I said before I hope to enjoy and assimilate as much as I can doing this kind of work because I think it helps me a lot to get out of my comfort zone and this kind of challenges makes learning much more fun.
 
-
+\pagebreak
     \section{Introducció}
    
     Feia temps que volia crear-me una eina automatitzada per poder realitzar pentestings, a més a més treballar una mica el desenvolupament web i conèixer noves tecnologies també estava dins el meu pla.
-La idea del projecte es realitzar un entorn de pentesting de forma gràfic mitjançant una web. Aquest entorn és una infraestructura en Docker on recolliré totes les eines que son útils per a mi i poder realitzar una auditoria de pentesting i desplegar-la de forma còmode i ràpida.\par
+La idea del projecte es realitzar un entorn de pentesting de forma gràfica mitjançant una web. Aquest entorn és una infraestructura en Docker on recolliré totes les eines que son útils per a mi. Em permetrà realitzar una auditoria de pentesting i desplegar-la de forma còmode i ràpida.\par
 Un pentest consisteix en realitar un procés d'avaluació coordinat. La prova implica una varietat d'elements, però per a simplificar l'explicació, un individu o equip contractat accedeix al sistema, avaluaria tot el sistema cercant vulnerabilitats o febleses a través d'una metodologia predefinida, aquestes vulnerabilitats són explotades de manera controlada i permet identificar el risc per a l'organització. \par\par 
 La idea s'origina en la necessitat d'automatitzar i les ganes d'aprendre o millorar un llenguatge de programació, concretament Python. Com he comentat anteriorment aquest projecte no ha set la primera idea que he tingut, ja que abans han passat varies molt similars i molt interessants. Una d'aquestes i que m'ha ajudat molt a obtenir aquesta idea final, era crear un plugin del Framework caldera.
-Caldera és un framework que utilitza les tàctiques de MITRE AT\&TCK, i s'utilitza tant per red team com per blue. Aquest inici em va permetre entendre una mica el funcionament de com estava programat.
+Caldera és un framework que utilitza les tàctiques de MITRE ATT\&CK, i s'utilitza tant per red team com per blue. Aquest inici em va permetre entendre una mica el funcionament de com estava programat.
 Però aquesta idea no m'acabava de convecer, ja que principalment volia crear una eina per realitzar pentesting i no de red team. Molta gent ho engloba tot i realment són metodologies diferents. Més endavant explicaré que signifiquen aquests conceptes, però detallar aquesta part ho he trobat important perquè ha set de gran ajuda per obtenir la idea final.
 Finalment vaig decidir crear la meva pròpia eina des de zero, anomenada GPenTools. Com he dit, ho escriure principalment amb Python tant l'entorn gràfic com la majoria de scripts. El que faré serà una web on hi hagui una shell interactiva i tindré totes les eines de pentesting que consideri. Aquesta web et permetrà modificar ràpidament el script i també crear tasques automatitzades.
+Per la creació d'aquesta eina m'ha servit d'inspiració altres eines com \href{https://github.com/byt3bl33d3r/CrackMapExec}{\color{blue}crackmapexec} i \href{https://github.com/Tib3rius/AutoRecon}{\color{blue}autorecon}.\par
 Tota la informació la compartiré en el meu repositori de Github, ja que ho vull fer de forma pública i que qualsevol persona la pugui utilitzar. \\
 
     \begin{center}
         Enllaç del repositori: \href{https://github.com/Th3FirstAvenger/GPenT0ols}{\color{blue}https://github.com/Th3FirstAvenger/GPenT0ols}\\
     \end{center}
-
+\pagebreak
     \section{Objectius}
     Per poder executar aquest projecte, ha set necessari complir uns requisits mínims. Aquest requisit seria comptar amb les bases de Linux i tenir uns coneixements de pentesting. Els objectius que m'agradaria assolir serien aconseguir una primera experiència desenvolupant una eina automatitzada totalment pròpia amb el llenguatge de programació de python, poder aprofitar aquesta eina per implementar-la en les auditories i seguir treballant amb ella per aconseguir millores.
 Per complir els objectius ha set necessari una primera fase de planificació, aquesta part consider-ho que ha set la més important ja que soc una persona que li agrada realitzar inversions a llarg termini i tenir una bona preparació.
 
 Com bé deia Abraham Lincoln " Give me six hours to chop down a tree and I will spend the first four sharpening the ax. " Dona'm sis hores per tallar un arbre i em passaré les quatre primeres afilant la destral.
 
-Al tenir poca experiència en desenvolupar un projecte de programació a llarg termini, com es normal he comès alguns errors i imprevistos. Sent veritat, que gràcies a l'haver planificat una idea inicial i ben estructurada he rectificar a temps sense que hagi complicat molt el projecta. Quan dic que no tinc experiència vull fer referència que jo en l'àmbit de programació he realitzat sigui scripts automatitzats o creació d'algun exploit web.
-
+Al tenir poca experiència en desenvolupar un projecte de programació a llarg termini, com es normal he comès alguns errors i imprevistos. Sent veritat, que gràcies a l'haver planificat una idea inicial i ben estructurada he rectificat a temps sense que hagi complicat molt el projecte. Quan dic que no tinc experiència vull fer referència que jo en l'àmbit de programació, només he realitzat scripts automatitzats i creació d'algun exploit web. Aquests a nivell bàsic.
+\pagebreak
     \section{Anàlisi de la programació}
-        \begin{figure}[h]
-          \centering
+    La planificació del projecte ha estat estructurada de la següent forma: 
+    \begin{figure}[h]
+        \centering
           \includegraphics[scale=0.4]{\cronologia}
-          \caption{Cronograma del projecte}
-        \end{figure}
-
+            Figura 1: Cronograma
+    \end{figure}
+    \pagebreak
     \section{Resultats}
+    En aquest apartat compartiré el codi i les instruccions per poder utilitzar la eina GPenT0ols. Tota la informació es troba en el meu repositori de github que he anunciat anteriorment. 
 
-    \begin{lstlisting}[language=Python, caption=Python example]
+    Per realitzar la instal·lació recomano que es faci amb docker ja que et permet tenir la ultima versió del projecte amb totes les eines i llibreries necessaries. Apart aquesta eina unicament ocupa 3 GB en la que cada vegada que es utilitzada s'elimina automaticament a no se que utilitzis configuracions que no s'indiquen a la instal·lació. 
 
-    \end{lstlisting}        
+\subsection{Instal·lació}
+Primer de tot es necessari tenir-ho descarregat
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{bash}
+git clone https://github.com/Th3FirstAvenger/GPenT0ols.git /opt/GPenT0ols
+cd /opt/GPenT0ols
+\end{minted}
+
+\subsubsection{Per utilitzar python3}
+En aquest cas ja tindriem l'eina descarregada. Faltaria descarregar i instal·lar les dependències minimes per poder utilitzar l'eina. Per tenir-ho es pot fer us de la següent comanda: \par 
+\textit{* Aquesta comanda es valida per kali linux, en altres distribucions es probable que hagis de realitzar una instal·lació manual. }
+
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{bash}
+apt-get update && \
+        apt-get install -y \
+    python3 \
+    python3-pip \
+    git \
+    nmap \
+    masscan \
+    smbmap \
+    whatweb \
+    snmp \
+    wget \
+    nbtscan \
+    wpscan \
+    enum4linux \ 
+    nikto \
+    ffuf \
+    golang \
+    python3-venv \
+    crackmapexec \
+    seclists 
+\end{minted}
+
+El següent pas ja es realitzar l'execució. 
+
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{bash}
+python3 AutoGPenT0ols.py -h 
+\end{minted}
+
+    \subsubsection{Docker (Recomenada)}
+    A continuació mostraré els passos per instal·lar l'eina amb docker.
+Per la creació de la imatge haurem d'executar la següent comanda.
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{bash}
+docker build -t capitanj4ck/gpent0ols .
+\end{minted}
+Per fer l'execució es bestant facil i com he indicat abans d'aquesta forma l'eina no es guarda i s'elimina cuan acaba l'execució. Per iniciar utilitzariem la següent comanda:
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{bash}
+docker run --rm -it -v /tmp/gpt_report:/tmp/gpt_report capitanj4ck/gpent0ols -h
+\end{minted}
+
+Recomano afegir el següent alies per fer l'execució d'una forma més ràpida: 
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{bash}
+alias gpt="docker run --rm -it -v /tmp/gpt_report:/tmp/gpt_report capitanj4ck/gpent0ols"
+\end{minted}
+
+\pagebreak
+\subsection{Funcionament}
+Primer de tot explicaré com esta estrucurada l'eina. M'agradaria donar molta més énfasi a l'apartat del codi ja que la web encara enstà en desenvolupament. He prioritzat aprendre el funcionament de python abans que flask, l'objectiu inicial era tenir una eina propia.\par 
+A l'executar l'eina ens permet realitzar diferents funcions. Com he dit anteriorment, el que ens permet realitzar aquesta eina es enumerar qualsevol equip de forma bàsica. 
+Com que la meva intenció es seguir treballant amb aquesta eina, inicialment vaig planificar una estructura que em permetés poder desenvolupar el projecte a llarga durada i no fos únicament un fitxer python que ho realitzes tot. Un dels objectius era entendre com desenvolupar una eina de forma professional i no únicament teclejar i entendre el codi. Per aquest motiu vaig estar preguntat a professionals i veien diferents programes realitzats en python. D'aquesta forma em van servir d'inspiració diferents programes i amb aquesta ajuda vaig aconseguir planificar una estructura que fins el dia d'avui no he tingut molt problemes.
+
+Per tant procediré en mostrar com la tinc estructurada.    
+\begin{figure}[h]
+          \includegraphics[scale=0.5]{\scriptEstruc}
+        \centering\par
+            Figura 2: Estructura de l'eina
+    \end{figure}
+
+    \subsubsection{Codi}
+Veiem que inicialment tenim un fitxer main, aquest em permet cridar les diferents llibreries creades i cada llibreria té les llibreries necessàries i així no omplo el primer fitxer de codi que únicament em pot servir per a un servei.
+El contingut d'aquest fitxer seria el següent:
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{python}
+#!/usr/bin/python3 
+## 
+                           #                                                                                                                                                                                         
+                           ##                                ###                                                                                                                                                     
+  ###### #######  ######## ###  ## ######## ####### #######  ###         ####                                                                                                                                        
+ ###           ##          #### ##    ###   ##   ##       ## ###        ###                                                                                                                                          
+ ###  ##  ######   ####### #######    ###   ##   ##  ##   ## ###        ###                                                                                                                                          
+ ###  ##  ###      ###     ### ###    ###   ##   ##  ##   ## ###        ###                                                                                                                                          
+  ######  ###      ####### ###  ##    ###   #######   #####  ####### #####                                                                                                                                           
+                                 #                                                                                                                                                                                   
+# Author : CapitanJ4ck
+##
+
+import signal
+from sys import exit
+import os
+import time
+import subprocess
+from pwn import *
+from gptools_cli import gen_cli_args
+from services.recon import recon
+from services.web import web
+from services.smb import smb
+from services.ldap import ldap
+from services.ftp import ftp
+
+## Detect Contrl + C 
+def signal_handler(key, frame):
+    # Handle any cleanup here
+    exit = log.progress("SIGINT or CTRL-C detected.")
+    exit.status("Exiting...")
+    time.sleep(1)
+    exit.failure("Exiting gracefully")
+    sys.exit(1)
+
+signal = signal.signal(signal.SIGINT, signal_handler)
+
+
+# Vars 
+
+# Make directories
+
+def mdir(dir_name):
+    
+    directory_created = True
+
+    try:
+        os.makedirs(dir_name)
+    
+    except OSError:
+        directory_created = False
+    
+    return directory_created
+
+# Managment function, we can build directories for save outputs
+
+def build_infraestucture(dir_name,output):
+
+    infra = log.progress("Managment")
+    
+    infra.status("Building structure on ")
+
+    
+    if not os.path.exists(dir_name):
+        directory_created = mdir(dir_name)
+        if directory_created: 
+            infra.success("Succesfully created the directory {}".format(dir_name))
+        else: 
+            infra.failure("Creation of the directory {} failed".format(dir_name))
+    else: 
+        infra.success("Directory {} already exist".format(dir_name))
+
+def run(dir_file, command,service,debug):
+    out = dir_file + "out.txt"
+    err = dir_file + "err.txt"
+#    parsed_command = command ## Util working other commands 
+    parsed_command = []
+    
+    for c in command:
+        parsed_command.append(c.replace('·',' '))
+    
+
+    p = log.progress(service)
+    
+    with open(out,'w+') as fout:
+        with open(err,'w+') as ferr:
+            
+            p.status("Running")           
+            try: 
+                out=subprocess.call(parsed_command,stdout=fout,stderr=ferr)
+                # reset file to read from it
+                fout.seek(0)
+                # save output (if any) in variable
+                output=fout.read()
+                if debug:
+                    print(output) 
+
+                # reset file to read from it
+                ferr.seek(0) 
+                # save errors (if any) in variable
+                errors = ferr.read()
+                if out != 0: 
+                    p.failure("Something wrong")
+                else: 
+                    p.success("Succesfully!")
+            except: 
+                p.failure("Command timeout")
+            
+def main():
+    
+    # Get args from Namespace type 
+    args = vars(gen_cli_args())
+    
+    # Get service
+    service = args['services']
+    target = args['target'] 
+    debug = args['verbose'] 
+    out_path = os.path.join(args['path'],(os.path.join(args['target'],service)))
+    config_path = os.path.join(os.getcwd(), os.path.join("data",service))
+    
+    web_path = out_path # CHANGE WHEN WEB WORKS
+
+    # Build infraestucture for save output
+    build_infraestucture(out_path,config_path)
+
+    #print(args) # debug
+    # Start progress
+    service_progress = log.progress(service)
+    
+    ## Recon scanner
+    if 'recon' == service: 
+        scanner = recon(args,config_path,out_path)
+    ## Web scanner
+    elif 'web' == service: 
+        scanner = web(args,config_path,out_path)
+    ## smb scanner
+    elif 'smb' == service: 
+        scanner = smb(args,config_path,out_path) 
+    ## ldap scanner
+    elif 'ldap' == service: 
+        scanner = ldap(args,config_path,out_path) 
+    ## ftp scanner
+    elif 'ftp' == service: 
+        scanner = ftp(args,config_path,out_path) 
+    
+    print("-- 𝒞𝒽𝑒𝒸𝓀 𝒢𝒫𝑒𝓃𝒯𝒪𝑜𝓁𝓈 --")
+    for description, command in scanner.items():
+        service_progress.status("{}".format(command))
+        if args['show_commands']:
+            print(command)
+            time.sleep(2) # Check without exec 
+        else: 
+            run(web_path,command.split(),description,debug)
+
+if __name__ == '__main__':
+    main()
+\end{minted}
+
+En aquest fitxer mostrat anteriorment el que fa es agafar els arguments passats pel fitxer gpentools\_cli.py. A partir del que passa l'usuari executarà una cosa o altra. Més endavant mostraré el que mostra i el seu funcionament.\par
+
+_NOM FITXER
+
+Aquest fitxer fa ús del mòdul argparse, aquest mòdul em permet agafar els arguments de forma fàcil i compatible de moltes formes. També he escollit aquest mòdul perquè em permet crear com submenús i aprofundir més en detall cada servei. Aquest mòdul el comparteixo a la webgrafia, ja que ha set complexa entendre el seu funcionament però finalment he aconseguit implementar-ho.
+\par
+
+El contingut del fitxer gpentools\_cli és el següent: 
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{python}
+import argparse
+import sys
+from argparse import RawTextHelpFormatter
+from lib.core.__version__ import __version__
+from helpers.logger import highlight
+
+def gen_cli_args():
+
+    VERSION  = __version__
+    CODENAME = 'CapitanJ4ck'
+
+
+    parser = argparse.ArgumentParser(description="""
+                           #                                                 
+                           ##                                ###             
+  ###### #######  ######## ###  ## ######## ####### #######  ###         ####
+ ###           ##          #### ##    ###   ##   ##       ## ###        ###  
+ ###  ##  ######   ####### #######    ###   ##   ##  ##   ## ###        ###  
+ ###  ##  ###      ###     ### ###    ###   ##   ##  ##   ## ###        ###  
+  ######  ###      ####### ###  ##    ###   #######   #####  ####### #####   
+                                 #                                           
+                                 {}: {}
+                                 {}: {}
+""".format(highlight('Version', 'red'),
+           highlight(VERSION),
+           highlight('Codename', 'red'),
+           highlight(CODENAME)),
+
+                                    formatter_class=RawTextHelpFormatter,
+                                    epilog="We are in... Let the hacking begin!")
+
+    parser.add_argument("-t", type=int, dest="threads", default=100, help="set how many concurrent threads to use (default: 100)")
+    parser.add_argument("--verbose", action='store_true', help="enable verbose output")
+    parser.add_argument("--show-commands", action='store_true', help="Just show commands")
+    parser.add_argument("--path",dest="path", default='/tmp/gpt_report/', help="Destination path (default: /tmp/gpt_report)")
+
+    std_parser = argparse.ArgumentParser(add_help=False)
+    std_parser.add_argument("target", nargs='?', type=str, help="(Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets ")
+    scan_parser = argparse.ArgumentParser(add_help=False)
+    scan_parser.add_argument(
+            '--scanner',
+            help='Select scanner (default : full_scanner)',
+            nargs='?',
+            default = 'full_scanner'
+            )
+
+    have_info_parser = argparse.ArgumentParser(add_help=False)
+    have_info_parser.add_argument(
+            '--tags',
+            help='What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)',
+            default = 'NoCreds',
+            nargs='?'
+            )
+
+    wlist_parser = argparse.ArgumentParser(add_help=False)
+    wlist_parser.add_argument("-w", metavar="WORDLIST", dest='wordlist', nargs='+', help="set wordlist  (Default SecList wordlist)")
+    
+    ssl_parser = argparse.ArgumentParser(add_help=False)
+    ssl_parser.add_argument(
+            '--ssl',
+            help='usage of SSL/TLS requests',
+            action='store_true'
+            )
+
+    cred_parser = argparse.ArgumentParser(add_help=False)
+    cred_parser.add_argument("-u", metavar="USERNAME", dest='username', nargs='?', default=[], help="username(s) or file(s) containing usernames")
+    cred_parser.add_argument("-p", metavar="PASSWORD", dest='password', nargs='?', default=[], help="password(s) or file(s) containing passwords")
+    cred_parser.add_argument("-H", metavar="HASH", dest='HASH', nargs='?', default=[], help="Pass The hash")
+
+    subparsers = parser.add_subparsers(title='services', dest='services', description='available options')
+
+
+    # Arguments Recon
+
+    recon = subparsers.add_parser('recon', help='Initial recon', parents=[std_parser,scan_parser]) ## Get new arguments and can introduce std_parser arguments
+    recon.add_argument(
+            '--all-ports',
+            help='scan all ports',
+            action='store_true'
+            )
+    
+    recon.add_argument(
+            '--ports',
+            help='scan specific ports',
+            nargs='?'
+            )
+    
+    recon.add_argument(
+            '--full',
+            help='Full recon scan',
+            action='store_true'
+            )
+
+
+    # Arguments WEB
+
+    web = subparsers.add_parser('web', help='Web server scanner', parents = [cred_parser, std_parser,wlist_parser,scan_parser,ssl_parser])
+    
+    web.add_argument(
+            '--port',
+            help='scan specific port (Default 80)',
+            nargs='?',
+            default = '80'
+            )
+    
+    web.add_argument(
+            '--file-path',
+            help='Specify to find the requested resource and start the enumeration with that route (Default / )',
+            nargs='?',
+            default = '/'
+            )
+    
+
+    web.add_argument(
+            '--cms',
+            help='What do you have? [Wordpress, Joombla, Drupal] (Default: NoCreds)',
+            default = 'NoCreds',
+            nargs='?'
+            )
+    # Arguments SMTP
+
+    smtp = subparsers.add_parser('smtp', help='smtp enumeration')
+
+    # Arguments SMB
+
+    smb = subparsers.add_parser('smb', help='Enum smb', parents = [cred_parser,std_parser,have_info_parser])
+
+    smb.add_argument(
+            '--port',
+            help='scan specific port (Default 445)',
+            nargs='?',
+            default = '445'
+            )
+    
+    
+    # Arguments FTP
+    
+    ftp = subparsers.add_parser('ftp', help='FTP enum', parents = [cred_parser,std_parser,have_info_parser,ssl_parser])
+
+    ftp.add_argument(
+            '--port',
+            help='scan specific port (Default 22)',
+            nargs='?',
+            default = '22'
+            )
+    
+    
+    # Argumets LDAP
+
+    ldap = subparsers.add_parser('ldap', help='LDAP enum', parents = [cred_parser,std_parser,have_info_parser])
+    
+    ldap.add_argument(
+            '--port',
+            help='scan specific port (Default 389)',
+            nargs='?',
+            default = '389'
+            )
+
+    # Arguments SNMP
+    
+    snmp = subparsers.add_parser('snmp', help='Enum SNMP', parents = [cred_parser,std_parser])
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(1)
+
+    args = parser.parse_args()
+    
+    check = vars(args)
+
+
+    if not check['target']:
+        if check['services'] == 'recon':
+            recon.print_help()
+        elif check['services'] == 'web':
+            web.print_help()
+        elif check['services'] == 'smb':
+            smb.print_help()
+        elif check['services'] == 'smtp':
+            smtp.print_help()
+        elif check['services'] == 'ftp':
+            ftp.print_help()
+        elif check['services'] == 'ldap':
+            ldap.print_help()
+        elif check['services'] == 'snmp':
+            snmp.print_help()
+        else: 
+            parser.print_help()
+        sys.exit(1)
+
+    return args
+\end{minted}
+
+Una vegada s'han passat els arguments de forma correcta ja passen a executar els serveis. Cada servei té el seu fitxer i està creat com una llibreria. En el fitxer Main, veiem que crida unes funcions i aquestes funcions són les que es troben dins de cada servei. Sí que la metodologia és molt similar a cada fitxer però a poc a poc aniré implementant millores. Per exemple els fitxers recon i web són molt similars en canvi amb samba i ldap ja són diferents. El motiu es que he estat realitzant proves per veure quina seria la més eficaç i de moment crec que l'estructura que mantindré es la forma que estan configurats la segona opció.
+En primer lloc la primera opció, fa ús dels fitxers de configuració .yaml però l'estructura es diferent. Podem observar que la primera opció s'ha de passar un argument i serà el mateix que cridarà en el fitxer yaml, en canvi la segona opció utilitzem sempre els mateixos tags i busca a través d'aquest tags. Si que pel servei de recon la millor opció es l'actual pero per l'apartat web seria modificar-ho i utilitzar els tags, però aquesta part la fa molt més complexa, ja que s'hauria de planificar quins serien aquest tags i com ho organitzaria per aquest motiu de moment ho mantinc com està.
+\par
+
+La metodologia que hauriem de seguir es realiar en primer lloc un recon, aquesta funció ens permet enumerar a nivell de xarxa tots els ports que poden esta oberts. 
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{python}
+
+\end{minted}
+\subsection{Utilització}
     \section{Conclusions}
 
     \section{Referecies bibliografiques}

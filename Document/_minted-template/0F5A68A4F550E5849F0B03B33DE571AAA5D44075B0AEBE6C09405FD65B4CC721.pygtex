@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+apt\PYGZhy{}get update \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{l+s+se}{\PYGZbs{}}
+        apt\PYGZhy{}get install \PYGZhy{}y \PYG{l+s+se}{\PYGZbs{}}
+    python3 \PYG{l+s+se}{\PYGZbs{}}
+    python3\PYGZhy{}pip \PYG{l+s+se}{\PYGZbs{}}
+    git \PYG{l+s+se}{\PYGZbs{}}
+    nmap \PYG{l+s+se}{\PYGZbs{}}
+    masscan \PYG{l+s+se}{\PYGZbs{}}
+    smbmap \PYG{l+s+se}{\PYGZbs{}}
+    whatweb \PYG{l+s+se}{\PYGZbs{}}
+    snmp \PYG{l+s+se}{\PYGZbs{}}
+    wget \PYG{l+s+se}{\PYGZbs{}}
+    nbtscan \PYG{l+s+se}{\PYGZbs{}}
+    wpscan \PYG{l+s+se}{\PYGZbs{}}
+    enum4linux \PYG{l+s+se}{\PYGZbs{}}
+    nikto \PYG{l+s+se}{\PYGZbs{}}
+    ffuf \PYG{l+s+se}{\PYGZbs{}}
+    golang \PYG{l+s+se}{\PYGZbs{}}
+    python3\PYGZhy{}venv \PYG{l+s+se}{\PYGZbs{}}
+    crackmapexec \PYG{l+s+se}{\PYGZbs{}}
+    seclists
+\end{Verbatim}
