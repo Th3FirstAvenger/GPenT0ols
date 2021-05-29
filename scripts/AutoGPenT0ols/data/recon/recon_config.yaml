@@ -20,10 +20,15 @@ full_scanner:
     description: "Scanning udp ports"
     commands: |  
         nmap -F -sU -sV -T 4 -oN ${{ out_dir }} ${{ target }} 
+  
+  masscan_full:
+    attack_technique: masscan
+    description: "Scanning all ports with masscan"
+    commands: |  
+        masscan --rate 10000 -p1-65535 --only-open -oL ${{ out_dir }} ${{ target }}
 
 ## Not ready yet
 nmap_custom:
-  
   nmap_allports:
     attack_technique: nmap
     description: "Scanning all ports with nmap"

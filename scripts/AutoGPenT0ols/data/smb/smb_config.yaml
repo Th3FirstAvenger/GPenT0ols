@@ -20,7 +20,7 @@ enum4linux_null_session:
     tags: 
         - nocreds
     commands: |
-        enum4linux 
+        enum4linux -a ${{ target }} | tee ${{ out_dir }} 
 
 cme_dsa_session:
     attack_technique: crackmapexec

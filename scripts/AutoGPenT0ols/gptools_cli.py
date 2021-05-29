@@ -35,7 +35,7 @@ def gen_cli_args():
     parser.add_argument("-t", type=int, dest="threads", default=100, help="set how many concurrent threads to use (default: 100)")
     parser.add_argument("--verbose", action='store_true', help="enable verbose output")
     parser.add_argument("--show-commands", action='store_true', help="Just show commands")
-    parser.add_argument("--path",dest="path", default='/tmp/autorecon/', help="Destination path (default: /tmp/autorecon)")
+    parser.add_argument("--path",dest="path", default='/tmp/gpt_report/', help="Destination path (default: /tmp/gpt_report)")
 
     std_parser = argparse.ArgumentParser(add_help=False)
     std_parser.add_argument("target", nargs='?', type=str, help="(Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets ")
@@ -58,6 +58,13 @@ def gen_cli_args():
     wlist_parser = argparse.ArgumentParser(add_help=False)
     wlist_parser.add_argument("-w", metavar="WORDLIST", dest='wordlist', nargs='+', help="set wordlist  (Default SecList wordlist)")
     
+    ssl_parser = argparse.ArgumentParser(add_help=False)
+    ssl_parser.add_argument(
+            '--ssl',
+            help='usage of SSL/TLS requests',
+            action='store_true'
+            )
+
     cred_parser = argparse.ArgumentParser(add_help=False)
     cred_parser.add_argument("-u", metavar="USERNAME", dest='username', nargs='?', default=[], help="username(s) or file(s) containing usernames")
     cred_parser.add_argument("-p", metavar="PASSWORD", dest='password', nargs='?', default=[], help="password(s) or file(s) containing passwords")
@@ -106,11 +113,6 @@ def gen_cli_args():
             default = '/'
             )
     
-    web.add_argument(
-            '--ssl',
-            help='usage of SSL/HTTPS requests',
-            action='store_true'
-            )
 
     web.add_argument(
             '--cms',
@@ -136,8 +138,16 @@ def gen_cli_args():
     
     # Arguments FTP
     
-    ftp = subparsers.add_parser('ftp', help='FTP enum', parents = [cred_parser,std_parser])
+    ftp = subparsers.add_parser('ftp', help='FTP enum', parents = [cred_parser,std_parser,have_info_parser,ssl_parser])
 
+    ftp.add_argument(
+            '--port',
+            help='scan specific port (Default 22)',
+            nargs='?',
+            default = '22'
+            )
+    
+    
     # Argumets LDAP
 
     ldap = subparsers.add_parser('ldap', help='LDAP enum', parents = [cred_parser,std_parser,have_info_parser])

@@ -1,0 +1,23 @@
+ftp_anon_session:
+    attack_technique: nmap_ftp
+    description: "check anonymous user ftp"
+    tags: 
+        - nocreds
+    commands: |
+        nmap -sC -sV -p ${{ port }} -on ${{ out_dir }} ${{ target }}
+
+donwload_anonymous_session:
+    attack_technique: download_files
+    description: "downloading all files"
+    tags: 
+        - nocreds
+    commands: |
+        wget -r ${{ scheme }}://${{ target }}:${{ port }} -P ${{ out_dir }}
+
+donwload_creds_session:
+    attack_technique: download_files
+    description: "downloading all files"
+    tags: 
+        - creds
+    commands: |
+        wget -r ${{ scheme }}://${{ username }}:${{ password }}@${{ target }}:${{ port }} -P ${{ out_dir }}

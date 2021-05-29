@@ -23,6 +23,7 @@ from services.recon import recon
 from services.web import web
 from services.smb import smb
 from services.ldap import ldap
+from services.ftp import ftp
 
 ## Detect Contrl + C 
 def signal_handler(key, frame):
@@ -139,6 +140,9 @@ def main():
     ## ldap scanner
     elif 'ldap' == service: 
         scanner = ldap(args,config_path,out_path) 
+    ## ftp scanner
+    elif 'ftp' == service: 
+        scanner = ftp(args,config_path,out_path) 
     
     print("-- 𝒞𝒽𝑒𝒸𝓀 𝒢𝒫𝑒𝓃𝒯𝒪𝑜𝓁𝓈 --")
     for description, command in scanner.items():
