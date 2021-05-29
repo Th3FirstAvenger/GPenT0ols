@@ -20,7 +20,7 @@ RUN apt-get update && \
     ffuf \
     golang \
     python3-venv \
-#    crackmapexec \
+    crackmapexec \
     seclists 
 
 RUN git clone https://github.com/Th3FirstAvenger/GPenT0ols.git GPenT0ols && \
@@ -30,8 +30,8 @@ RUN git clone https://github.com/Th3FirstAvenger/GPenT0ols.git GPenT0ols && \
     go get && \ 
     go build 
 
-WORKDIR /GPenT0ols
+WORKDIR /GPenT0ols/scripts/AutoGPenT0ols
 
-RUN pip install -r requirements.txt 
+RUN pip install -r ../../requirements.txt 
 
-#ENTRYPOINT ["GPenT0ols"]
+ENTRYPOINT ["python3", "AutoGPenT0ols.py"]

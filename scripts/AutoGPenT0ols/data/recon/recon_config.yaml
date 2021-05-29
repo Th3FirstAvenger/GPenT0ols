@@ -2,6 +2,11 @@ full_scanner:
   nmap_quick:
     description: "Quick scan with nmap"
     commands: | 
+        nmap --open --version-all -oN ${{ out_dir }} ${{ target }} 
+  
+  nmap_quick:
+    description: "Quick scan with nmap"
+    commands: | 
         nmap -sV -sC --open --version-all -oN ${{ out_dir }} ${{ target }} 
   
   nmap_full: 

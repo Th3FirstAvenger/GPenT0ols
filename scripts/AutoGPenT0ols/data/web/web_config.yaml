@@ -10,23 +10,29 @@ full_scanner:
     attack_technique: curl-index
     description: "Enum index web content"
     commands: | 
-        curl -sSik ${{ url }} -m 10
+        curl -sSik ${{ url }} -m 10 > ${{ out_dir }}
+  
+  whatweb_index: 
+    attack_technique: whatweb
+    description: "Enum versions webs"
+    commands: | 
+        whatweb -v -a 3 ${{ target }} > ${{ out_dir }}
 
   nikto_scanenr:
     attack_technique: nikto
     description: "Nikto detect misconfiguration, risky files, etc."
     commands: |  
-        nikto -h ${{ url }}  
+        nikto -h ${{ url }}  > ${{ out_dir }}
   
   fuzzing_ffuf:
     attack_technique: ffuf
     description: "Fuzzing directories and files"
     commands: |  
-        ffuf -w ${{ wordlist }} -u ${{ url }}FUZZ -c -e '.php,.asp,.aspx,.txt,.html,.zip'  
+        ffuf -w ${{ wordlist }} -u ${{ url }}FUZZ -c -e '.php,.asp,.aspx,.txt,.html,.zip'  > ${{ out_dir }}
 wp: 
     wordpres_scanner: 
         attack_technique: wpscan
         description: "Fuzzing directories and files"
         commands: |  
-            wpscan --url ${{ url }} -e vp,vt,tt,cb,dbe,u,m --plugins-detection aggressive --plugins-version-detection aggressive 
+            wpscan --url ${{ url }} -e vp,vt,tt,cb,dbe,u,m --plugins-detection aggressive --plugins-version-detection aggressive > ${{ out_dir }}
 

@@ -94,6 +94,7 @@ def run(dir_file, command,service,debug):
                 output=fout.read()
                 if debug:
                     print(output) 
+
                 # reset file to read from it
                 ferr.seek(0) 
                 # save errors (if any) in variable
