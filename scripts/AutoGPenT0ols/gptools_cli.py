@@ -97,7 +97,7 @@ def gen_cli_args():
 
     # Arguments WEB
 
-    web = subparsers.add_parser('web', help='Web server scanner', parents = [cred_parser, std_parser,wlist_parser,scan_parser])
+    web = subparsers.add_parser('web', help='Web server scanner', parents = [cred_parser, std_parser,wlist_parser,scan_parser,ssl_parser])
     
     web.add_argument(
             '--port',
