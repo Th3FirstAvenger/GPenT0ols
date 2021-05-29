@@ -16,7 +16,7 @@ full_scanner:
     attack_technique: whatweb
     description: "Enum versions webs"
     commands: | 
-        whatweb -v -a 3 ${{ target }} | tee ${{ out_dir }}
+        whatweb -v -a 3 ${{ target }} 
 
   nikto_scanenr:
     attack_technique: nikto
@@ -28,11 +28,11 @@ full_scanner:
     attack_technique: ffuf
     description: "Fuzzing directories and files"
     commands: |  
-        ffuf -w ${{ wordlist }} -u ${{ url }}FUZZ -c -e '.php,.asp,.aspx,.txt,.html,.zip'  | tee ${{ out_dir }}
+        ffuf -w ${{ wordlist }} -u ${{ url }}FUZZ -c -e '.php,.asp,.aspx,.txt,.html,.zip' -o ${{ out_dir }}
 wp: 
     wordpres_scanner: 
         attack_technique: wpscan
         description: "Fuzzing directories and files"
         commands: |  
-            wpscan --url ${{ url }} -e vp,vt,tt,cb,dbe,u,m --plugins-detection aggressive --plugins-version-detection aggressive | tee ${{ out_dir }}
+            wpscan --url ${{ url }} -e vp,vt,tt,cb,dbe,u,m --plugins-detection aggressive --plugins-version-detection aggressive -o ${{ out_dir }}
 
