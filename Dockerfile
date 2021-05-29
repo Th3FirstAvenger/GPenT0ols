@@ -23,12 +23,7 @@ RUN apt-get update && \
     crackmapexec \
     seclists 
 
-RUN git clone https://github.com/Th3FirstAvenger/GPenT0ols.git GPenT0ols && \
-    ## Install ffuf
-    git clone https://github.com/ffuf/ffuf /opt/tools/web/ffuf && \
-    cd /opt/tools/web/ffuf && \
-    go get && \ 
-    go build 
+RUN git clone https://github.com/Th3FirstAvenger/GPenT0ols.git GPenT0ols
 
 WORKDIR /GPenT0ols/scripts/AutoGPenT0ols
 

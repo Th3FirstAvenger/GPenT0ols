@@ -1,17 +1,13 @@
 # PROGRAMS
-## DEFAULT RECON
-- [] nmap
-- [] masscan
-- [] crackmapexec 
-- [] enum4linux
+- [x] nmap
+- [x] masscan
+- [x] crackmapexec 
+- [x] enum4linux
 - [] smbmap
-- [] nikto
-- [] ffuf
+- [x] nikto
+- [x] ffuf
 - [] gobuster
-- [] whatweb
-
-
-## MANUAL 
-- [] wpscan
+- [x] whatweb
+- [x] wpscan
 
 
