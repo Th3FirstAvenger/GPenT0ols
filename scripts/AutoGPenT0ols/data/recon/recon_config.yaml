@@ -1,10 +1,10 @@
 full_scanner:
-  nmap_quick:
-    description: "Quick scan with nmap"
+  nmap_quick_open:
+    description: "Quick open ports with nmap"
     commands: | 
-        nmap --open --version-all -oN ${{ out_dir }} ${{ target }} 
+        nmap -F --open -oN ${{ out_dir }} ${{ target }} 
   
-  nmap_quick:
+  nmap_quick_versions:
     description: "Quick scan with nmap"
     commands: | 
         nmap -sV -sC --open --version-all -oN ${{ out_dir }} ${{ target }} 
