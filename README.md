@@ -111,6 +111,94 @@ services:
 We are in... Let the hacking begin!
 ```
 
+## RECON 
+```bash
+usage: AutoGPenT0ols.py recon [-h] [--scanner [SCANNER]] [--all-ports] [--ports [PORTS]] [--full] [target]
+
+positional arguments:
+  target               (Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --scanner [SCANNER]  Select scanner (default : full_scanner)
+  --all-ports          scan all ports
+  --ports [PORTS]      scan specific ports
+  --full               Full recon scan
+```
+
+## Web 
+```
+usage: AutoGPenT0ols.py web [-h] [-u [USERNAME]] [-p [PASSWORD]] [-H [HASH]] [-w WORDLIST [WORDLIST ...]] [--scanner [SCANNER]] [--ssl] [--port [PORT]] [--file-path [FILE_PATH]] [--cms [CMS]] [target]
+
+positional arguments:
+  target                (Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -u [USERNAME]         username(s) or file(s) containing usernames
+  -p [PASSWORD]         password(s) or file(s) containing passwords
+  -H [HASH]             Pass The hash
+  -w WORDLIST [WORDLIST ...]
+                        set wordlist (Default SecList wordlist)
+  --scanner [SCANNER]   Select scanner (default : full_scanner)
+  --ssl                 usage of SSL/TLS requests
+  --port [PORT]         scan specific port (Default 80)
+  --file-path [FILE_PATH]
+                        Specify to find the requested resource and start the enumeration with that route (Default / )
+  --cms [CMS]           What do you have? [Wordpress, Joombla, Drupal] (Default: None)
+
+```
+
+## Samba 
+
+```
+usage: AutoGPenT0ols.py smb [-h] [-u [USERNAME]] [-p [PASSWORD]] [-H [HASH]] [--tags [TAGS]] [--port [PORT]] [target]
+
+positional arguments:
+  target         (Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -u [USERNAME]  username(s) or file(s) containing usernames
+  -p [PASSWORD]  password(s) or file(s) containing passwords
+  -H [HASH]      Pass The hash
+  --tags [TAGS]  What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)
+  --port [PORT]  scan specific port (Default 445)
+```
+
+## LDAP
+
+```bash
+usage: AutoGPenT0ols.py ldap [-h] [-u [USERNAME]] [-p [PASSWORD]] [-H [HASH]] [--tags [TAGS]] [--port [PORT]] [target]
+
+positional arguments:
+  target         (Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -u [USERNAME]  username(s) or file(s) containing usernames
+  -p [PASSWORD]  password(s) or file(s) containing passwords
+  -H [HASH]      Pass The hash
+  --tags [TAGS]  What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)
+  --port [PORT]  scan specific port (Default 389)                                                                                                                                                           
+```
+## FTP
+
+```
+usage: AutoGPenT0ols.py ftp [-h] [-u [USERNAME]] [-p [PASSWORD]] [-H [HASH]] [--tags [TAGS]] [--ssl] [--port [PORT]] [target]
+
+positional arguments:
+  target         (Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -u [USERNAME]  username(s) or file(s) containing usernames
+  -p [PASSWORD]  password(s) or file(s) containing passwords
+  -H [HASH]      Pass The hash
+  --tags [TAGS]  What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)
+  --ssl          usage of SSL/TLS requests
+  --port [PORT]  scan specific port (Default 22)
+```
 
 
 
