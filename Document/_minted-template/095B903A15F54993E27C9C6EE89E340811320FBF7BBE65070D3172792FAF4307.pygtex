@@ -1,0 +1,44 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{l+s+sb}{```yaml}
+\PYG{n+nt}{full\PYGZus{}scanner}\PYG{p}{:}
+  \PYG{n+nt}{nmap\PYGZus{}quick\PYGZus{}open}\PYG{p}{:}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Quick}\PYG{n+nv}{ }\PYG{l+s}{open}\PYG{n+nv}{ }\PYG{l+s}{ports}\PYG{n+nv}{ }\PYG{l+s}{with}\PYG{n+nv}{ }\PYG{l+s}{nmap\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{nmap \PYGZhy{}F \PYGZhy{}\PYGZhy{}open \PYGZhy{}oN \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{} \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}}
+
+  \PYG{n+nt}{nmap\PYGZus{}quick\PYGZus{}versions}\PYG{p}{:}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Quick}\PYG{n+nv}{ }\PYG{l+s}{scan}\PYG{n+nv}{ }\PYG{l+s}{with}\PYG{n+nv}{ }\PYG{l+s}{nmap\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{nmap \PYGZhy{}sV \PYGZhy{}sC \PYGZhy{}\PYGZhy{}open \PYGZhy{}\PYGZhy{}version\PYGZhy{}all \PYGZhy{}oN \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{} \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}}
+
+  \PYG{n+nt}{nmap\PYGZus{}full}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{nmap}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Scanning}\PYG{n+nv}{ }\PYG{l+s}{all}\PYG{n+nv}{ }\PYG{l+s}{ports}\PYG{n+nv}{ }\PYG{l+s}{with}\PYG{n+nv}{ }\PYG{l+s}{nmap}\PYG{n+nv}{ }\PYG{l+s}{and}\PYG{n+nv}{ }\PYG{l+s}{return}\PYG{n+nv}{ }\PYG{l+s}{service}\PYG{n+nv}{ }\PYG{l+s}{information\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{nmap \PYGZhy{}sS \PYGZhy{}sV \PYGZhy{}sC \PYGZhy{}O \PYGZhy{}p\PYGZhy{} \PYGZhy{}\PYGZhy{}min\PYGZhy{}rate 5000 \PYGZhy{}n \PYGZhy{}oN \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{} \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}}
+  \PYG{n+nt}{nmap\PYGZus{}fast\PYGZus{}udp}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{nmap}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Scanning}\PYG{n+nv}{ }\PYG{l+s}{udp}\PYG{n+nv}{ }\PYG{l+s}{ports\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{nmap \PYGZhy{}F \PYGZhy{}sU \PYGZhy{}sV \PYGZhy{}T 4 \PYGZhy{}oN \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{} \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}}
+
+  \PYG{n+nt}{masscan\PYGZus{}full}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{masscan}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Scanning}\PYG{n+nv}{ }\PYG{l+s}{all}\PYG{n+nv}{ }\PYG{l+s}{ports}\PYG{n+nv}{ }\PYG{l+s}{with}\PYG{n+nv}{ }\PYG{l+s}{masscan\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{masscan \PYGZhy{}\PYGZhy{}rate 10000 \PYGZhy{}p1\PYGZhy{}65535 \PYGZhy{}\PYGZhy{}only\PYGZhy{}open \PYGZhy{}oL \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{} \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{} Not ready yet}
+\PYG{n+nt}{nmap\PYGZus{}custom}\PYG{p}{:}
+  \PYG{n+nt}{nmap\PYGZus{}allports}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{nmap}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Scanning}\PYG{n+nv}{ }\PYG{l+s}{all}\PYG{n+nv}{ }\PYG{l+s}{ports}\PYG{n+nv}{ }\PYG{l+s}{with}\PYG{n+nv}{ }\PYG{l+s}{nmap\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{nmap \PYGZhy{}p\PYGZhy{} \PYGZhy{}\PYGZhy{}min\PYGZhy{}rate 5000 \PYGZhy{}n \PYGZhy{}oG \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{} \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}}
+
+  \PYG{n+nt}{nmap\PYGZus{}ports}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{nmap}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Scanning}\PYG{n+nv}{ }\PYG{l+s}{specific}\PYG{n+nv}{ }\PYG{l+s}{ports}\PYG{n+nv}{ }\PYG{l+s}{with}\PYG{n+nv}{ }\PYG{l+s}{nmap\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{nmap \PYGZhy{}p \PYGZdl{}\PYGZob{}\PYGZob{} ports \PYGZcb{}\PYGZcb{} \PYGZhy{}sC \PYGZhy{}sV \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{} \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}}
+\PYG{l+s+sb}{```}
+\end{Verbatim}

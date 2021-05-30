@@ -1,0 +1,82 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+[\PYGZhy{}] Enum index web content: Something wrong
+HTTP/1.1 302 Found
+Location: https://192.168.1.12:443/
+Date: Sun, 30 May 2021 09:31:26 GMT
+Content\PYGZhy{}Length: 5
+Content\PYGZhy{}Type: text/plain; charset=utf\PYGZhy{}8
+
+Found
+[b] Enum versions webs: Running
+WhatWeb report for http://192.168.1.12
+Status    : 302 Found
+Title     : \PYGZlt{}None\PYGZgt{}
+IP        : 192.168.1.12
+Country   : RESERVED, ZZ
+
+Summary   : RedirectLocation[https://192.168.1.12:443/]
+
+Detected Plugins:
+[ RedirectLocation ]
+    HTTP Server string location. used with http\PYGZhy{}status 301 and
+    302
+
+    String       : https://192.168.1.12:443/ (from location)
+
+HTTP Headers:
+    HTTP/1.1 302 Found
+    Location: https://192.168.1.12:443/
+    Date: Sun, 30 May 2021 09:31:27 GMT
+    Content\PYGZhy{}Length: 5
+    Content\PYGZhy{}Type: text/plain; charset=utf\PYGZhy{}8
+    Connection: close
+
+WhatWeb report for https://192.168.1.12/
+Status    : 404 Not Found
+Title     : \PYGZlt{}None\PYGZgt{}
+IP        : 192.168.1.12
+Country   : RESERVED, ZZ
+
+Summary   : UncommonHeaders[x\PYGZhy{}content\PYGZhy{}type\PYGZhy{}options]
+
+Detected Plugins:
+[ UncommonHeaders ]
+    Uncommon HTTP server headers. The blacklist includes all
+    the standard headers and many non standard but common ones.
+    Interesting but fairly common headers should have their own
+    plugins, eg. x\PYGZhy{}powered\PYGZhy{}by, server and x\PYGZhy{}aspnet\PYGZhy{}version.
+    Info about headers can be found at www.http\PYGZhy{}stats.com
+
+    String       : x\PYGZhy{}content\PYGZhy{}type\PYGZhy{}options (from headers)
+
+HTTP Headers:
+    HTTP/1.1 404 Not Found
+    Content\PYGZhy{}Type: text/plain; charset=utf\PYGZhy{}8
+    X\PYGZhy{}Content\PYGZhy{}Type\PYGZhy{}Options: nosniff
+    Date: Sun, 30 May 2021 09:31:28 GMT
+    Content\PYGZhy{}Length: 19
+    Connection: close
+
+
+[+] Nikto detect misconfiguration, risky files, etc.: Succesfully!
+\PYGZhy{} Nikto v2.1.6
+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}
++ Target IP:          192.168.1.12
++ Target Hostname:    192.168.1.12
++ Target Port:        80
++ Start Time:         2021\PYGZhy{}05\PYGZhy{}30 09:31:30 (GMT0)
+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}
++ Server: No banner retrieved
++ The anti\PYGZhy{}clickjacking X\PYGZhy{}Frame\PYGZhy{}Options header is not present.
++ The X\PYGZhy{}XSS\PYGZhy{}Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X\PYGZhy{}Content\PYGZhy{}Type\PYGZhy{}Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Root page / redirects to: https://192.168.1.12:443/
++ No CGI Directories found (use \PYGZsq{}\PYGZhy{}C all\PYGZsq{} to force check all possible dirs)
++ 7915 requests: 0 error(s) and 3 item(s) reported on remote host
++ End Time:           2021\PYGZhy{}05\PYGZhy{}30 09:31:42 (GMT0) (12 seconds)
+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}
++ 1 host(s) tested
+
+[\PYGZhy{}] Fuzzing directories and files: Command timeout
+[\PYGZhy{}] SIGINT or CTRL\PYGZhy{}C detected.: Exiting gracefully
+\end{Verbatim}

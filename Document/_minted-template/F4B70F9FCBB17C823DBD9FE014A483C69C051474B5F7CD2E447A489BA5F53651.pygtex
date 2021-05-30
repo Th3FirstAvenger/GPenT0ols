@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+usage: AutoGPenT0ols.py recon [\PYGZhy{}h] [\PYGZhy{}\PYGZhy{}scanner [SCANNER]]
+[\PYGZhy{}\PYGZhy{}all\PYGZhy{}ports] [\PYGZhy{}\PYGZhy{}ports [PORTS]] [\PYGZhy{}\PYGZhy{}full] [target]
+
+positional arguments:
+  target               (Target Required *) The target IP(s), range(s),
+  CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  \PYGZhy{}h, \PYGZhy{}\PYGZhy{}help           show this help message and exit
+  \PYGZhy{}\PYGZhy{}scanner [SCANNER]  Select scanner (default : full\PYGZus{}scanner)
+  \PYGZhy{}\PYGZhy{}all\PYGZhy{}ports          scan all ports
+  \PYGZhy{}\PYGZhy{}ports [PORTS]      scan specific ports
+  \PYGZhy{}\PYGZhy{}full               Full recon scan
+\end{Verbatim}

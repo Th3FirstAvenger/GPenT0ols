@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/usr/bin/env python3}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} This script enum all ports, services and vulnerabilities with nmap}
+\PYG{k+kn}{import} \PYG{n+nn}{yaml}
+\PYG{k+kn}{import} \PYG{n+nn}{os}
+
+
+
+\PYG{k}{def} \PYG{n+nf}{recon}\PYG{p}{(}\PYG{n}{all\PYGZus{}info}\PYG{p}{,} \PYG{n}{recon\PYGZus{}path}\PYG{p}{,} \PYG{n}{out\PYGZus{}path}\PYG{p}{):}
+    \PYG{n}{target} \PYG{o}{=} \PYG{n}{all\PYGZus{}info}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}target\PYGZsq{}}\PYG{p}{]}
+    \PYG{n}{info\PYGZus{}data} \PYG{o}{=} \PYG{n}{all\PYGZus{}info}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}scanner\PYGZsq{}}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} get path information}
+    \PYG{n}{recon\PYGZus{}data} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{recon\PYGZus{}path}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}recon\PYGZus{}config.yaml\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{command\PYGZus{}info} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+    \PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{recon\PYGZus{}data}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}r\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{unparsed}\PYG{p}{:}
+        \PYG{k}{try}\PYG{p}{:}
+            \PYG{n}{recon\PYGZus{}data} \PYG{o}{=} \PYG{n}{yaml}\PYG{o}{.}\PYG{n}{safe\PYGZus{}load}\PYG{p}{(}\PYG{n}{unparsed}\PYG{p}{)}
+        \PYG{k}{except} \PYG{n}{yaml}\PYG{o}{.}\PYG{n}{YAMLError} \PYG{k}{as} \PYG{n}{exc}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{exc}\PYG{p}{)}
+
+        \PYG{n}{list\PYGZus{}data} \PYG{o}{=} \PYG{n}{recon\PYGZus{}data}\PYG{p}{[}\PYG{n}{info\PYGZus{}data}\PYG{p}{]}\PYG{o}{.}\PYG{n}{keys}\PYG{p}{()}
+
+        \PYG{k}{for} \PYG{n}{options} \PYG{o+ow}{in} \PYG{n}{list\PYGZus{}data}\PYG{p}{:}
+            \PYG{n}{descr} \PYG{o}{=} \PYG{n}{recon\PYGZus{}data}\PYG{p}{[}\PYG{n}{info\PYGZus{}data}\PYG{p}{][}\PYG{n}{options}\PYG{p}{][}\PYG{l+s+s1}{\PYGZsq{}description\PYGZsq{}}\PYG{p}{]}
+            \PYG{n}{out\PYGZus{}file} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{out\PYGZus{}path}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}.\PYGZsq{}}\PYG{o}{.}\PYG{n}{join}\PYG{p}{((}\PYG{n}{options}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}txt\PYGZsq{}}\PYG{p}{)))}
+            \PYG{n}{cmd} \PYG{o}{=} \PYG{p}{(}\PYG{n}{recon\PYGZus{}data}\PYG{p}{[}\PYG{n}{info\PYGZus{}data}\PYG{p}{][}\PYG{n}{options}\PYG{p}{][}\PYG{l+s+s1}{\PYGZsq{}commands\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{}\PYGZsq{}}\PYG{p}{,}
+                    \PYG{n}{out\PYGZus{}file}\PYG{p}{)}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}\PYGZsq{}}\PYG{p}{,} \PYG{n}{target}\PYG{p}{))}
+            \PYG{n}{command\PYGZus{}info}\PYG{p}{[}\PYG{n}{descr}\PYG{p}{]} \PYG{o}{=} \PYG{n}{cmd}
+
+    \PYG{k}{return} \PYG{n}{command\PYGZus{}info}
+\end{Verbatim}

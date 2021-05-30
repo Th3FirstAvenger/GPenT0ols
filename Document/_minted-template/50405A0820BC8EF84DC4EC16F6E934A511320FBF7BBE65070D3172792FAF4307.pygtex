@@ -1,0 +1,44 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{l+s+sb}{```yaml}
+\PYG{n+nt}{full\PYGZus{}scanner}\PYG{p}{:}
+  \PYG{n+nt}{nmap\PYGZus{}scan}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{nmap}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Scanning}\PYG{n+nv}{ }\PYG{l+s}{nmap}\PYG{n+nv}{ }\PYG{l+s}{with}\PYG{n+nv}{ }\PYG{l+s}{scripts}\PYG{n+nv}{ }\PYG{l+s}{banner,(http*}\PYG{n+nv}{ }\PYG{l+s}{or}\PYG{n+nv}{ }\PYG{l+s}{ssl*)}\PYG{n+nv}{ }\PYG{l+s}{and}\PYG{n+nv}{ }\PYG{l+s}{not}
+        \PYG{l+s}{(brute}\PYG{n+nv}{ }\PYG{l+s}{or}\PYG{n+nv}{ }\PYG{l+s}{broadcast}\PYG{n+nv}{ }\PYG{l+s}{or}\PYG{n+nv}{ }\PYG{l+s}{dos}\PYG{n+nv}{ }\PYG{l+s}{or}\PYG{n+nv}{ }\PYG{l+s}{external}\PYG{n+nv}{ }\PYG{l+s}{or}\PYG{n+nv}{ }\PYG{l+s}{http\PYGZhy{}slowloris*}\PYG{n+nv}{ }\PYG{l+s}{or}\PYG{n+nv}{ }\PYG{l+s}{fuzzer)\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+      \PYG{n+no}{nmap \PYGZhy{}sV \PYGZhy{}p \PYGZdl{}\PYGZob{}\PYGZob{} port \PYGZcb{}\PYGZcb{} \PYGZhy{}\PYGZhy{}script=\PYGZdq{}banner,(http*·or·ssl*)·and·not·}
+        \PYG{n+no}{(brute·or·broadcast·or·dos·or·external·or·http\PYGZhy{}slowloris*·or·fuzzer)\PYGZdq{} \PYGZhy{}oN}
+            \PYG{n+no}{\PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{} \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}}
+
+  \PYG{n+nt}{curl\PYGZus{}index}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{curl\PYGZhy{}index}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Enum}\PYG{n+nv}{ }\PYG{l+s}{index}\PYG{n+nv}{ }\PYG{l+s}{web}\PYG{n+nv}{ }\PYG{l+s}{content\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{curl \PYGZhy{}sSik \PYGZdl{}\PYGZob{}\PYGZob{} url \PYGZcb{}\PYGZcb{} \PYGZhy{}m 10 | tee \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{}}
+
+  \PYG{n+nt}{whatweb\PYGZus{}index}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{whatweb}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Enum}\PYG{n+nv}{ }\PYG{l+s}{versions}\PYG{n+nv}{ }\PYG{l+s}{webs\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{whatweb \PYGZhy{}v \PYGZhy{}a 3 \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}}
+  \PYG{n+nt}{nikto\PYGZus{}scanenr}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{nikto}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Nikto}\PYG{n+nv}{ }\PYG{l+s}{detect}\PYG{n+nv}{ }\PYG{l+s}{misconfiguration,}\PYG{n+nv}{ }\PYG{l+s}{risky}\PYG{n+nv}{ }\PYG{l+s}{files,}\PYG{n+nv}{ }\PYG{l+s}{etc.\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{nikto \PYGZhy{}h \PYGZdl{}\PYGZob{}\PYGZob{} url \PYGZcb{}\PYGZcb{}  | tee \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{}}
+
+  \PYG{n+nt}{fuzzing\PYGZus{}ffuf}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{ffuf}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Fuzzing}\PYG{n+nv}{ }\PYG{l+s}{directories}\PYG{n+nv}{ }\PYG{l+s}{and}\PYG{n+nv}{ }\PYG{l+s}{files\PYGZdq{}}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{ffuf \PYGZhy{}w \PYGZdl{}\PYGZob{}\PYGZob{} wordlist \PYGZcb{}\PYGZcb{} \PYGZhy{}u \PYGZdl{}\PYGZob{}\PYGZob{} url \PYGZcb{}\PYGZcb{}FUZZ \PYGZhy{}c \PYGZhy{}e \PYGZsq{}.php,.asp,.aspx,.txt,.html,.zip\PYGZsq{}}
+            \PYG{n+no}{\PYGZhy{}o \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{}}
+\PYG{n+nt}{wp}\PYG{p}{:}
+    \PYG{n+nt}{wordpres\PYGZus{}scanner}\PYG{p}{:}
+        \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{wpscan}
+        \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Fuzzing}\PYG{n+nv}{ }\PYG{l+s}{directories}\PYG{n+nv}{ }\PYG{l+s}{and}\PYG{n+nv}{ }\PYG{l+s}{files\PYGZdq{}}
+        \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+            \PYG{n+no}{wpscan \PYGZhy{}\PYGZhy{}url \PYGZdl{}\PYGZob{}\PYGZob{} url \PYGZcb{}\PYGZcb{} \PYGZhy{}e vp,vt,tt,cb,dbe,u,m \PYGZhy{}\PYGZhy{}plugins\PYGZhy{}detection aggressive}
+                \PYG{n+no}{\PYGZhy{}\PYGZhy{}plugins\PYGZhy{}version\PYGZhy{}detection aggressive \PYGZhy{}o \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{}}
+\PYG{l+s+sb}{```}
+\end{Verbatim}

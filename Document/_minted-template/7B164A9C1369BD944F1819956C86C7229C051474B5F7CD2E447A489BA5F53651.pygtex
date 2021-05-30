@@ -1,0 +1,264 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+╭─[internetghost2] as jack in \PYGZti{}
+╰──➤  gpt \PYGZhy{}\PYGZhy{}verbose recon 192.168.1.12
+[+] Managment: Directory /tmp/gpt\PYGZus{}report/192.168.1.12/recon already exist
+[↘] recon: nmap \PYGZhy{}sV \PYGZhy{}sC \PYGZhy{}\PYGZhy{}open \PYGZhy{}\PYGZhy{}version\PYGZhy{}all \PYGZhy{}oN
+    /tmp/gpt\PYGZus{}report/192.168.1.12/recon/nmap\PYGZus{}quick\PYGZus{}versions.txt 192.168.1.12
+\PYGZhy{}\PYGZhy{} 𝒞𝒽𝑒𝒸𝓀 𝒢𝒫𝑒𝓃𝒯𝒪𝑜𝓁𝓈 \PYGZhy{}\PYGZhy{}
+[+] Quick open ports with nmap: Succesfully!
+Starting Nmap 7.91 ( https://nmap.org ) at 2021\PYGZhy{}05\PYGZhy{}30 08:28 UTC
+Nmap scan report for internetghost2.home (192.168.1.12)
+Host is up (0.000021s latency).
+Not shown: 95 closed ports
+PORT    STATE SERVICE
+21/tcp  open  ftp
+80/tcp  open  http
+139/tcp open  netbios\PYGZhy{}ssn
+443/tcp open  https
+445/tcp open  microsoft\PYGZhy{}ds
+
+Nmap done: 1 IP address (1 host up) scanned in 0.32 seconds
+
+[O] Quick scan with nmap: Running
+Starting Nmap 7.91 ( https://nmap.org ) at 2021\PYGZhy{}05\PYGZhy{}30 08:28 UTC
+Nmap scan report for internetghost2.home (192.168.1.12)
+Host is up (0.000012s latency).
+Not shown: 993 closed ports
+PORT      STATE SERVICE     VERSION
+21/tcp    open  ftp         Pure\PYGZhy{}FTPd
+80/tcp    open  http
+| fingerprint\PYGZhy{}strings:
+|   FourOhFourRequest:
+|     HTTP/1.0 302 Found
+|     Location: https://http:443:///nice\PYGZpc{}20ports\PYGZpc{}2C/Tri\PYGZpc{}6Eity.txt\PYGZpc{}2ebak
+|     Date: Sun, 30 May 2021 08:28:58 GMT
+|     Content\PYGZhy{}Length: 5
+|     Content\PYGZhy{}Type: text/plain; charset=utf\PYGZhy{}8
+|     Found
+|   GenericLines, Hello, Help, Kerberos, RTSPRequest, SSLSessionReq,
+    SSLv23SessionReq, TLSSessionReq, TerminalServerCookie:
+|     HTTP/1.1 400 Bad Request
+|     Content\PYGZhy{}Type: text/plain; charset=utf\PYGZhy{}8
+|     Connection: close
+|     Request
+|   GetRequest, HTTPOptions:
+|     HTTP/1.0 302 Found
+|     Location: https://http:443:///
+|     Date: Sun, 30 May 2021 08:28:53 GMT
+|     Content\PYGZhy{}Length: 5
+|     Content\PYGZhy{}Type: text/plain; charset=utf\PYGZhy{}8
+|\PYGZus{}    Found
+|\PYGZus{}http\PYGZhy{}title: Did not follow redirect to https://internetghost2.home:443/
+139/tcp   open  netbios\PYGZhy{}ssn Samba smbd 4.6.2
+443/tcp   open  ssl/http    Golang net/http server (Go\PYGZhy{}IPFS json\PYGZhy{}rpc or InfluxDB API)
+|\PYGZus{}http\PYGZhy{}title: Site doesn\PYGZsq{}t have a title (text/plain; charset=utf\PYGZhy{}8).
+| ssl\PYGZhy{}cert: Subject: commonName=TRAEFIK DEFAULT CERT
+| Subject Alternative Name:
+DNS:5fb207ee8c5e95258740a5c37d0c43c8.de0ab1663e5dab751b09fa03961c958a.traefik.default
+| Not valid before: 2021\PYGZhy{}05\PYGZhy{}30T08:07:59
+|\PYGZus{}Not valid after:  2022\PYGZhy{}05\PYGZhy{}30T08:07:59
+|\PYGZus{}ssl\PYGZhy{}date: TLS randomness does not represent time
+| tls\PYGZhy{}alpn:
+|   h2
+|   http/1.1
+|\PYGZus{}  acme\PYGZhy{}tls/1
+| tls\PYGZhy{}nextprotoneg:
+|   h2
+|   http/1.1
+|\PYGZus{}  acme\PYGZhy{}tls/1
+445/tcp   open  netbios\PYGZhy{}ssn Samba smbd 4.6.2
+8090/tcp  open  http        PHP cli server 5.5 or later (PHP 7.4.9)
+|\PYGZus{}http\PYGZhy{}title: Login \PYGZhy{} Adminer
+|\PYGZus{}http\PYGZhy{}trane\PYGZhy{}info: Problem with XML parsing of /evox/about
+30000/tcp open  tcpwrapped
+1 service unrecognized despite returning data. If you know the service/version,
+please submit the following fingerprint at https://nmap.org/cgi\PYGZhy{}bin/submit.cgi?new\PYGZhy{}service :
+SF\PYGZhy{}Port80\PYGZhy{}TCP:V=7.91\PYGZpc{}I=9\PYGZpc{}D=5/30\PYGZpc{}Time=60B34CC5\PYGZpc{}P=x86\PYGZus{}64\PYGZhy{}pc\PYGZhy{}linux\PYGZhy{}gnu\PYGZpc{}r(GetR
+SF:equest,9C,\PYGZdq{}HTTP/1\PYGZbs{}.0\PYGZbs{}x20302\PYGZbs{}x20Found\PYGZbs{}r\PYGZbs{}nLocation:\PYGZbs{}x20https://http:443:/
+SF://\PYGZbs{}r\PYGZbs{}nDate:\PYGZbs{}x20Sun,\PYGZbs{}x2030\PYGZbs{}x20May\PYGZbs{}x202021\PYGZbs{}x2008:28:53\PYGZbs{}x20GMT\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}
+SF:Length:\PYGZbs{}x205\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}nFo
+SF:und\PYGZdq{})\PYGZpc{}r(HTTPOptions,9C,\PYGZdq{}HTTP/1\PYGZbs{}.0\PYGZbs{}x20302\PYGZbs{}x20Found\PYGZbs{}r\PYGZbs{}nLocation:\PYGZbs{}x20https
+SF:://http:443:///\PYGZbs{}r\PYGZbs{}nDate:\PYGZbs{}x20Sun,\PYGZbs{}x2030\PYGZbs{}x20May\PYGZbs{}x202021\PYGZbs{}x2008:28:53\PYGZbs{}x20GM
+SF:T\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Length:\PYGZbs{}x205\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=ut
+SF:f\PYGZhy{}8\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}nFound\PYGZdq{})\PYGZpc{}r(RTSPRequest,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request
+SF:\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20clo
+SF:se\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(FourOhFourRequest,BF,\PYGZdq{}HTTP/1\PYGZbs{}.0\PYGZbs{}x20
+SF:302\PYGZbs{}x20Found\PYGZbs{}r\PYGZbs{}nLocation:\PYGZbs{}x20https://http:443:///nice\PYGZpc{}20ports\PYGZpc{}2C/Tri\PYGZpc{}6E
+SF:ity\PYGZbs{}.txt\PYGZpc{}2ebak\PYGZbs{}r\PYGZbs{}nDate:\PYGZbs{}x20Sun,\PYGZbs{}x2030\PYGZbs{}x20May\PYGZbs{}x202021\PYGZbs{}x2008:28:58\PYGZbs{}x20GMT
+SF:\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Length:\PYGZbs{}x205\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf
+SF:\PYGZhy{}8\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}nFound\PYGZdq{})\PYGZpc{}r(GenericLines,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request
+SF:\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20clo
+SF:se\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(Hello,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x
+SF:20Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnectio
+SF:n:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(Help,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}
+SF:x20Bad\PYGZbs{}x20Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nC
+SF:onnection:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(SSLSessionReq,67,\PYGZdq{}
+SF:HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20c
+SF:harset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(T
+SF:erminalServerCookie,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}T
+SF:ype:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400
+SF:\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(TLSSessionReq,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Req
+SF:uest\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x2
+SF:0close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(SSLv23SessionReq,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}
+SF:x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf
+SF:\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(Kerberos,67
+SF:,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x2
+SF:0charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{});
+
+Host script results:
+| smb2\PYGZhy{}security\PYGZhy{}mode:
+|   2.10:
+|\PYGZus{}    Message signing enabled but not required
+|\PYGZus{}smb2\PYGZhy{}time: Protocol negotiation failed (SMB2)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 266.04 seconds
+
+[.] Scanning all ports with nmap and return service information: Running
+Starting Nmap 7.91 ( https://nmap.org ) at 2021\PYGZhy{}05\PYGZhy{}30 08:33 UTC
+Nmap scan report for 192.168.1.12
+Host is up (0.00013s latency).
+Not shown: 65517 closed ports
+PORT      STATE SERVICE     VERSION
+21/tcp    open  ftp         Pure\PYGZhy{}FTPd
+80/tcp    open  http
+| fingerprint\PYGZhy{}strings:
+|   FourOhFourRequest:
+|     HTTP/1.0 302 Found
+|     Location: https://http:443:///nice\PYGZpc{}20ports\PYGZpc{}2C/Tri\PYGZpc{}6Eity.txt\PYGZpc{}2ebak
+|     Date: Sun, 30 May 2021 08:33:25 GMT
+|     Content\PYGZhy{}Length: 5
+|     Content\PYGZhy{}Type: text/plain; charset=utf\PYGZhy{}8
+|     Found
+|   GenericLines, Help, Kerberos, LDAPSearchReq, LPDString, RTSPRequest,
+SSLSessionReq, TLSSessionReq, TerminalServerCookie:
+|     HTTP/1.1 400 Bad Request
+|     Content\PYGZhy{}Type: text/plain; charset=utf\PYGZhy{}8
+|     Connection: close
+|     Request
+|   GetRequest, HTTPOptions:
+|     HTTP/1.0 302 Found
+|     Location: https://http:443:///
+|     Date: Sun, 30 May 2021 08:33:20 GMT
+|     Content\PYGZhy{}Length: 5
+|     Content\PYGZhy{}Type: text/plain; charset=utf\PYGZhy{}8
+|\PYGZus{}    Found
+|\PYGZus{}http\PYGZhy{}title: Did not follow redirect to https://192.168.1.12:443/
+139/tcp   open  netbios\PYGZhy{}ssn Samba smbd 4.6.2
+443/tcp   open  ssl/http    Golang net/http server (Go\PYGZhy{}IPFS json\PYGZhy{}rpc or InfluxDB API)
+|\PYGZus{}http\PYGZhy{}title: Site doesn\PYGZsq{}t have a title (text/plain; charset=utf\PYGZhy{}8).
+| ssl\PYGZhy{}cert: Subject: commonName=TRAEFIK DEFAULT CERT
+| Subject Alternative Name:
+DNS:5fb207ee8c5e95258740a5c37d0c43c8.de0ab1663e5dab751b09fa03961c958a.traefik.default
+| Not valid before: 2021\PYGZhy{}05\PYGZhy{}30T08:07:59
+|\PYGZus{}Not valid after:  2022\PYGZhy{}05\PYGZhy{}30T08:07:59
+|\PYGZus{}ssl\PYGZhy{}date: TLS randomness does not represent time
+| tls\PYGZhy{}alpn:
+|   h2
+|   http/1.1
+|\PYGZus{}  acme\PYGZhy{}tls/1
+| tls\PYGZhy{}nextprotoneg:
+|   h2
+|   http/1.1
+|\PYGZus{}  acme\PYGZhy{}tls/1
+445/tcp   open  netbios\PYGZhy{}ssn Samba smbd 4.6.2
+8090/tcp  open  http        PHP cli server 5.5 or later (PHP 7.4.9)
+|\PYGZus{}http\PYGZhy{}title: Login \PYGZhy{} Adminer
+|\PYGZus{}http\PYGZhy{}trane\PYGZhy{}info: Problem with XML parsing of /evox/about
+30000/tcp open  tcpwrapped
+30001/tcp open  tcpwrapped
+30002/tcp open  tcpwrapped
+30003/tcp open  tcpwrapped
+30004/tcp open  tcpwrapped
+30005/tcp open  tcpwrapped
+30006/tcp open  tcpwrapped
+30007/tcp open  tcpwrapped
+30008/tcp open  tcpwrapped
+30009/tcp open  tcpwrapped
+43677/tcp open  unknown
+| fingerprint\PYGZhy{}strings:
+|   NULL, RPCCheck:
+|\PYGZus{}    \PYGZob{}\PYGZdq{}type\PYGZdq{}:\PYGZdq{}Tier1\PYGZdq{},\PYGZdq{}version\PYGZdq{}:\PYGZdq{}1.0\PYGZdq{}\PYGZcb{}
+57621/tcp open  unknown
+2 services unrecognized despite returning data. If you know the service/version,
+please submit the following fingerprints at https://nmap.org/cgi\PYGZhy{}bin/submit.cgi?new\PYGZhy{}service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF\PYGZhy{}Port80\PYGZhy{}TCP:V=7.91\PYGZpc{}I=7\PYGZpc{}D=5/30\PYGZpc{}Time=60B34DD0\PYGZpc{}P=x86\PYGZus{}64\PYGZhy{}pc\PYGZhy{}linux\PYGZhy{}gnu\PYGZpc{}r(GetR
+SF:equest,9C,\PYGZdq{}HTTP/1\PYGZbs{}.0\PYGZbs{}x20302\PYGZbs{}x20Found\PYGZbs{}r\PYGZbs{}nLocation:\PYGZbs{}x20https://http:443:/
+SF://\PYGZbs{}r\PYGZbs{}nDate:\PYGZbs{}x20Sun,\PYGZbs{}x2030\PYGZbs{}x20May\PYGZbs{}x202021\PYGZbs{}x2008:33:20\PYGZbs{}x20GMT\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}
+SF:Length:\PYGZbs{}x205\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}nFo
+SF:und\PYGZdq{})\PYGZpc{}r(HTTPOptions,9C,\PYGZdq{}HTTP/1\PYGZbs{}.0\PYGZbs{}x20302\PYGZbs{}x20Found\PYGZbs{}r\PYGZbs{}nLocation:\PYGZbs{}x20https
+SF:://http:443:///\PYGZbs{}r\PYGZbs{}nDate:\PYGZbs{}x20Sun,\PYGZbs{}x2030\PYGZbs{}x20May\PYGZbs{}x202021\PYGZbs{}x2008:33:20\PYGZbs{}x20GM
+SF:T\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Length:\PYGZbs{}x205\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=ut
+SF:f\PYGZhy{}8\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}nFound\PYGZdq{})\PYGZpc{}r(RTSPRequest,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request
+SF:\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20clo
+SF:se\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(FourOhFourRequest,BF,\PYGZdq{}HTTP/1\PYGZbs{}.0\PYGZbs{}x20
+SF:302\PYGZbs{}x20Found\PYGZbs{}r\PYGZbs{}nLocation:\PYGZbs{}x20https://http:443:///nice\PYGZpc{}20ports\PYGZpc{}2C/Tri\PYGZpc{}6E
+SF:ity\PYGZbs{}.txt\PYGZpc{}2ebak\PYGZbs{}r\PYGZbs{}nDate:\PYGZbs{}x20Sun,\PYGZbs{}x2030\PYGZbs{}x20May\PYGZbs{}x202021\PYGZbs{}x2008:33:25\PYGZbs{}x20GMT
+SF:\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Length:\PYGZbs{}x205\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf
+SF:\PYGZhy{}8\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}nFound\PYGZdq{})\PYGZpc{}r(GenericLines,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request
+SF:\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20clo
+SF:se\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(Help,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x2
+SF:0Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection
+SF::\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(SSLSessionReq,67,\PYGZdq{}HTTP/1\PYGZbs{}.1
+SF:\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=ut
+SF:f\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(TerminalSe
+SF:rverCookie,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20t
+SF:ext/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x
+SF:20Request\PYGZdq{})\PYGZpc{}r(TLSSessionReq,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZbs{}r\PYGZbs{}nC
+SF:ontent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}
+SF:n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(Kerberos,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20
+SF:Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:
+SF:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(LPDString,67,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x204
+SF:00\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x20charset=utf\PYGZhy{}8\PYGZbs{}r
+SF:\PYGZbs{}nConnection:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{})\PYGZpc{}r(LDAPSearchReq,6
+SF:7,\PYGZdq{}HTTP/1\PYGZbs{}.1\PYGZbs{}x20400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZbs{}r\PYGZbs{}nContent\PYGZhy{}Type:\PYGZbs{}x20text/plain;\PYGZbs{}x
+SF:20charset=utf\PYGZhy{}8\PYGZbs{}r\PYGZbs{}nConnection:\PYGZbs{}x20close\PYGZbs{}r\PYGZbs{}n\PYGZbs{}r\PYGZbs{}n400\PYGZbs{}x20Bad\PYGZbs{}x20Request\PYGZdq{});
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF\PYGZhy{}Port43677\PYGZhy{}TCP:V=7.91\PYGZpc{}I=7\PYGZpc{}D=5/30\PYGZpc{}Time=60B34DCA\PYGZpc{}P=x86\PYGZus{}64\PYGZhy{}pc\PYGZhy{}linux\PYGZhy{}gnu\PYGZpc{}r(N
+SF:ULL,22,\PYGZdq{}\PYGZob{}\PYGZbs{}\PYGZdq{}type\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}Tier1\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}version\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}1\PYGZbs{}.0\PYGZbs{}\PYGZdq{}\PYGZcb{}\PYGZbs{}r\PYGZbs{}n\PYGZdq{})\PYGZpc{}r(RPCCheck,22,\PYGZdq{}
+SF:\PYGZob{}\PYGZbs{}\PYGZdq{}type\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}Tier1\PYGZbs{}\PYGZdq{},\PYGZbs{}\PYGZdq{}version\PYGZbs{}\PYGZdq{}:\PYGZbs{}\PYGZdq{}1\PYGZbs{}.0\PYGZbs{}\PYGZdq{}\PYGZcb{}\PYGZbs{}r\PYGZbs{}n\PYGZdq{});
+Device type: general purpose
+Running: Linux 4.X|5.X
+OS CPE: cpe:/o:linux:linux\PYGZus{}kernel:4 cpe:/o:linux:linux\PYGZus{}kernel:5
+OS details: Linux 4.15 \PYGZhy{} 5.6
+Network Distance: 1 hop
+
+Host script results:
+| smb2\PYGZhy{}security\PYGZhy{}mode:
+|   2.10:
+|\PYGZus{}    Message signing enabled but not required
+|\PYGZus{}smb2\PYGZhy{}time: Protocol negotiation failed (SMB2)
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 99.70 seconds
+
+[+] Scanning udp ports: Succesfully!
+Starting Nmap 7.91 ( https://nmap.org ) at 2021\PYGZhy{}05\PYGZhy{}30 08:34 UTC
+Nmap scan report for internetghost2.home (192.168.1.12)
+Host is up (0.00014s latency).
+Not shown: 81 open|filtered ports
+PORT      STATE  SERVICE        VERSION
+17/udp    closed qotd
+69/udp    closed tftp
+88/udp    closed kerberos\PYGZhy{}sec
+139/udp   closed netbios\PYGZhy{}ssn
+500/udp   closed isakmp
+515/udp   closed printer
+593/udp   closed http\PYGZhy{}rpc\PYGZhy{}epmap
+1025/udp  closed blackjack
+1029/udp  closed solid\PYGZhy{}mux
+1433/udp  closed ms\PYGZhy{}sql\PYGZhy{}s
+1813/udp  closed radacct
+5000/udp  closed upnp
+31337/udp closed BackOrifice
+32769/udp closed filenet\PYGZhy{}rpc
+32815/udp closed unknown
+49154/udp closed unknown
+49186/udp closed unknown
+49193/udp closed unknown
+49200/udp closed unknown
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 277.81 seconds
+\end{Verbatim}

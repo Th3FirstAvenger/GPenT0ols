@@ -1,0 +1,9 @@
+[0] Config.pm:312> INFO - This is Biber 2.15
+[0] Config.pm:315> INFO - Logfile is 'template.blg'
+[65] biber:330> INFO - === Sun May 30, 2021, 12:32:57
+[76] Biber.pm:415> INFO - Reading 'template.bcf'
+[133] Biber.pm:952> INFO - Found 3 citekeys in bib section 0
+[144] Biber.pm:4334> INFO - Processing section 0
+[152] Biber.pm:4523> INFO - Looking for bibtex format file 'sample.bib' for section 0
+[212] Utils.pm:411> ERROR - Data file '/usr/share/texmf-dist/bibtex/bib/gloss/sample.bib' cannot be read in encoding 'utf8': Can't decode ill-formed UTF-8 octet sequence <D2> at /usr/share/perl5/vendor_perl/File/Slurper.pm line 59.
+[212] Biber.pm:132> INFO - ERRORS: 1

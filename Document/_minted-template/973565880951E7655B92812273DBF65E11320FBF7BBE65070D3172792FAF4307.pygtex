@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{l+s+sb}{```yaml}
+\PYG{n+nt}{ftp\PYGZus{}anon\PYGZus{}session}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{nmap\PYGZus{}ftp}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}check}\PYG{n+nv}{ }\PYG{l+s}{anonymous}\PYG{n+nv}{ }\PYG{l+s}{user}\PYG{n+nv}{ }\PYG{l+s}{ftp\PYGZdq{}}
+    \PYG{n+nt}{tags}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{nocreds}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{nmap \PYGZhy{}sC \PYGZhy{}sV \PYGZhy{}p \PYGZdl{}\PYGZob{}\PYGZob{} port \PYGZcb{}\PYGZcb{} \PYGZhy{}on \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{} \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}}
+\PYG{n+nt}{donwload\PYGZus{}anonymous\PYGZus{}session}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{download\PYGZus{}files}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}downloading}\PYG{n+nv}{ }\PYG{l+s}{all}\PYG{n+nv}{ }\PYG{l+s}{files\PYGZdq{}}
+    \PYG{n+nt}{tags}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{nocreds}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{wget \PYGZhy{}r \PYGZdl{}\PYGZob{}\PYGZob{} scheme \PYGZcb{}\PYGZcb{}://\PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}:\PYGZdl{}\PYGZob{}\PYGZob{} port \PYGZcb{}\PYGZcb{} \PYGZhy{}P \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{}}
+\PYG{n+nt}{donwload\PYGZus{}creds\PYGZus{}session}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{download\PYGZus{}files}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}downloading}\PYG{n+nv}{ }\PYG{l+s}{all}\PYG{n+nv}{ }\PYG{l+s}{files\PYGZdq{}}
+    \PYG{n+nt}{tags}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{creds}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{wget \PYGZhy{}r \PYGZdl{}\PYGZob{}\PYGZob{} scheme \PYGZcb{}\PYGZcb{}://\PYGZdl{}\PYGZob{}\PYGZob{} username \PYGZcb{}\PYGZcb{}:\PYGZdl{}\PYGZob{}\PYGZob{} password \PYGZcb{}\PYGZcb{}@\PYGZdl{}\PYGZob{}\PYGZob{} target}
+        \PYG{n+no}{\PYGZcb{}\PYGZcb{}:\PYGZdl{}\PYGZob{}\PYGZob{} port \PYGZcb{}\PYGZcb{} \PYGZhy{}P \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{}}
+\PYG{l+s+sb}{```}
+\end{Verbatim}

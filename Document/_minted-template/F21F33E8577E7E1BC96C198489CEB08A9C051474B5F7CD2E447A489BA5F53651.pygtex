@@ -1,0 +1,37 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+usage: AutoGPenT0ols.py [\PYGZhy{}h] [\PYGZhy{}t THREADS] [\PYGZhy{}\PYGZhy{}verbose] [\PYGZhy{}\PYGZhy{}show\PYGZhy{}commands] [\PYGZhy{}\PYGZhy{}path PATH]
+\PYGZob{}recon,web,smtp,smb,ftp,ldap,snmp\PYGZcb{} ...
+
+                           \PYGZsh{}
+                           \PYGZsh{}\PYGZsh{}                                \PYGZsh{}\PYGZsh{}\PYGZsh{}
+  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}         \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}
+ \PYGZsh{}\PYGZsh{}\PYGZsh{}           \PYGZsh{}\PYGZsh{}          \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}       \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}        \PYGZsh{}\PYGZsh{}\PYGZsh{}
+ \PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}        \PYGZsh{}\PYGZsh{}\PYGZsh{}
+ \PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}      \PYGZsh{}\PYGZsh{}\PYGZsh{}     \PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}        \PYGZsh{}\PYGZsh{}\PYGZsh{}
+  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}      \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}    \PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}   \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}  \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{} \PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}
+                                 \PYGZsh{}
+
+                                 Version: 0.1
+                                 Codename: CapitanJ4ck
+
+optional arguments:
+  \PYGZhy{}h, \PYGZhy{}\PYGZhy{}help            show this help message and exit
+  \PYGZhy{}t THREADS            set how many concurrent threads to use (default: 100)
+  \PYGZhy{}\PYGZhy{}verbose             enable verbose output
+  \PYGZhy{}\PYGZhy{}show\PYGZhy{}commands       Just check commands
+  \PYGZhy{}\PYGZhy{}path PATH           Destination path (default: /tmp/gpt\PYGZus{}report)
+
+services:
+  available options
+
+  \PYGZob{}recon,web,smtp,smb,ftp,ldap,snmp\PYGZcb{}
+    recon               Initial recon
+    web                 Web server scanner
+    smtp                smtp enumeration
+    smb                 Enum smb
+    ftp                 FTP enum
+    ldap                LDAP enum
+    snmp                Enum SNMP
+
+We are in... Let the hacking begin!
+\end{Verbatim}

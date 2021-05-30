@@ -1,0 +1,42 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{l+s+sb}{```yaml}
+\PYG{n+nt}{smbc\PYGZus{}null\PYGZus{}session}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{smbclient}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Samba}\PYG{n+nv}{ }\PYG{l+s}{null}\PYG{n+nv}{ }\PYG{l+s}{sessions}\PYG{n+nv}{ }\PYG{l+s}{enum}\PYG{n+nv}{ }\PYG{l+s}{directories\PYGZdq{}}
+    \PYG{n+nt}{tags}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{nocreds}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{smbclient \PYGZhy{}L \PYGZbs{}\PYGZbs{}\PYGZbs{}\PYGZbs{}\PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}\PYGZbs{}\PYGZbs{} \PYGZhy{}N \PYGZhy{}p \PYGZdl{}\PYGZob{}\PYGZob{} port \PYGZcb{}\PYGZcb{}}
+\PYG{n+nt}{cme\PYGZus{}null\PYGZus{}session}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{crackmapexec}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Enum}\PYG{n+nv}{ }\PYG{l+s}{null}\PYG{n+nv}{ }\PYG{l+s}{sessions}\PYG{n+nv}{ }\PYG{l+s}{with}\PYG{n+nv}{ }\PYG{l+s}{Crackmapexec\PYGZdq{}}
+    \PYG{n+nt}{tags}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{nocreds}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{crackmapexec smb \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{} \PYGZhy{}u \PYGZsq{}\PYGZsq{} \PYGZhy{}p \PYGZsq{}\PYGZsq{} \PYGZhy{}\PYGZhy{}shares \PYGZhy{}\PYGZhy{}timeout 5}
+\PYG{n+nt}{enum4linux\PYGZus{}null\PYGZus{}session}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{Enum4linux}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Enum}\PYG{n+nv}{ }\PYG{l+s}{null}\PYG{n+nv}{ }\PYG{l+s}{sessions}\PYG{n+nv}{ }\PYG{l+s}{with}\PYG{n+nv}{ }\PYG{l+s}{enum4linux\PYGZdq{}}
+    \PYG{n+nt}{tags}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{nocreds}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{enum4linux \PYGZhy{}a \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{} | tee \PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{}}
+\PYG{n+nt}{cme\PYGZus{}dsa\PYGZus{}session}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{crackmapexec}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Enum}\PYG{n+nv}{ }\PYG{l+s}{directories}\PYG{n+nv}{ }\PYG{l+s}{and}\PYG{n+nv}{ }\PYG{l+s}{see}\PYG{n+nv}{ }\PYG{l+s}{if}\PYG{n+nv}{ }\PYG{l+s}{have}\PYG{n+nv}{ }\PYG{l+s}{shell\PYGZdq{}}
+    \PYG{n+nt}{tags}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{creds}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{crackmapexec smb \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{} \PYGZhy{}u \PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} username \PYGZcb{}\PYGZcb{}\PYGZsq{} \PYGZhy{}p \PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} password \PYGZcb{}\PYGZcb{}\PYGZsq{}}
+            \PYG{n+no}{\PYGZhy{}\PYGZhy{}shares \PYGZhy{}\PYGZhy{}timeout 5}
+\PYG{n+nt}{cme\PYGZus{}passthehash}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{crackmapexec}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Enum}\PYG{n+nv}{ }\PYG{l+s}{directories}\PYG{n+nv}{ }\PYG{l+s}{and}\PYG{n+nv}{ }\PYG{l+s}{see}\PYG{n+nv}{ }\PYG{l+s}{if}\PYG{n+nv}{ }\PYG{l+s}{have}\PYG{n+nv}{ }\PYG{l+s}{shell\PYGZdq{}}
+    \PYG{n+nt}{tags}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{hash}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{crackmapexec smb \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{} \PYGZhy{}u \PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} username \PYGZcb{}\PYGZcb{}\PYGZsq{} \PYGZhy{}H \PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} hash \PYGZcb{}\PYGZcb{}\PYGZsq{}}
+            \PYG{n+no}{\PYGZhy{}\PYGZhy{}shares \PYGZhy{}\PYGZhy{}timeout 5}
+
+\PYG{l+s+sb}{```}
+\end{Verbatim}

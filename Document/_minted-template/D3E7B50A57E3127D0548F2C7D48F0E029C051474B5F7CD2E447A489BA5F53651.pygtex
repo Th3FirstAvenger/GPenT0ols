@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+gpt web \PYGZhy{}h
+
+usage: AutoGPenT0ols.py web [\PYGZhy{}h] [\PYGZhy{}u [USERNAME]] [\PYGZhy{}p [PASSWORD]] [\PYGZhy{}H [HASH]] [\PYGZhy{}w WORDLIST [WORDLIST ...]]
+[\PYGZhy{}\PYGZhy{}scanner [SCANNER]] [\PYGZhy{}\PYGZhy{}ssl] [\PYGZhy{}\PYGZhy{}port [PORT]] [\PYGZhy{}\PYGZhy{}file\PYGZhy{}path [FILE\PYGZus{}PATH]] [\PYGZhy{}\PYGZhy{}cms [CMS]] [target]
+
+positional arguments:
+  target                (Target Required *) The target IP(s), range(s),
+                        CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  \PYGZhy{}h, \PYGZhy{}\PYGZhy{}help            show this help message and exit
+  \PYGZhy{}u [USERNAME]         username(s) or file(s) containing usernames
+  \PYGZhy{}p [PASSWORD]         password(s) or file(s) containing passwords
+  \PYGZhy{}H [HASH]             Pass The hash
+  \PYGZhy{}w WORDLIST [WORDLIST ...]
+                        set wordlist (Default SecList wordlist)
+  \PYGZhy{}\PYGZhy{}scanner [SCANNER]   Select scanner (default : full\PYGZus{}scanner)
+  \PYGZhy{}\PYGZhy{}ssl                 usage of SSL/TLS requests
+  \PYGZhy{}\PYGZhy{}port [PORT]         scan specific port (Default 80)
+  \PYGZhy{}\PYGZhy{}file\PYGZhy{}path [FILE\PYGZus{}PATH]
+                        Specify to find the requested resource and start the enumeration
+                        with that route (Default / )
+  \PYGZhy{}\PYGZhy{}cms [CMS]           What do you have? [Wordpress, Joombla, Drupal] (Default: None)
+\end{Verbatim}

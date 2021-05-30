@@ -1,0 +1,320 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+╰──➤  gpt \PYGZhy{}\PYGZhy{}verbose smb 192.168.1.12 \PYGZhy{}h
+usage: AutoGPenT0ols.py smb [\PYGZhy{}h] [\PYGZhy{}u [USERNAME]] [\PYGZhy{}p [PASSWORD]] [\PYGZhy{}H [HASH]] [\PYGZhy{}\PYGZhy{}tags [TAGS]]
+                            [\PYGZhy{}\PYGZhy{}port [PORT]]
+                            [target]
+
+positional arguments:
+  target         (Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s),
+                 file(s) containing a list of targets
+
+optional arguments:
+  \PYGZhy{}h, \PYGZhy{}\PYGZhy{}help     show this help message and exit
+  \PYGZhy{}u [USERNAME]  username(s) or file(s) containing usernames
+  \PYGZhy{}p [PASSWORD]  password(s) or file(s) containing passwords
+  \PYGZhy{}H [HASH]      Pass The hash
+  \PYGZhy{}\PYGZhy{}tags [TAGS]  What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)
+  \PYGZhy{}\PYGZhy{}port [PORT]  scan specific port (Default 445)
+[+] Managment: Directory /tmp/gpt\PYGZus{}report/192.168.1.12/smb already exist
+[/] smb: enum4linux \PYGZhy{}a 192.168.1.12 |
+tee /tmp/gpt\PYGZus{}report/192.168.1.12/smb/enum4linux\PYGZus{}null\PYGZus{}session.txt
+[+] Managment: Directory /tmp/gpt\PYGZus{}report/192.168.1.12/smb already exist
+[/] smb: enum4linux \PYGZhy{}a 192.168.1.12 |
+tee /tmp/gpt\PYGZus{}report/192.168.1.12/smb/enum4linux\PYGZus{}null\PYGZus{}session.txt
+\PYGZhy{}\PYGZhy{} 𝒞𝒽𝑒𝒸𝓀 𝒢𝒫𝑒𝓃𝒯𝒪𝑜𝓁𝓈 \PYGZhy{}\PYGZhy{}
+[+] Samba null sessions enum directories: Succesfully!
+
+    Sharename       Type      Comment
+    \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}       \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}      \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}
+    marc            Disk      Carpeta de l\PYGZsq{}Alumne marc
+    michael         Disk      Carpeta de l\PYGZsq{}Alumne michael
+    ernest          Disk      Carpeta de l\PYGZsq{}Alumne ernest
+    cosmin          Disk      Carpeta de l\PYGZsq{}Alumne cosmin
+    isaac           Disk      Carpeta de l\PYGZsq{}Alumne isaac
+    jordi           Disk      Carpeta de l\PYGZsq{}Alumne jordi
+    fernando        Disk      Carpeta de l\PYGZsq{}Alumne fernando
+    victor          Disk      Carpeta de l\PYGZsq{}Alumne victor
+    lina            Disk      Carpeta de l\PYGZsq{}Alumne lina
+[\PYGZbs{}] jack            Disk      Carpeta de l\PYGZsq{}Alumne jack
+    ju              Disk      Carpeta de l\PYGZsq{}Alumne ju
+    andre           Disk      Carpeta de l\PYGZsq{}Alumne andre
+    anton           Disk      Carpeta de l\PYGZsq{}Alumne anton
+    juan            Disk      Carpeta de l\PYGZsq{}Alumne juan
+    pe              Disk      Carpeta de l\PYGZsq{}Alumne pe
+    IPC\PYGZdl{}            IPC       IPC Service (Samba Server)
+SMB1 disabled \PYGZhy{}\PYGZhy{} no workgroup available
+
+[\PYGZhy{}] Enum null sessions with Crackmapexec: Something wrong
+[*] First time use detected
+[*] Creating home directory structure
+[*] Creating default workspace
+[*] Initializing SSH protocol database
+[*] Initializing WINRM protocol database
+[*] Initializing MSSQL protocol database
+[*] Initializing SMB protocol database
+[*] Initializing LDAP protocol database
+[*] Copying default configuration file
+[*] Generating SSL certificate
+
+[|] Enum null sessions with enum4linux: Running
+
+SMB1 disabled \PYGZhy{}\PYGZhy{} no workgroup available
+
+[\PYGZhy{}] Enum null sessions with Crackmapexec: Something wrong
+[*] First time use detected
+[*] Creating home directory structure
+[*] Creating default workspace
+[*] Initializing SSH protocol database
+[*] Initializing WINRM protocol database
+[*] Initializing MSSQL protocol database
+[*] Initializing SMB protocol database
+[*] Initializing LDAP protocol database
+[*] Copying default configuration file
+[\PYGZhy{}] Generating SSL certificate
+Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ )
+on Sun May 30 08:28:05 2021
+
+ ==========================
+|    Target Information    |
+ ==========================
+Target ........... 192.168.1.12
+RID Range ........ 500\PYGZhy{}550,1000\PYGZhy{}1050
+Username ......... \PYGZsq{}\PYGZsq{}
+Password ......... \PYGZsq{}\PYGZsq{}
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
+
+
+ ====================================================
+|    Enumerating Workgroup/Domain on 192.168.1.12    |
+ ====================================================
+[E] Can\PYGZsq{}t find workgroup/domain
+
+
+ ============================================
+|    Nbtstat Information for 192.168.1.12    |
+ ============================================
+Looking up status of 192.168.1.12
+No reply from 192.168.1.12
+
+ =====================================
+|    Session Check on 192.168.1.12    |
+ =====================================
+[+] Server 192.168.1.12 allows sessions using username \PYGZsq{}\PYGZsq{}, password \PYGZsq{}\PYGZsq{}
+[+] Got domain/workgroup name:
+
+ ===========================================
+|    Getting domain SID for 192.168.1.12    |
+ ===========================================
+Domain Name: MYGROUP
+Domain Sid: (NULL SID)
+[+] Can\PYGZsq{}t determine if host is part of domain or part of a workgroup
+
+ ======================================
+|    OS information on 192.168.1.12    |
+ ======================================
+[+] Got OS info for 192.168.1.12 from smbclient:
+[+] Got OS info for 192.168.1.12 from srvinfo:
+    1C144B1916EA   Wk Sv PrQ Unx NT SNT Samba Server
+    platform\PYGZus{}id     :    500
+    os version      :    6.1
+    server type     :    0x809a03
+
+ =============================
+|    Users on 192.168.1.12    |
+ =============================
+index: 0x1 RID: 0x3f5 acb: 0x00000010 Account: juan    Name: Linux User    Desc:
+index: 0x2 RID: 0x3f6 acb: 0x00000010 Account: pe    Name: Linux User    Desc:
+index: 0x3 RID: 0x3e8 acb: 0x00000010 Account: marc    Name: Linux User    Desc:
+index: 0x4 RID: 0x3ea acb: 0x00000010 Account: ernest    Name: Linux User    Desc:
+index: 0x5 RID: 0x3ec acb: 0x00000010 Account: isaac    Name: Linux User    Desc:
+index: 0x6 RID: 0x3e9 acb: 0x00000010 Account: michael    Name: Linux User    Desc:
+index: 0x7 RID: 0x3eb acb: 0x00000010 Account: cosmin    Name: Linux User    Desc:
+index: 0x8 RID: 0x3ed acb: 0x00000010 Account: jordi    Name: Linux User    Desc:
+index: 0x9 RID: 0x3ee acb: 0x00000010 Account: fernando    Name: Linux User    Desc:
+index: 0xa RID: 0x3ef acb: 0x00000010 Account: victor    Name: Linux User    Desc:
+index: 0xb RID: 0x3f0 acb: 0x00000010 Account: lina    Name: Linux User    Desc:
+index: 0xc RID: 0x3f1 acb: 0x00000010 Account: jack    Name: Linux User    Desc:
+index: 0xd RID: 0x3f2 acb: 0x00000010 Account: ju    Name: Linux User    Desc:
+index: 0xe RID: 0x3f3 acb: 0x00000010 Account: andre    Name: Linux User    Desc:
+index: 0xf RID: 0x3f4 acb: 0x00000010 Account: anton    Name: Linux User    Desc:
+
+user:[juan] rid:[0x3f5]
+user:[pe] rid:[0x3f6]
+user:[marc] rid:[0x3e8]
+user:[ernest] rid:[0x3ea]
+user:[isaac] rid:[0x3ec]
+user:[michael] rid:[0x3e9]
+user:[cosmin] rid:[0x3eb]
+user:[jordi] rid:[0x3ed]
+user:[fernando] rid:[0x3ee]
+user:[victor] rid:[0x3ef]
+user:[lina] rid:[0x3f0]
+user:[jack] rid:[0x3f1]
+user:[ju] rid:[0x3f2]
+user:[andre] rid:[0x3f3]
+user:[anton] rid:[0x3f4]
+
+ =========================================
+|    Share Enumeration on 192.168.1.12    |
+ =========================================
+
+    Sharename       Type      Comment
+    \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}       \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}      \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}
+    marc            Disk      Carpeta de l\PYGZsq{}Alumne marc
+    michael         Disk      Carpeta de l\PYGZsq{}Alumne michael
+    ernest          Disk      Carpeta de l\PYGZsq{}Alumne ernest
+    cosmin          Disk      Carpeta de l\PYGZsq{}Alumne cosmin
+    isaac           Disk      Carpeta de l\PYGZsq{}Alumne isaac
+    jordi           Disk      Carpeta de l\PYGZsq{}Alumne jordi
+    fernando        Disk      Carpeta de l\PYGZsq{}Alumne fernando
+    victor          Disk      Carpeta de l\PYGZsq{}Alumne victor
+    lina            Disk      Carpeta de l\PYGZsq{}Alumne lina
+    jack            Disk      Carpeta de l\PYGZsq{}Alumne jack
+    ju              Disk      Carpeta de l\PYGZsq{}Alumne ju
+    andre           Disk      Carpeta de l\PYGZsq{}Alumne andre
+    anton           Disk      Carpeta de l\PYGZsq{}Alumne anton
+    juan            Disk      Carpeta de l\PYGZsq{}Alumne juan
+    pe              Disk      Carpeta de l\PYGZsq{}Alumne pe
+    IPC\PYGZdl{}            IPC       IPC Service (Samba Server)
+SMB1 disabled \PYGZhy{}\PYGZhy{} no workgroup available
+
+[+] Attempting to map shares on 192.168.1.12
+//192.168.1.12/marc    Mapping: DENIED, Listing: N/A
+//192.168.1.12/michael    Mapping: DENIED, Listing: N/A
+//192.168.1.12/ernest    Mapping: DENIED, Listing: N/A
+//192.168.1.12/cosmin    Mapping: DENIED, Listing: N/A
+//192.168.1.12/isaac    Mapping: DENIED, Listing: N/A
+//192.168.1.12/jordi    Mapping: DENIED, Listing: N/A
+//192.168.1.12/fernando    Mapping: DENIED, Listing: N/A
+//192.168.1.12/victor    Mapping: DENIED, Listing: N/A
+//192.168.1.12/lina    Mapping: DENIED, Listing: N/A
+//192.168.1.12/jack    Mapping: DENIED, Listing: N/A
+//192.168.1.12/ju    Mapping: DENIED, Listing: N/A
+//192.168.1.12/andre    Mapping: DENIED, Listing: N/A
+//192.168.1.12/anton    Mapping: DENIED, Listing: N/A
+//192.168.1.12/juan    Mapping: DENIED, Listing: N/A
+//192.168.1.12/pe    Mapping: DENIED, Listing: N/A
+//192.168.1.12/IPC\PYGZdl{}    [E] Can\PYGZsq{}t understand response:
+NT\PYGZus{}STATUS\PYGZus{}OBJECT\PYGZus{}NAME\PYGZus{}NOT\PYGZus{}FOUND listing \PYGZbs{}*
+
+ ====================================================
+|    Password Policy Information for 192.168.1.12    |
+ ====================================================
+
+
+[+] Attaching to 192.168.1.12 using a NULL share
+
+[+] Trying protocol 139/SMB...
+
+    [!] Protocol failed: (\PYGZsq{}unpack requires a buffer of 1 bytes\PYGZsq{},
+    \PYGZdq{}When unpacking field \PYGZsq{}SecurityMode | \PYGZlt{}B | b\PYGZsq{}\PYGZsq{}[:1]\PYGZsq{}\PYGZdq{})
+
+[+] Trying protocol 445/SMB...
+
+[+] Found domain(s):
+
+    [+] 1C144B1916EA
+    [+] Builtin
+
+[+] Password Info for Domain: 1C144B1916EA
+
+    [+] Minimum password length: 5
+    [+] Password history length: None
+    [+] Maximum password age: 37 days 6 hours 21 minutes
+    [+] Password Complexity Flags: 000000
+
+        [+] Domain Refuse Password Change: 0
+        [+] Domain Password Store Cleartext: 0
+        [+] Domain Password Lockout Admins: 0
+        [+] Domain Password No Clear Change: 0
+        [+] Domain Password No Anon Change: 0
+        [+] Domain Password Complex: 0
+
+    [+] Minimum password age: None
+    [+] Reset Account Lockout Counter: 30 minutes
+    [+] Locked Account Duration: 30 minutes
+    [+] Account Lockout Threshold: None
+    [+] Forced Log off Time: 37 days 6 hours 21 minutes
+
+
+[+] Retieved partial password policy with rpcclient:
+
+Password Complexity: Disabled
+Minimum Password Length: 5
+
+
+ ==============================
+|    Groups on 192.168.1.12    |
+ ==============================
+
+[+] Getting builtin groups:
+
+[+] Getting builtin group memberships:
+
+[+] Getting local groups:
+
+[+] Getting local group memberships:
+
+[+] Getting domain groups:
+
+[+] Getting domain group memberships:
+
+ =======================================================================
+|    Users on 192.168.1.12 via RID cycling (RIDS: 500\PYGZhy{}550,1000\PYGZhy{}1050)    |
+ =======================================================================
+[I] Found new SID: S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1
+[I] Found new SID: S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174
+[I] Found new SID: S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}32
+[+] Enumerating users using SID S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}32 and logon username \PYGZsq{}\PYGZsq{}, password \PYGZsq{}\PYGZsq{}
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}32\PYGZhy{}544 BUILTIN\PYGZbs{}Administrators (Local Group)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}32\PYGZhy{}545 BUILTIN\PYGZbs{}Users (Local Group)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}32\PYGZhy{}546 BUILTIN\PYGZbs{}Guests (Local Group)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}32\PYGZhy{}547 BUILTIN\PYGZbs{}Power Users (Local Group)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}32\PYGZhy{}548 BUILTIN\PYGZbs{}Account Operators (Local Group)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}32\PYGZhy{}549 BUILTIN\PYGZbs{}Server Operators (Local Group)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}32\PYGZhy{}550 BUILTIN\PYGZbs{}Print Operators (Local Group)
+[+] Enumerating users using SID S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174
+and logon username \PYGZsq{}\PYGZsq{}, password \PYGZsq{}\PYGZsq{}
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}500 *unknown*\PYGZbs{}*unknown* (8)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}501 1C144B1916EA\PYGZbs{}nobody (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}513 1C144B1916EA\PYGZbs{}None (Domain Group)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1000 1C144B1916EA\PYGZbs{}marc (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1001 1C144B1916EA\PYGZbs{}michael (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1002 1C144B1916EA\PYGZbs{}ernest (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1003 1C144B1916EA\PYGZbs{}cosmin (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1004 1C144B1916EA\PYGZbs{}isaac (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1005 1C144B1916EA\PYGZbs{}jordi (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1006 1C144B1916EA\PYGZbs{}fernando (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1007 1C144B1916EA\PYGZbs{}victor (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1008 1C144B1916EA\PYGZbs{}lina (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1009 1C144B1916EA\PYGZbs{}jack (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1010 1C144B1916EA\PYGZbs{}ju (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1011 1C144B1916EA\PYGZbs{}andre (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1012 1C144B1916EA\PYGZbs{}anton (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1013 1C144B1916EA\PYGZbs{}juan (Local User)
+S\PYGZhy{}1\PYGZhy{}5\PYGZhy{}21\PYGZhy{}2112836514\PYGZhy{}3653563689\PYGZhy{}2825713174\PYGZhy{}1014 1C144B1916EA\PYGZbs{}pe (Local User)
+[+] Enumerating users using SID S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1 and logon username \PYGZsq{}\PYGZsq{}, password \PYGZsq{}\PYGZsq{}
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1000 Unix User\PYGZbs{}marc (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1001 Unix User\PYGZbs{}michael (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1002 Unix User\PYGZbs{}ernest (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1003 Unix User\PYGZbs{}cosmin (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1004 Unix User\PYGZbs{}isaac (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1005 Unix User\PYGZbs{}jordi (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1006 Unix User\PYGZbs{}fernando (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1007 Unix User\PYGZbs{}victor (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1008 Unix User\PYGZbs{}lina (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1009 Unix User\PYGZbs{}jack (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1010 Unix User\PYGZbs{}ju (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1011 Unix User\PYGZbs{}andre (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1012 Unix User\PYGZbs{}anton (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1013 Unix User\PYGZbs{}juan (Local User)
+S\PYGZhy{}1\PYGZhy{}22\PYGZhy{}1\PYGZhy{}1014 Unix User\PYGZbs{}pe (Local User)
+
+ =============================================
+|    Getting printer info for 192.168.1.12    |
+ =============================================
+Could not initialise spoolss. Error was NT\PYGZus{}STATUS\PYGZus{}OBJECT\PYGZus{}NAME\PYGZus{}NOT\PYGZus{}FOUND
+
+
+enum4linux complete on Sun May 30 08:28:39 2021
+\end{Verbatim}

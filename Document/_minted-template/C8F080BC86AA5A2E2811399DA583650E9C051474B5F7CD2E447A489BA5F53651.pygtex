@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+gpt smb \PYGZhy{}h
+
+usage: AutoGPenT0ols.py smb [\PYGZhy{}h] [\PYGZhy{}u [USERNAME]] [\PYGZhy{}p [PASSWORD]]
+        [\PYGZhy{}H [HASH]] [\PYGZhy{}\PYGZhy{}tags [TAGS]] [\PYGZhy{}\PYGZhy{}port [PORT]] [target]
+
+positional arguments:
+  target         (Target Required *) The target IP(s), range(s),
+                  CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  \PYGZhy{}h, \PYGZhy{}\PYGZhy{}help     show this help message and exit
+  \PYGZhy{}u [USERNAME]  username(s) or file(s) containing usernames
+  \PYGZhy{}p [PASSWORD]  password(s) or file(s) containing passwords
+  \PYGZhy{}H [HASH]      Pass The hash
+  \PYGZhy{}\PYGZhy{}tags [TAGS]  What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)
+  \PYGZhy{}\PYGZhy{}port [PORT]  scan specific port (Default 445)
+\end{Verbatim}

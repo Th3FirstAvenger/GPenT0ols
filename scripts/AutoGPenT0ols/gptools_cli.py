@@ -142,9 +142,9 @@ def gen_cli_args():
 
     ftp.add_argument(
             '--port',
-            help='scan specific port (Default 22)',
+            help='scan specific port (Default 21)',
             nargs='?',
-            default = '22'
+            default = '21'
             )
     
     

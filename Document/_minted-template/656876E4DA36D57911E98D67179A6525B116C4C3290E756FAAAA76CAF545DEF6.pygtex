@@ -1,0 +1,64 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{c+c1}{\PYGZsh{}!/usr/bin/env python3}
+\PYG{k+kn}{import} \PYG{n+nn}{yaml}
+\PYG{k+kn}{import} \PYG{n+nn}{os}
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}tags}\PYG{p}{(}\PYG{n}{ftp\PYGZus{}data}\PYG{p}{,} \PYG{n}{tags}\PYG{p}{):}
+
+    \PYG{n}{list\PYGZus{}data} \PYG{o}{=} \PYG{n}{ftp\PYGZus{}data}\PYG{o}{.}\PYG{n}{keys}\PYG{p}{()}
+    \PYG{n}{final\PYGZus{}services} \PYG{o}{=} \PYG{p}{[]}
+
+    \PYG{k}{for} \PYG{n}{parameter} \PYG{o+ow}{in} \PYG{n}{tags}\PYG{p}{:}
+        \PYG{k}{for} \PYG{n}{technique} \PYG{o+ow}{in} \PYG{n}{list\PYGZus{}data}\PYG{p}{:}
+            \PYG{n}{total} \PYG{o}{=} \PYG{l+m+mi}{0}
+            \PYG{k}{for} \PYG{n}{opt} \PYG{o+ow}{in} \PYG{n}{ftp\PYGZus{}data}\PYG{p}{[}\PYG{n}{technique}\PYG{p}{][}\PYG{l+s+s1}{\PYGZsq{}tags\PYGZsq{}}\PYG{p}{]:}
+                \PYG{n}{ecual} \PYG{o}{=} \PYG{k+kc}{False}
+                \PYG{k}{if} \PYG{n}{parameter}\PYG{o}{.}\PYG{n}{lower}\PYG{p}{()} \PYG{o}{==} \PYG{n}{opt}\PYG{o}{.}\PYG{n}{lower}\PYG{p}{():}
+                    \PYG{n}{ecual} \PYG{o}{=} \PYG{k+kc}{True}
+                    \PYG{n}{total} \PYG{o}{+=}\PYG{l+m+mi}{1}
+                \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{ecual}\PYG{p}{:}
+                    \PYG{k}{break}
+            \PYG{k}{if} \PYG{n}{total} \PYG{o}{==} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{tags}\PYG{p}{):}
+                \PYG{n}{final\PYGZus{}services}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{technique}\PYG{p}{)}
+
+    \PYG{k}{return} \PYG{n}{final\PYGZus{}services}
+
+\PYG{k}{def} \PYG{n+nf}{ftp}\PYG{p}{(}\PYG{n}{all\PYGZus{}info}\PYG{p}{,} \PYG{n}{recon\PYGZus{}path}\PYG{p}{,} \PYG{n}{out\PYGZus{}path}\PYG{p}{):}
+    \PYG{n}{target} \PYG{o}{=} \PYG{n}{all\PYGZus{}info}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}target\PYGZsq{}}\PYG{p}{]}
+    \PYG{n}{port} \PYG{o}{=} \PYG{n}{all\PYGZus{}info}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}port\PYGZsq{}}\PYG{p}{]}
+    \PYG{n}{tags} \PYG{o}{=} \PYG{n}{all\PYGZus{}info}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}tags\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{},\PYGZsq{}}\PYG{p}{)}
+    \PYG{n}{username} \PYG{o}{=} \PYG{n}{all\PYGZus{}info}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}username\PYGZsq{}}\PYG{p}{]}
+    \PYG{n}{password} \PYG{o}{=} \PYG{n}{all\PYGZus{}info}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}password\PYGZsq{}}\PYG{p}{]}
+
+    \PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{username}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{0} \PYG{o+ow}{or} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{password}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{:}
+        \PYG{n}{username} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}anonymous\PYGZsq{}}
+        \PYG{n}{password} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}\PYGZsq{}}
+
+    \PYG{c+c1}{\PYGZsh{} Check ftp or ftps scheme}
+    \PYG{n}{scheme} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}ftp\PYGZsq{}}
+    \PYG{k}{if} \PYG{n}{all\PYGZus{}info}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}ssl\PYGZsq{}}\PYG{p}{]:}
+       \PYG{n}{scheme} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}ftps\PYGZsq{}}
+
+    \PYG{c+c1}{\PYGZsh{} get path information}
+    \PYG{n}{ftp\PYGZus{}data} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{recon\PYGZus{}path}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}ftp\PYGZus{}config.yaml\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{command\PYGZus{}info} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+
+    \PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{ftp\PYGZus{}data}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}r\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{unparsed}\PYG{p}{:}
+        \PYG{k}{try}\PYG{p}{:}
+            \PYG{n}{ftp\PYGZus{}data} \PYG{o}{=} \PYG{n}{yaml}\PYG{o}{.}\PYG{n}{safe\PYGZus{}load}\PYG{p}{(}\PYG{n}{unparsed}\PYG{p}{)}
+        \PYG{k}{except} \PYG{n}{yaml}\PYG{o}{.}\PYG{n}{YAMLError} \PYG{k}{as} \PYG{n}{exc}\PYG{p}{:}
+            \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{exc}\PYG{p}{)}
+
+        \PYG{n}{services} \PYG{o}{=} \PYG{n}{get\PYGZus{}tags}\PYG{p}{(}\PYG{n}{ftp\PYGZus{}data}\PYG{p}{,} \PYG{n}{tags}\PYG{p}{)}
+
+        \PYG{k}{for} \PYG{n}{options} \PYG{o+ow}{in} \PYG{n}{services}\PYG{p}{:}
+            \PYG{n}{descr} \PYG{o}{=} \PYG{n}{ftp\PYGZus{}data}\PYG{p}{[}\PYG{n}{options}\PYG{p}{][}\PYG{l+s+s1}{\PYGZsq{}description\PYGZsq{}}\PYG{p}{]}
+            \PYG{n}{out\PYGZus{}file} \PYG{o}{=} \PYG{n}{os}\PYG{o}{.}\PYG{n}{path}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{out\PYGZus{}path}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}.\PYGZsq{}}\PYG{o}{.}\PYG{n}{join}\PYG{p}{((}\PYG{n}{options}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}txt\PYGZsq{}}\PYG{p}{)))}
+            \PYG{n}{cmd} \PYG{o}{=} \PYG{p}{(}\PYG{n}{ftp\PYGZus{}data}\PYG{p}{[}\PYG{n}{options}\PYG{p}{][}\PYG{l+s+s1}{\PYGZsq{}commands\PYGZsq{}}\PYG{p}{]}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{}\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{out\PYGZus{}file}\PYG{p}{)}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}\PYGZsq{}}\PYG{p}{,} \PYG{n}{target}\PYG{p}{)}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} port \PYGZcb{}\PYGZcb{}\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{port}\PYG{p}{)}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} username \PYGZcb{}\PYGZcb{}\PYGZsq{}}\PYG{p}{,} \PYG{n}{username}\PYG{p}{)}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} password \PYGZcb{}\PYGZcb{}\PYGZsq{}}\PYG{p}{,}
+            \PYG{n}{password}\PYG{p}{)}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZdl{}\PYGZob{}\PYGZob{} scheme \PYGZcb{}\PYGZcb{}\PYGZsq{}}\PYG{p}{,} \PYG{n}{scheme}\PYG{p}{))}
+            \PYG{n}{command\PYGZus{}info}\PYG{p}{[}\PYG{n}{descr}\PYG{p}{]} \PYG{o}{=} \PYG{n}{cmd}
+
+    \PYG{k}{return} \PYG{n}{command\PYGZus{}info}
+\end{Verbatim}

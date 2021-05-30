@@ -7,6 +7,13 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{minted}
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+\addbibresource{sample.bib}
+
 
 % VARIABLES 
 \newcommand{\logoITB}{./data/img/ITB_Logo_417.png}
@@ -24,6 +31,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{\includegraphics[width=4cm]{\logoITB}}
+\chead{ASIX c, Maig del 2021}
 \rhead{\includegraphics[width=2cm]{\LogoGPTS}}
 \rfoot{\thepage}
 \lfoot{\autor}
@@ -96,7 +104,7 @@ La idea s'origina en la necessitat d'automatitzar i les ganes d'aprendre o millo
 Caldera és un framework que utilitza les tàctiques de MITRE ATT\&CK, i s'utilitza tant per red team com per blue. Aquest inici em va permetre entendre una mica el funcionament de com estava programat.
 Però aquesta idea no m'acabava de convecer, ja que principalment volia crear una eina per realitzar pentesting i no de red team. Molta gent ho engloba tot i realment són metodologies diferents. Més endavant explicaré que signifiquen aquests conceptes, però detallar aquesta part ho he trobat important perquè ha set de gran ajuda per obtenir la idea final.
 Finalment vaig decidir crear la meva pròpia eina des de zero, anomenada GPenTools. Com he dit, ho escriure principalment amb Python tant l'entorn gràfic com la majoria de scripts. El que faré serà una web on hi hagui una shell interactiva i tindré totes les eines de pentesting que consideri. Aquesta web et permetrà modificar ràpidament el script i també crear tasques automatitzades.
-Per la creació d'aquesta eina m'ha servit d'inspiració altres eines com \href{https://github.com/byt3bl33d3r/CrackMapExec}{\color{blue}crackmapexec} i \href{https://github.com/Tib3rius/AutoRecon}{\color{blue}autorecon}.\par
+Per la creació d'aquesta eina m'ha servit d'inspiració altres eines com \cite{1} \href{https://github.com/byt3bl33d3r/CrackMapExec}{\color{blue}crackmapexec} i \cite{2}\href{https://github.com/Tib3rius/AutoRecon}{\color{blue}autorecon}.\par
 Tota la informació la compartiré en el meu repositori de Github, ja que ho vull fer de forma pública i que qualsevol persona la pugui utilitzar. \\
 
     \begin{center}
@@ -242,7 +250,7 @@ Per tant procediré en mostrar com la tinc estructurada.
     \subsubsection{Codi}
 Veiem que inicialment tenim un fitxer main, aquest em permet cridar les diferents llibreries creades i cada llibreria té les llibreries necessàries i així no omplo el primer fitxer de codi que únicament em pot servir per a un servei.
 El contingut d'aquest fitxer seria el següent:
-
+\subsubsubsection{AutoGPenT0ols.py}
 \begin{minted}
 [
 frame=lines,
@@ -413,7 +421,7 @@ if __name__ == '__main__':
 
 En aquest fitxer mostrat anteriorment el que fa es agafar els arguments passats pel fitxer gpentools\_cli.py. A partir del que passa l'usuari executarà una cosa o altra. Més endavant mostraré el que mostra i el seu funcionament.\par
 
-_NOM FITXER
+\subsubsubsection{gptools\_cli.py}
 
 Aquest fitxer fa ús del mòdul argparse, aquest mòdul em permet agafar els arguments de forma fàcil i compatible de moltes formes. També he escollit aquest mòdul perquè em permet crear com submenús i aprofundir més en detall cada servei. Aquest mòdul el comparteixo a la webgrafia, ja que ha set complexa entendre el seu funcionament però finalment he aconseguit implementar-ho.
 \par
@@ -461,13 +469,18 @@ def gen_cli_args():
                                     formatter_class=RawTextHelpFormatter,
                                     epilog="We are in... Let the hacking begin!")
 
-    parser.add_argument("-t", type=int, dest="threads", default=100, help="set how many concurrent threads to use (default: 100)")
+    parser.add_argument("-t", type=int, dest="threads", default=100, 
+                        help="set how many concurrent threads to use (default: 100)")
     parser.add_argument("--verbose", action='store_true', help="enable verbose output")
     parser.add_argument("--show-commands", action='store_true', help="Just show commands")
-    parser.add_argument("--path",dest="path", default='/tmp/gpt_report/', help="Destination path (default: /tmp/gpt_report)")
+    parser.add_argument("--path",dest="path", default='/tmp/gpt_report/', 
+                        help="Destination path (default: /tmp/gpt_report)")
 
     std_parser = argparse.ArgumentParser(add_help=False)
-    std_parser.add_argument("target", nargs='?', type=str, help="(Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets ")
+    std_parser.add_argument("target", nargs='?', type=str, 
+                            help="(Target Required *) The target IP(s), range(s), 
+                            CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets ")
+   # Type scanner group
     scan_parser = argparse.ArgumentParser(add_help=False)
     scan_parser.add_argument(
             '--scanner',
@@ -476,6 +489,7 @@ def gen_cli_args():
             default = 'full_scanner'
             )
 
+   # Introduce what info you have
     have_info_parser = argparse.ArgumentParser(add_help=False)
     have_info_parser.add_argument(
             '--tags',
@@ -484,9 +498,12 @@ def gen_cli_args():
             nargs='?'
             )
 
+   # wordlist group
     wlist_parser = argparse.ArgumentParser(add_help=False)
-    wlist_parser.add_argument("-w", metavar="WORDLIST", dest='wordlist', nargs='+', help="set wordlist  (Default SecList wordlist)")
-    
+    wlist_parser.add_argument("-w", metavar="WORDLIST", dest='wordlist', 
+                            nargs='+', help="set wordlist  (Default SecList wordlist)")
+   
+   # ssl group
     ssl_parser = argparse.ArgumentParser(add_help=False)
     ssl_parser.add_argument(
             '--ssl',
@@ -494,17 +511,24 @@ def gen_cli_args():
             action='store_true'
             )
 
+   # credentials group
     cred_parser = argparse.ArgumentParser(add_help=False)
-    cred_parser.add_argument("-u", metavar="USERNAME", dest='username', nargs='?', default=[], help="username(s) or file(s) containing usernames")
-    cred_parser.add_argument("-p", metavar="PASSWORD", dest='password', nargs='?', default=[], help="password(s) or file(s) containing passwords")
-    cred_parser.add_argument("-H", metavar="HASH", dest='HASH', nargs='?', default=[], help="Pass The hash")
+    cred_parser.add_argument("-u", metavar="USERNAME", dest='username', 
+                        nargs='?', default=[], help="username(s) or file(s) containing usernames")
+    cred_parser.add_argument("-p", metavar="PASSWORD", dest='password', 
+                        nargs='?', default=[], help="password(s) or file(s) containing passwords")
+    cred_parser.add_argument("-H", metavar="HASH", dest='HASH', 
+                            nargs='?', default=[], help="Pass The hash")
 
-    subparsers = parser.add_subparsers(title='services', dest='services', description='available options')
+    subparsers = parser.add_subparsers(title='services', dest='services', 
+                                            description='available options')
 
 
     # Arguments Recon
 
-    recon = subparsers.add_parser('recon', help='Initial recon', parents=[std_parser,scan_parser]) ## Get new arguments and can introduce std_parser arguments
+    recon = subparsers.add_parser('recon', help='Initial recon', 
+            parents=[std_parser,scan_parser])   
+        ## Get new arguments and can introduce std_parser arguments
     recon.add_argument(
             '--all-ports',
             help='scan all ports',
@@ -526,7 +550,8 @@ def gen_cli_args():
 
     # Arguments WEB
 
-    web = subparsers.add_parser('web', help='Web server scanner', parents = [cred_parser, std_parser,wlist_parser,scan_parser,ssl_parser])
+    web = subparsers.add_parser('web', help='Web server scanner', 
+                parents = [cred_parser, std_parser,wlist_parser,scan_parser,ssl_parser])
     
     web.add_argument(
             '--port',
@@ -567,19 +592,21 @@ def gen_cli_args():
     
     # Arguments FTP
     
-    ftp = subparsers.add_parser('ftp', help='FTP enum', parents = [cred_parser,std_parser,have_info_parser,ssl_parser])
+    ftp = subparsers.add_parser('ftp', help='FTP enum', 
+                    parents = [cred_parser,std_parser,have_info_parser,ssl_parser])
 
     ftp.add_argument(
             '--port',
-            help='scan specific port (Default 22)',
+            help='scan specific port (Default 21)',
             nargs='?',
-            default = '22'
+            default = '21'
             )
     
     
     # Argumets LDAP
 
-    ldap = subparsers.add_parser('ldap', help='LDAP enum', parents = [cred_parser,std_parser,have_info_parser])
+    ldap = subparsers.add_parser('ldap', help='LDAP enum', 
+                        parents = [cred_parser,std_parser,have_info_parser])
     
     ldap.add_argument(
             '--port',
@@ -627,7 +654,117 @@ Una vegada s'han passat els arguments de forma correcta ja passen a executar els
 En primer lloc la primera opció, fa ús dels fitxers de configuració .yaml però l'estructura es diferent. Podem observar que la primera opció s'ha de passar un argument i serà el mateix que cridarà en el fitxer yaml, en canvi la segona opció utilitzem sempre els mateixos tags i busca a través d'aquest tags. Si que pel servei de recon la millor opció es l'actual pero per l'apartat web seria modificar-ho i utilitzar els tags, però aquesta part la fa molt més complexa, ja que s'hauria de planificar quins serien aquest tags i com ho organitzaria per aquest motiu de moment ho mantinc com està.
 \par
 
-La metodologia que hauriem de seguir es realiar en primer lloc un recon, aquesta funció ens permet enumerar a nivell de xarxa tots els ports que poden esta oberts. 
+Seguidament mostraré el codi dels serveis. Aquests serveis són importats en l'inici del codi Main i permet fe ús de les funcions que es troben dins d'aquestes llibreries.
+Les funcions són passar-l'hi la comanda que haurà d'executar, retorna un array amb la descripció de la comanda i la comanda.
+La informació l'agafa del seu fitxer de configuració, el motiu que ho he realitzat d'aquesta forma es perquè em permet ampliar les comandes sempre que ho vegi convenient i no tindré cap problema, ja que al final retorno un array amb tota la informació.
+
+Inicio la part dels serveis mostrant el codi i el seu fitxer de configuració. 
+
+\subsubsubsection{recon.py}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{python}
+#!/usr/bin/env python3
+### This script enum all ports, services and vulnerabilities with nmap
+import yaml
+import os 
+
+
+
+def recon(all_info, recon_path, out_path):
+    target = all_info['target']
+    info_data = all_info['scanner']
+    
+    # get path information
+    recon_data = os.path.join(recon_path, "recon_config.yaml")
+    command_info = {} 
+    with open(recon_data, 'r') as unparsed:
+        try:
+            recon_data = yaml.safe_load(unparsed)
+        except yaml.YAMLError as exc:
+            print(exc)
+        
+        list_data = recon_data[info_data].keys()
+
+        for options in list_data: 
+            descr = recon_data[info_data][options]['description']
+            out_file = os.path.join(out_path, '.'.join((options, 'txt')))
+            cmd = (recon_data[info_data][options]['commands'].replace('${{ out_dir }}', 
+                    out_file).replace('${{ target }}', target))
+            command_info[descr] = cmd 
+    
+    return command_info
+
+\end{minted}
+
+\subsubsubsection{recon\_config.yaml}
+\par La configuració veurem que hi ha unes variables \$\{\{ nom \}\} que em permeten fer el replace en el codi de python3. He trobat varies formes pero aquesta era la que més s'ajustaba el que volia. 
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{markdown}
+```yaml
+full_scanner:
+  nmap_quick_open:
+    description: "Quick open ports with nmap"
+    commands: | 
+        nmap -F --open -oN ${{ out_dir }} ${{ target }} 
+  
+  nmap_quick_versions:
+    description: "Quick scan with nmap"
+    commands: | 
+        nmap -sV -sC --open --version-all -oN ${{ out_dir }} ${{ target }} 
+  
+  nmap_full: 
+    attack_technique: nmap
+    description: "Scanning all ports with nmap and return service information"
+    commands: | 
+        nmap -sS -sV -sC -O -p- --min-rate 5000 -n -oN ${{ out_dir }} ${{ target }} 
+  nmap_fast_udp:
+    attack_technique: nmap
+    description: "Scanning udp ports"
+    commands: |  
+        nmap -F -sU -sV -T 4 -oN ${{ out_dir }} ${{ target }} 
+  
+  masscan_full:
+    attack_technique: masscan
+    description: "Scanning all ports with masscan"
+    commands: |  
+        masscan --rate 10000 -p1-65535 --only-open -oL ${{ out_dir }} ${{ target }}
+## Not ready yet
+nmap_custom:
+  nmap_allports:
+    attack_technique: nmap
+    description: "Scanning all ports with nmap"
+    commands: | 
+        nmap -p- --min-rate 5000 -n -oG ${{ out_dir }} ${{ target }} 
+  
+  nmap_ports:
+    attack_technique: nmap
+    description: "Scanning specific ports with nmap"
+    commands: |  
+        nmap -p ${{ ports }} -sC -sV ${{ out_dir }} ${{ target }}
+```
+\end{minted}
+A continuació mostro el que fa la funcio \cite{3} argsparse, i ens retorna la seguent llista: 
+\par
+{'threads': 100, 'verbose': False, 'path': '/tmp/autorecon/', 'services': 'recon', 'target': ['127.0.0.1'], 'all_ports': True, 'ports': None}
+\par
+\subsubsubsection{web.py}\par
+En l'apartat web, trobem que el funcionament es molt similar. L'unic que previament pots passar-l'hi el parametre ssl i et trasnforma el http a https. 
 
 \begin{minted}
 [
@@ -639,14 +776,1421 @@ fontsize=\footnotesize,
 linenos
 ]
 {python}
+#!/usr/bin/env python3
+### This script enum all ports, services and vulnerabilities with nmap
+import yaml
+import os 
+## need port, user, passwd, type scanner, CMS, fuzzing, layer (http/https), wordlist, url 
+
+def web(all_info, recon_path, out_path):
+    target = all_info['target']
+    info_data = all_info['scanner']
+    port = all_info['port']
+    url_path = all_info['file_path']
+    cms = all_info['cms']
+
+
+    # Check https or http scheme 
+    scheme = 'http'
+    if all_info['ssl']:
+       scheme = 'https' 
+
+    url = '{0}://{1}:{2}{3}'.format(scheme,target, port, url_path) 
+    
+    ## Set wordlist
+    wordlist = all_info['wordlist']
+    
+    if wordlist == None:
+        wordlist = '/usr/share/seclists/Discovery/Web-Content/big.txt'
+    
+
+    # get path information
+    web_data = os.path.join(recon_path, "web_config.yaml")
+    command_info = {} 
+    
+
+
+    with open(web_data, 'r') as unparsed:
+        try:
+            web_data = yaml.safe_load(unparsed)
+        except yaml.YAMLError as exc:
+            print(exc)
+        
+        list_data = web_data[info_data].keys()
+        
+        for options in list_data:
+            descr = web_data[info_data][options]['description']
+            out_file = os.path.join(out_path, '.'.join((options, 'txt')))
+            cmd = (web_data[info_data][options]['commands'].replace('${{ out_dir }}', 
+                    out_file).replace('${{ target }}', target).replace('${{ port }}', 
+                    port).replace('${{ url }}', url).replace('${{ wordlist }}',wordlist))
+            command_info[descr] = cmd 
+    
+    return command_info
 
 \end{minted}
+
+
+\subsubsubsection{web\_config.yaml}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{markdown}
+```yaml
+full_scanner:
+  nmap_scan:
+    attack_technique: nmap
+    description: "Scanning nmap with scripts banner,(http* or ssl*) and not 
+        (brute or broadcast or dos or external or http-slowloris* or fuzzer)"
+    commands: |
+      nmap -sV -p ${{ port }} --script="banner,(http*·or·ssl*)·and·not·
+        (brute·or·broadcast·or·dos·or·external·or·http-slowloris*·or·fuzzer)" -oN 
+            ${{ out_dir }} ${{ target }}
+  
+  curl_index: 
+    attack_technique: curl-index
+    description: "Enum index web content"
+    commands: | 
+        curl -sSik ${{ url }} -m 10 | tee ${{ out_dir }}
+  
+  whatweb_index: 
+    attack_technique: whatweb
+    description: "Enum versions webs"
+    commands: | 
+        whatweb -v -a 3 ${{ target }} 
+  nikto_scanenr:
+    attack_technique: nikto
+    description: "Nikto detect misconfiguration, risky files, etc."
+    commands: |  
+        nikto -h ${{ url }}  | tee ${{ out_dir }}
+  
+  fuzzing_ffuf:
+    attack_technique: ffuf
+    description: "Fuzzing directories and files"
+    commands: |  
+        ffuf -w ${{ wordlist }} -u ${{ url }}FUZZ -c -e '.php,.asp,.aspx,.txt,.html,.zip' 
+            -o ${{ out_dir }}
+wp: 
+    wordpres_scanner: 
+        attack_technique: wpscan
+        description: "Fuzzing directories and files"
+        commands: |  
+            wpscan --url ${{ url }} -e vp,vt,tt,cb,dbe,u,m --plugins-detection aggressive 
+                --plugins-version-detection aggressive -o ${{ out_dir }}
+```
+
+\end{minted}
+
+
+
+\subsubsubsection{smb.py}\par
+Aquest script ja veurem que el que fa és diferent de la resta. Per arguments és passen uns tags que seran buscats en el fitxer de configuració. Fa referència a la informació que té l'atacant. Es a dir, si l'atacant no té informació, el més normal seria iniciar per una sessió nul·la. Una vegada ja es te credencials doncs és passa a enumerar aquesta informació amb l'usuari i contrasenya. I també hi ha l'opció de passar-li el hash, aquesta et permet de la mateixa forma executar comandes de forma remota com si tinguessis la contrasenya.
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{python}
+#!/usr/bin/env python3
+import yaml
+import os 
+
+# list only data pased 
+def get_tags(smb_data, tags):
+    
+    list_data = smb_data.keys()
+    final_services = [] 
+
+    for parameter in tags:
+        for technique in list_data:
+            total = 0
+            for opt in smb_data[technique]['tags']: 
+                ecual = False
+                if parameter.lower() == opt.lower(): 
+                    ecual = True
+                    total +=1
+                if not ecual:
+                    break
+            if total == len(tags):
+                final_services.append(technique)
+
+    return final_services
+
+#return command
+
+def smb(all_info, recon_path, out_path):
+    target = all_info['target']
+    port = all_info['port']
+    tags = all_info['tags'].split(',')
+    username = all_info['username']
+    password = all_info['password']
+    
+    if len(username) == 0 or len(password) == 0: 
+        username = ''
+        password = ''
+
+    # get path information
+    smb_data = os.path.join(recon_path, "smb_config.yaml")
+    command_info = {} 
+     
+    with open(smb_data, 'r') as unparsed:
+        try:
+            smb_data = yaml.safe_load(unparsed)
+        except yaml.YAMLError as exc:
+            print(exc)
+        
+        services = get_tags(smb_data, tags)        
+        
+        for options in services:
+            descr = smb_data[options]['description']
+            out_file = os.path.join(out_path, '.'.join((options, 'txt')))
+            cmd = (smb_data[options]['commands'].replace('${{ out_dir }}', 
+            out_file).replace('${{ target }}', target).replace('${{ port }}', 
+            port).replace('${{ username }}', username).replace('${{ password }}', password))
+            command_info[descr] = cmd 
+         
+    return command_info
+\end{minted}
+
+\subsubsubsection{smb\_config.yaml}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{markdown}
+```yaml
+smbc_null_session:
+    attack_technique: smbclient
+    description: "Samba null sessions enum directories"
+    tags: 
+        - nocreds
+    commands: |
+        smbclient -L \\\\${{ target }}\\ -N -p ${{ port }}
+cme_null_session:
+    attack_technique: crackmapexec
+    description: "Enum null sessions with Crackmapexec"
+    tags: 
+        - nocreds
+    commands: |
+        crackmapexec smb ${{ target }} -u '' -p '' --shares --timeout 5
+enum4linux_null_session:
+    attack_technique: Enum4linux
+    description: "Enum null sessions with enum4linux"
+    tags: 
+        - nocreds
+    commands: |
+        enum4linux -a ${{ target }} | tee ${{ out_dir }} 
+cme_dsa_session:
+    attack_technique: crackmapexec
+    description: "Enum directories and see if have shell"
+    tags: 
+        - creds
+    commands: |
+        crackmapexec smb ${{ target }} -u '${{ username }}' -p '${{ password }}' 
+            --shares --timeout 5
+cme_passthehash:
+    attack_technique: crackmapexec
+    description: "Enum directories and see if have shell"
+    tags: 
+        - hash
+    commands: |
+        crackmapexec smb ${{ target }} -u '${{ username }}' -H '${{ hash }}' 
+            --shares --timeout 5
+
+```
+
+\end{minted}
+
+\subsubsubsection{ldap.py}
+
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{python}
+    #!/usr/bin/env python3
+import yaml
+import os 
+import ldap3
+
+# Not ready yet
+def enum_ldap(server, port):
+    server = ldap3.Server(server,port, use_ssl = True)
+    connection = ldap3.Connection(server)
+    if connection.bind(): 
+        info = server.info
+    else:
+        info = False
+
+def get_tags(ldap_data, tags):
+    
+    list_data = ldap_data.keys()
+    final_services = [] 
+
+    for parameter in tags:
+        for technique in list_data:
+            total = 0
+            for opt in ldap_data[technique]['tags']: 
+                ecual = False
+                if parameter.lower() == opt.lower(): 
+                    ecual = True
+                    total +=1
+                if not ecual:
+                    break
+            if total == len(tags):
+                final_services.append(technique)
+
+    return final_services
+
+def ldap(all_info, recon_path, out_path):
+    target = all_info['target']
+    port = all_info['port']
+    tags = all_info['tags'].split(',')
+    username = all_info['username']
+    password = all_info['password']
+    
+    if len(username) == 0 or len(password) == 0: 
+        username = ''
+        password = ''
+
+    # get path information
+    ldap_data = os.path.join(recon_path, "ldap_config.yaml")
+    command_info = {} 
+     
+    with open(ldap_data, 'r') as unparsed:
+        try:
+            ldap_data = yaml.safe_load(unparsed)
+        except yaml.YAMLError as exc:
+            print(exc)
+        
+        services = get_tags(ldap_data, tags)        
+        
+        for options in services:
+            descr = ldap_data[options]['description']
+            out_file = os.path.join(out_path, '.'.join((options, 'txt')))
+            cmd = (ldap_data[options]['commands'].replace('${{ out_dir }}', 
+            out_file).replace('${{ target }}', target).replace('${{ port }}', 
+            port).replace('${{ username }}', username).replace('${{ password }}', password))
+            command_info[descr] = cmd 
+         
+    return command_info
+
+\end{minted}
+
+\subsubsubsection{ldap\_config.yaml}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{markdown}
+```yaml
+ldap_nmap_session:
+    attack_technique: nmap
+    description: "Enum null sessions with nmap"
+    tags: 
+        - nocreds
+    commands: |
+        nmap -sV -p ${{ port }} --script="banner,(ldap* or ssl*) and not 
+        (brute or broadcast or dos or external or fuzzer)" -oN "${{ out_dir }}" ${{ target }}
+```
+
+\end{minted}
+
+\subsubsubsection{ftp}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{python}
+    #!/usr/bin/env python3
+import yaml
+import os 
+
+def get_tags(ftp_data, tags):
+
+    list_data = ftp_data.keys()
+    final_services = [] 
+
+    for parameter in tags:
+        for technique in list_data:
+            total = 0
+            for opt in ftp_data[technique]['tags']: 
+                ecual = False
+                if parameter.lower() == opt.lower(): 
+                    ecual = True
+                    total +=1
+                if not ecual:
+                    break
+            if total == len(tags):
+                final_services.append(technique)
+
+    return final_services
+
+def ftp(all_info, recon_path, out_path):
+    target = all_info['target']
+    port = all_info['port']
+    tags = all_info['tags'].split(',')
+    username = all_info['username']
+    password = all_info['password']
+    
+    if len(username) == 0 or len(password) == 0: 
+        username = 'anonymous'
+        password = ''
+
+    # Check ftp or ftps scheme 
+    scheme = 'ftp'
+    if all_info['ssl']:
+       scheme = 'ftps' 
+    
+    # get path information
+    ftp_data = os.path.join(recon_path, "ftp_config.yaml")
+    command_info = {} 
+     
+    with open(ftp_data, 'r') as unparsed:
+        try:
+            ftp_data = yaml.safe_load(unparsed)
+        except yaml.YAMLError as exc:
+            print(exc)
+        
+        services = get_tags(ftp_data, tags)        
+        
+        for options in services:
+            descr = ftp_data[options]['description']
+            out_file = os.path.join(out_path, '.'.join((options, 'txt')))
+            cmd = (ftp_data[options]['commands'].replace('${{ out_dir }}', 
+            out_file).replace('${{ target }}', target).replace('${{ port }}', 
+            port).replace('${{ username }}', username).replace('${{ password }}', 
+            password).replace('${{ scheme }}', scheme))
+            command_info[descr] = cmd 
+         
+    return command_info
+
+\end{minted}
+\subsubsubsection{ftp\_config.yaml}
+\begin{minted}
+[
+frame=lines,
+framesep=2mm,
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+linenos
+]
+{markdown}
+```yaml
+ftp_anon_session:
+    attack_technique: nmap_ftp
+    description: "check anonymous user ftp"
+    tags: 
+        - nocreds
+    commands: |
+        nmap -sC -sV -p ${{ port }} -on ${{ out_dir }} ${{ target }}
+donwload_anonymous_session:
+    attack_technique: download_files
+    description: "downloading all files"
+    tags: 
+        - nocreds
+    commands: |
+        wget -r ${{ scheme }}://${{ target }}:${{ port }} -P ${{ out_dir }}
+donwload_creds_session:
+    attack_technique: download_files
+    description: "downloading all files"
+    tags: 
+        - creds
+    commands: |
+        wget -r ${{ scheme }}://${{ username }}:${{ password }}@${{ target 
+        }}:${{ port }} -P ${{ out_dir }}
+```
+
+\end{minted}
+
+
 \subsection{Utilització}
+
+Una vegada mostrada, la part més important del codi, procediré en explicar l'ús de l'eina. 
+Primer de tot mostraré les opcions que té l'eina. 
+
+
+\begin{minted}
+[
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{text}
+usage: AutoGPenT0ols.py [-h] [-t THREADS] [--verbose] [--show-commands] [--path PATH] 
+{recon,web,smtp,smb,ftp,ldap,snmp} ...
+
+                           #                                                 
+                           ##                                ###             
+  ###### #######  ######## ###  ## ######## ####### #######  ###         ####
+ ###           ##          #### ##    ###   ##   ##       ## ###        ###  
+ ###  ##  ######   ####### #######    ###   ##   ##  ##   ## ###        ###  
+ ###  ##  ###      ###     ### ###    ###   ##   ##  ##   ## ###        ###  
+  ######  ###      ####### ###  ##    ###   #######   #####  ####### #####   
+                                 #                                           
+
+                                 Version: 0.1
+                                 Codename: CapitanJ4ck
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -t THREADS            set how many concurrent threads to use (default: 100)
+  --verbose             enable verbose output
+  --show-commands       Just check commands 
+  --path PATH           Destination path (default: /tmp/gpt_report)
+
+services:
+  available options
+
+  {recon,web,smtp,smb,ftp,ldap,snmp}
+    recon               Initial recon
+    web                 Web server scanner
+    smtp                smtp enumeration
+    smb                 Enum smb
+    ftp                 FTP enum
+    ldap                LDAP enum
+    snmp                Enum SNMP
+
+We are in... Let the hacking begin!
+
+\end{minted}
+
+La metodologia que hauriem de seguir es realiar en primer lloc un recon, aquesta funció ens permet enumerar a nivell de xarxa tots els ports que poden esta oberts. Utilitza tant nmap i masscan. Son eines molt potents que et permeten enumerar la xarxa de forma ràpida i precisa. 
+
+
+\begin{minted}
+[
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{text}
+
+usage: AutoGPenT0ols.py recon [-h] [--scanner [SCANNER]] 
+[--all-ports] [--ports [PORTS]] [--full] [target]
+
+positional arguments:
+  target               (Target Required *) The target IP(s), range(s), 
+  CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --scanner [SCANNER]  Select scanner (default : full_scanner)
+  --all-ports          scan all ports
+  --ports [PORTS]      scan specific ports
+  --full               Full recon scan
+
+\end{minted}
+
+Una vegada tenim la primera informació podem porcedir en enumerar els serveis oberts. Jo inicio l'explicació en funcio del port, de menys a més gran. 
+Iniciem pel port 22 - FTP. En aquest cas veurem que ens permet realitzar les següents operacions. 
+
+\begin{minted}
+[
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{text}
+gpt ftp -h
+usage: AutoGPenT0ols.py ftp [-h] [-u [USERNAME]] [-p [PASSWORD]] [-H [HASH]] 
+[--tags [TAGS]] [--ssl] [--port [PORT]] [target]
+
+positional arguments:
+  target         (Target Required *) The target IP(s), range(s),
+                  CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -u [USERNAME]  username(s) or file(s) containing usernames
+  -p [PASSWORD]  password(s) or file(s) containing passwords
+  -H [HASH]      Pass The hash
+  --tags [TAGS]  What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)
+  --ssl          usage of SSL/TLS requests
+  --port [PORT]  scan specific port (Default 22)
+
+\end{minted}
+
+Seguim amb el port 80/443 - Web \par
+El que ens permet es escollir el tipo de scanner en aquest cas per defecte hi ha el full\_scanner pero podriem escollir el wp que es per una web wordpress. També veiem que ens permet passar la les credencials i la wordlist. Per defecte ja estan configurades aquestes variables per evitar errors. I el parametre ssl et permet afegir el https en la url. 
+\begin{minted}
+[
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{text}
+
+gpt web -h
+
+usage: AutoGPenT0ols.py web [-h] [-u [USERNAME]] [-p [PASSWORD]] [-H [HASH]] [-w WORDLIST [WORDLIST ...]] 
+[--scanner [SCANNER]] [--ssl] [--port [PORT]] [--file-path [FILE_PATH]] [--cms [CMS]] [target]
+
+positional arguments:
+  target                (Target Required *) The target IP(s), range(s), 
+                        CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -u [USERNAME]         username(s) or file(s) containing usernames
+  -p [PASSWORD]         password(s) or file(s) containing passwords
+  -H [HASH]             Pass The hash
+  -w WORDLIST [WORDLIST ...]
+                        set wordlist (Default SecList wordlist)
+  --scanner [SCANNER]   Select scanner (default : full_scanner)
+  --ssl                 usage of SSL/TLS requests
+  --port [PORT]         scan specific port (Default 80)
+  --file-path [FILE_PATH]
+                        Specify to find the requested resource and start the enumeration 
+                        with that route (Default / )
+  --cms [CMS]           What do you have? [Wordpress, Joombla, Drupal] (Default: None)
+
+\end{minted}
+\par
+El servei LDAP, ens permet obtenir molta informació de la victima. Aquest protocol es molt utilizat per Controladors de Domini. 
+
+\begin{minted}
+[
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{text}
+
+gpt ldap -h
+
+usage: AutoGPenT0ols.py ldap [-h] [-u [USERNAME]] [-p [PASSWORD]] 
+    [-H [HASH]] [--tags [TAGS]] [--port [PORT]] [target]
+
+positional arguments:
+  target         (Target Required *) The target IP(s), range(s), 
+                CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -u [USERNAME]  username(s) or file(s) containing usernames
+  -p [PASSWORD]  password(s) or file(s) containing passwords
+  -H [HASH]      Pass The hash
+  --tags [TAGS]  What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)
+  --port [PORT]  scan specific port (Default 389)
+
+\end{minted}
+
+Finalment trobem el protocol samba, aquest es el que s'utilitza per les carpetas compartides. El funcionament es similar els anteriors. Pases un tag, en cas que no tinguis informació previa ho deixes per defecte i extraurà tota la informació possible d'aquest protocol. 
+
+\begin{minted}
+[
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{text}
+
+gpt smb -h
+
+usage: AutoGPenT0ols.py smb [-h] [-u [USERNAME]] [-p [PASSWORD]] 
+        [-H [HASH]] [--tags [TAGS]] [--port [PORT]] [target]
+
+positional arguments:
+  target         (Target Required *) The target IP(s), range(s), 
+                  CIDR(s), hostname(s), FQDN(s), file(s) containing a list of targets
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -u [USERNAME]  username(s) or file(s) containing usernames
+  -p [PASSWORD]  password(s) or file(s) containing passwords
+  -H [HASH]      Pass The hash
+  --tags [TAGS]  What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)
+  --port [PORT]  scan specific port (Default 445)
+
+\end{minted}
+
+\subsection{Exemples d'ús}
+Com he especificat anteriorment primer haurem d'executar l'opció de recon. Un exemple seria el següent: 
+
+\begin{minted}
+[
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{text}
+
+╭─[internetghost2] as jack in ~                                                                                                                                                                                      
+╰──➤  gpt --verbose recon 192.168.1.12 
+[+] Managment: Directory /tmp/gpt_report/192.168.1.12/recon already exist
+[↘] recon: nmap -sV -sC --open --version-all -oN 
+    /tmp/gpt_report/192.168.1.12/recon/nmap_quick_versions.txt 192.168.1.12 
+-- 𝒞𝒽𝑒𝒸𝓀 𝒢𝒫𝑒𝓃𝒯𝒪𝑜𝓁𝓈 --
+[+] Quick open ports with nmap: Succesfully!
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-30 08:28 UTC
+Nmap scan report for internetghost2.home (192.168.1.12)
+Host is up (0.000021s latency).
+Not shown: 95 closed ports
+PORT    STATE SERVICE
+21/tcp  open  ftp
+80/tcp  open  http
+139/tcp open  netbios-ssn
+443/tcp open  https
+445/tcp open  microsoft-ds
+
+Nmap done: 1 IP address (1 host up) scanned in 0.32 seconds
+
+[O] Quick scan with nmap: Running
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-30 08:28 UTC
+Nmap scan report for internetghost2.home (192.168.1.12)
+Host is up (0.000012s latency).
+Not shown: 993 closed ports
+PORT      STATE SERVICE     VERSION
+21/tcp    open  ftp         Pure-FTPd
+80/tcp    open  http
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.0 302 Found
+|     Location: https://http:443:///nice%20ports%2C/Tri%6Eity.txt%2ebak
+|     Date: Sun, 30 May 2021 08:28:58 GMT
+|     Content-Length: 5
+|     Content-Type: text/plain; charset=utf-8
+|     Found
+|   GenericLines, Hello, Help, Kerberos, RTSPRequest, SSLSessionReq, 
+    SSLv23SessionReq, TLSSessionReq, TerminalServerCookie: 
+|     HTTP/1.1 400 Bad Request
+|     Content-Type: text/plain; charset=utf-8
+|     Connection: close
+|     Request
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.0 302 Found
+|     Location: https://http:443:///
+|     Date: Sun, 30 May 2021 08:28:53 GMT
+|     Content-Length: 5
+|     Content-Type: text/plain; charset=utf-8
+|_    Found
+|_http-title: Did not follow redirect to https://internetghost2.home:443/
+139/tcp   open  netbios-ssn Samba smbd 4.6.2
+443/tcp   open  ssl/http    Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+|_http-title: Site doesn't have a title (text/plain; charset=utf-8).
+| ssl-cert: Subject: commonName=TRAEFIK DEFAULT CERT
+| Subject Alternative Name: 
+DNS:5fb207ee8c5e95258740a5c37d0c43c8.de0ab1663e5dab751b09fa03961c958a.traefik.default
+| Not valid before: 2021-05-30T08:07:59
+|_Not valid after:  2022-05-30T08:07:59
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn: 
+|   h2
+|   http/1.1
+|_  acme-tls/1
+| tls-nextprotoneg: 
+|   h2
+|   http/1.1
+|_  acme-tls/1
+445/tcp   open  netbios-ssn Samba smbd 4.6.2
+8090/tcp  open  http        PHP cli server 5.5 or later (PHP 7.4.9)
+|_http-title: Login - Adminer
+|_http-trane-info: Problem with XML parsing of /evox/about
+30000/tcp open  tcpwrapped
+1 service unrecognized despite returning data. If you know the service/version, 
+please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port80-TCP:V=7.91%I=9%D=5/30%Time=60B34CC5%P=x86_64-pc-linux-gnu%r(GetR
+SF:equest,9C,"HTTP/1\.0\x20302\x20Found\r\nLocation:\x20https://http:443:/
+SF://\r\nDate:\x20Sun,\x2030\x20May\x202021\x2008:28:53\x20GMT\r\nContent-
+SF:Length:\x205\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\n\r\nFo
+SF:und")%r(HTTPOptions,9C,"HTTP/1\.0\x20302\x20Found\r\nLocation:\x20https
+SF:://http:443:///\r\nDate:\x20Sun,\x2030\x20May\x202021\x2008:28:53\x20GM
+SF:T\r\nContent-Length:\x205\r\nContent-Type:\x20text/plain;\x20charset=ut
+SF:f-8\r\n\r\nFound")%r(RTSPRequest,67,"HTTP/1\.1\x20400\x20Bad\x20Request
+SF:\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20clo
+SF:se\r\n\r\n400\x20Bad\x20Request")%r(FourOhFourRequest,BF,"HTTP/1\.0\x20
+SF:302\x20Found\r\nLocation:\x20https://http:443:///nice%20ports%2C/Tri%6E
+SF:ity\.txt%2ebak\r\nDate:\x20Sun,\x2030\x20May\x202021\x2008:28:58\x20GMT
+SF:\r\nContent-Length:\x205\r\nContent-Type:\x20text/plain;\x20charset=utf
+SF:-8\r\n\r\nFound")%r(GenericLines,67,"HTTP/1\.1\x20400\x20Bad\x20Request
+SF:\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20clo
+SF:se\r\n\r\n400\x20Bad\x20Request")%r(Hello,67,"HTTP/1\.1\x20400\x20Bad\x
+SF:20Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnectio
+SF:n:\x20close\r\n\r\n400\x20Bad\x20Request")%r(Help,67,"HTTP/1\.1\x20400\
+SF:x20Bad\x20Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nC
+SF:onnection:\x20close\r\n\r\n400\x20Bad\x20Request")%r(SSLSessionReq,67,"
+SF:HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/plain;\x20c
+SF:harset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request")%r(T
+SF:erminalServerCookie,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-T
+SF:ype:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400
+SF:\x20Bad\x20Request")%r(TLSSessionReq,67,"HTTP/1\.1\x20400\x20Bad\x20Req
+SF:uest\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x2
+SF:0close\r\n\r\n400\x20Bad\x20Request")%r(SSLv23SessionReq,67,"HTTP/1\.1\
+SF:x20400\x20Bad\x20Request\r\nContent-Type:\x20text/plain;\x20charset=utf
+SF:-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request")%r(Kerberos,67
+SF:,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/plain;\x2
+SF:0charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request");
+
+Host script results:
+| smb2-security-mode: 
+|   2.10: 
+|_    Message signing enabled but not required
+|_smb2-time: Protocol negotiation failed (SMB2)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 266.04 seconds
+
+[.] Scanning all ports with nmap and return service information: Running
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-30 08:33 UTC
+Nmap scan report for 192.168.1.12
+Host is up (0.00013s latency).
+Not shown: 65517 closed ports
+PORT      STATE SERVICE     VERSION
+21/tcp    open  ftp         Pure-FTPd
+80/tcp    open  http
+| fingerprint-strings: 
+|   FourOhFourRequest: 
+|     HTTP/1.0 302 Found
+|     Location: https://http:443:///nice%20ports%2C/Tri%6Eity.txt%2ebak
+|     Date: Sun, 30 May 2021 08:33:25 GMT
+|     Content-Length: 5
+|     Content-Type: text/plain; charset=utf-8
+|     Found
+|   GenericLines, Help, Kerberos, LDAPSearchReq, LPDString, RTSPRequest, 
+SSLSessionReq, TLSSessionReq, TerminalServerCookie: 
+|     HTTP/1.1 400 Bad Request
+|     Content-Type: text/plain; charset=utf-8
+|     Connection: close
+|     Request
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.0 302 Found
+|     Location: https://http:443:///
+|     Date: Sun, 30 May 2021 08:33:20 GMT
+|     Content-Length: 5
+|     Content-Type: text/plain; charset=utf-8
+|_    Found
+|_http-title: Did not follow redirect to https://192.168.1.12:443/
+139/tcp   open  netbios-ssn Samba smbd 4.6.2
+443/tcp   open  ssl/http    Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+|_http-title: Site doesn't have a title (text/plain; charset=utf-8).
+| ssl-cert: Subject: commonName=TRAEFIK DEFAULT CERT
+| Subject Alternative Name: 
+DNS:5fb207ee8c5e95258740a5c37d0c43c8.de0ab1663e5dab751b09fa03961c958a.traefik.default
+| Not valid before: 2021-05-30T08:07:59
+|_Not valid after:  2022-05-30T08:07:59
+|_ssl-date: TLS randomness does not represent time
+| tls-alpn: 
+|   h2
+|   http/1.1
+|_  acme-tls/1
+| tls-nextprotoneg: 
+|   h2
+|   http/1.1
+|_  acme-tls/1
+445/tcp   open  netbios-ssn Samba smbd 4.6.2
+8090/tcp  open  http        PHP cli server 5.5 or later (PHP 7.4.9)
+|_http-title: Login - Adminer
+|_http-trane-info: Problem with XML parsing of /evox/about
+30000/tcp open  tcpwrapped
+30001/tcp open  tcpwrapped
+30002/tcp open  tcpwrapped
+30003/tcp open  tcpwrapped
+30004/tcp open  tcpwrapped
+30005/tcp open  tcpwrapped
+30006/tcp open  tcpwrapped
+30007/tcp open  tcpwrapped
+30008/tcp open  tcpwrapped
+30009/tcp open  tcpwrapped
+43677/tcp open  unknown
+| fingerprint-strings: 
+|   NULL, RPCCheck: 
+|_    {"type":"Tier1","version":"1.0"}
+57621/tcp open  unknown
+2 services unrecognized despite returning data. If you know the service/version, 
+please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port80-TCP:V=7.91%I=7%D=5/30%Time=60B34DD0%P=x86_64-pc-linux-gnu%r(GetR
+SF:equest,9C,"HTTP/1\.0\x20302\x20Found\r\nLocation:\x20https://http:443:/
+SF://\r\nDate:\x20Sun,\x2030\x20May\x202021\x2008:33:20\x20GMT\r\nContent-
+SF:Length:\x205\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\n\r\nFo
+SF:und")%r(HTTPOptions,9C,"HTTP/1\.0\x20302\x20Found\r\nLocation:\x20https
+SF:://http:443:///\r\nDate:\x20Sun,\x2030\x20May\x202021\x2008:33:20\x20GM
+SF:T\r\nContent-Length:\x205\r\nContent-Type:\x20text/plain;\x20charset=ut
+SF:f-8\r\n\r\nFound")%r(RTSPRequest,67,"HTTP/1\.1\x20400\x20Bad\x20Request
+SF:\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20clo
+SF:se\r\n\r\n400\x20Bad\x20Request")%r(FourOhFourRequest,BF,"HTTP/1\.0\x20
+SF:302\x20Found\r\nLocation:\x20https://http:443:///nice%20ports%2C/Tri%6E
+SF:ity\.txt%2ebak\r\nDate:\x20Sun,\x2030\x20May\x202021\x2008:33:25\x20GMT
+SF:\r\nContent-Length:\x205\r\nContent-Type:\x20text/plain;\x20charset=utf
+SF:-8\r\n\r\nFound")%r(GenericLines,67,"HTTP/1\.1\x20400\x20Bad\x20Request
+SF:\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20clo
+SF:se\r\n\r\n400\x20Bad\x20Request")%r(Help,67,"HTTP/1\.1\x20400\x20Bad\x2
+SF:0Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection
+SF::\x20close\r\n\r\n400\x20Bad\x20Request")%r(SSLSessionReq,67,"HTTP/1\.1
+SF:\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/plain;\x20charset=ut
+SF:f-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request")%r(TerminalSe
+SF:rverCookie,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20t
+SF:ext/plain;\x20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x
+SF:20Request")%r(TLSSessionReq,67,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nC
+SF:ontent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:\x20close\r\
+SF:n\r\n400\x20Bad\x20Request")%r(Kerberos,67,"HTTP/1\.1\x20400\x20Bad\x20
+SF:Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r\nConnection:
+SF:\x20close\r\n\r\n400\x20Bad\x20Request")%r(LPDString,67,"HTTP/1\.1\x204
+SF:00\x20Bad\x20Request\r\nContent-Type:\x20text/plain;\x20charset=utf-8\r
+SF:\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request")%r(LDAPSearchReq,6
+SF:7,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Type:\x20text/plain;\x
+SF:20charset=utf-8\r\nConnection:\x20close\r\n\r\n400\x20Bad\x20Request");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port43677-TCP:V=7.91%I=7%D=5/30%Time=60B34DCA%P=x86_64-pc-linux-gnu%r(N
+SF:ULL,22,"{\"type\":\"Tier1\",\"version\":\"1\.0\"}\r\n")%r(RPCCheck,22,"
+SF:{\"type\":\"Tier1\",\"version\":\"1\.0\"}\r\n");
+Device type: general purpose
+Running: Linux 4.X|5.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux 4.15 - 5.6
+Network Distance: 1 hop
+
+Host script results:
+| smb2-security-mode: 
+|   2.10: 
+|_    Message signing enabled but not required
+|_smb2-time: Protocol negotiation failed (SMB2)
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 99.70 seconds
+
+[+] Scanning udp ports: Succesfully!
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-05-30 08:34 UTC
+Nmap scan report for internetghost2.home (192.168.1.12)
+Host is up (0.00014s latency).
+Not shown: 81 open|filtered ports
+PORT      STATE  SERVICE        VERSION
+17/udp    closed qotd
+69/udp    closed tftp
+88/udp    closed kerberos-sec
+139/udp   closed netbios-ssn
+500/udp   closed isakmp
+515/udp   closed printer
+593/udp   closed http-rpc-epmap
+1025/udp  closed blackjack
+1029/udp  closed solid-mux
+1433/udp  closed ms-sql-s
+1813/udp  closed radacct
+5000/udp  closed upnp
+31337/udp closed BackOrifice
+32769/udp closed filenet-rpc
+32815/udp closed unknown
+49154/udp closed unknown
+49186/udp closed unknown
+49193/udp closed unknown
+49200/udp closed unknown
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 277.81 seconds
+
+\end{minted}
+
+
+
+\begin{minted}
+[
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{text}
+╰──➤  gpt --verbose smb 192.168.1.12 -h
+usage: AutoGPenT0ols.py smb [-h] [-u [USERNAME]] [-p [PASSWORD]] [-H [HASH]] [--tags [TAGS]]
+                            [--port [PORT]]
+                            [target]
+
+positional arguments:
+  target         (Target Required *) The target IP(s), range(s), CIDR(s), hostname(s), FQDN(s),
+                 file(s) containing a list of targets
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -u [USERNAME]  username(s) or file(s) containing usernames
+  -p [PASSWORD]  password(s) or file(s) containing passwords
+  -H [HASH]      Pass The hash
+  --tags [TAGS]  What do you have? [Creds, NoCreds, Hash, Shell] (Default: NoCreds)
+  --port [PORT]  scan specific port (Default 445)
+[+] Managment: Directory /tmp/gpt_report/192.168.1.12/smb already exist
+[/] smb: enum4linux -a 192.168.1.12 | 
+tee /tmp/gpt_report/192.168.1.12/smb/enum4linux_null_session.txt 
+[+] Managment: Directory /tmp/gpt_report/192.168.1.12/smb already exist
+[/] smb: enum4linux -a 192.168.1.12 | 
+tee /tmp/gpt_report/192.168.1.12/smb/enum4linux_null_session.txt 
+-- 𝒞𝒽𝑒𝒸𝓀 𝒢𝒫𝑒𝓃𝒯𝒪𝑜𝓁𝓈 --
+[+] Samba null sessions enum directories: Succesfully!
+
+    Sharename       Type      Comment
+    ---------       ----      -------
+    marc            Disk      Carpeta de l'Alumne marc
+    michael         Disk      Carpeta de l'Alumne michael
+    ernest          Disk      Carpeta de l'Alumne ernest
+    cosmin          Disk      Carpeta de l'Alumne cosmin
+    isaac           Disk      Carpeta de l'Alumne isaac
+    jordi           Disk      Carpeta de l'Alumne jordi
+    fernando        Disk      Carpeta de l'Alumne fernando
+    victor          Disk      Carpeta de l'Alumne victor
+    lina            Disk      Carpeta de l'Alumne lina
+[\] jack            Disk      Carpeta de l'Alumne jack
+    ju              Disk      Carpeta de l'Alumne ju
+    andre           Disk      Carpeta de l'Alumne andre
+    anton           Disk      Carpeta de l'Alumne anton
+    juan            Disk      Carpeta de l'Alumne juan
+    pe              Disk      Carpeta de l'Alumne pe
+    IPC$            IPC       IPC Service (Samba Server)
+SMB1 disabled -- no workgroup available
+
+[-] Enum null sessions with Crackmapexec: Something wrong
+[*] First time use detected
+[*] Creating home directory structure
+[*] Creating default workspace
+[*] Initializing SSH protocol database
+[*] Initializing WINRM protocol database
+[*] Initializing MSSQL protocol database
+[*] Initializing SMB protocol database
+[*] Initializing LDAP protocol database
+[*] Copying default configuration file
+[*] Generating SSL certificate
+
+[|] Enum null sessions with enum4linux: Running
+
+SMB1 disabled -- no workgroup available
+
+[-] Enum null sessions with Crackmapexec: Something wrong
+[*] First time use detected
+[*] Creating home directory structure
+[*] Creating default workspace
+[*] Initializing SSH protocol database
+[*] Initializing WINRM protocol database
+[*] Initializing MSSQL protocol database
+[*] Initializing SMB protocol database
+[*] Initializing LDAP protocol database
+[*] Copying default configuration file
+[-] Generating SSL certificate
+Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) 
+on Sun May 30 08:28:05 2021
+
+ ========================== 
+|    Target Information    |
+ ========================== 
+Target ........... 192.168.1.12
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
+
+
+ ==================================================== 
+|    Enumerating Workgroup/Domain on 192.168.1.12    |
+ ==================================================== 
+[E] Can't find workgroup/domain
+
+
+ ============================================ 
+|    Nbtstat Information for 192.168.1.12    |
+ ============================================ 
+Looking up status of 192.168.1.12
+No reply from 192.168.1.12
+
+ ===================================== 
+|    Session Check on 192.168.1.12    |
+ ===================================== 
+[+] Server 192.168.1.12 allows sessions using username '', password ''
+[+] Got domain/workgroup name: 
+
+ =========================================== 
+|    Getting domain SID for 192.168.1.12    |
+ =========================================== 
+Domain Name: MYGROUP
+Domain Sid: (NULL SID)
+[+] Can't determine if host is part of domain or part of a workgroup
+
+ ====================================== 
+|    OS information on 192.168.1.12    |
+ ====================================== 
+[+] Got OS info for 192.168.1.12 from smbclient: 
+[+] Got OS info for 192.168.1.12 from srvinfo:
+    1C144B1916EA   Wk Sv PrQ Unx NT SNT Samba Server
+    platform_id     :    500
+    os version      :    6.1
+    server type     :    0x809a03
+
+ ============================= 
+|    Users on 192.168.1.12    |
+ ============================= 
+index: 0x1 RID: 0x3f5 acb: 0x00000010 Account: juan    Name: Linux User    Desc: 
+index: 0x2 RID: 0x3f6 acb: 0x00000010 Account: pe    Name: Linux User    Desc: 
+index: 0x3 RID: 0x3e8 acb: 0x00000010 Account: marc    Name: Linux User    Desc: 
+index: 0x4 RID: 0x3ea acb: 0x00000010 Account: ernest    Name: Linux User    Desc: 
+index: 0x5 RID: 0x3ec acb: 0x00000010 Account: isaac    Name: Linux User    Desc: 
+index: 0x6 RID: 0x3e9 acb: 0x00000010 Account: michael    Name: Linux User    Desc: 
+index: 0x7 RID: 0x3eb acb: 0x00000010 Account: cosmin    Name: Linux User    Desc: 
+index: 0x8 RID: 0x3ed acb: 0x00000010 Account: jordi    Name: Linux User    Desc: 
+index: 0x9 RID: 0x3ee acb: 0x00000010 Account: fernando    Name: Linux User    Desc: 
+index: 0xa RID: 0x3ef acb: 0x00000010 Account: victor    Name: Linux User    Desc: 
+index: 0xb RID: 0x3f0 acb: 0x00000010 Account: lina    Name: Linux User    Desc: 
+index: 0xc RID: 0x3f1 acb: 0x00000010 Account: jack    Name: Linux User    Desc: 
+index: 0xd RID: 0x3f2 acb: 0x00000010 Account: ju    Name: Linux User    Desc: 
+index: 0xe RID: 0x3f3 acb: 0x00000010 Account: andre    Name: Linux User    Desc: 
+index: 0xf RID: 0x3f4 acb: 0x00000010 Account: anton    Name: Linux User    Desc: 
+
+user:[juan] rid:[0x3f5]
+user:[pe] rid:[0x3f6]
+user:[marc] rid:[0x3e8]
+user:[ernest] rid:[0x3ea]
+user:[isaac] rid:[0x3ec]
+user:[michael] rid:[0x3e9]
+user:[cosmin] rid:[0x3eb]
+user:[jordi] rid:[0x3ed]
+user:[fernando] rid:[0x3ee]
+user:[victor] rid:[0x3ef]
+user:[lina] rid:[0x3f0]
+user:[jack] rid:[0x3f1]
+user:[ju] rid:[0x3f2]
+user:[andre] rid:[0x3f3]
+user:[anton] rid:[0x3f4]
+
+ ========================================= 
+|    Share Enumeration on 192.168.1.12    |
+ ========================================= 
+
+    Sharename       Type      Comment
+    ---------       ----      -------
+    marc            Disk      Carpeta de l'Alumne marc
+    michael         Disk      Carpeta de l'Alumne michael
+    ernest          Disk      Carpeta de l'Alumne ernest
+    cosmin          Disk      Carpeta de l'Alumne cosmin
+    isaac           Disk      Carpeta de l'Alumne isaac
+    jordi           Disk      Carpeta de l'Alumne jordi
+    fernando        Disk      Carpeta de l'Alumne fernando
+    victor          Disk      Carpeta de l'Alumne victor
+    lina            Disk      Carpeta de l'Alumne lina
+    jack            Disk      Carpeta de l'Alumne jack
+    ju              Disk      Carpeta de l'Alumne ju
+    andre           Disk      Carpeta de l'Alumne andre
+    anton           Disk      Carpeta de l'Alumne anton
+    juan            Disk      Carpeta de l'Alumne juan
+    pe              Disk      Carpeta de l'Alumne pe
+    IPC$            IPC       IPC Service (Samba Server)
+SMB1 disabled -- no workgroup available
+
+[+] Attempting to map shares on 192.168.1.12
+//192.168.1.12/marc    Mapping: DENIED, Listing: N/A
+//192.168.1.12/michael    Mapping: DENIED, Listing: N/A
+//192.168.1.12/ernest    Mapping: DENIED, Listing: N/A
+//192.168.1.12/cosmin    Mapping: DENIED, Listing: N/A
+//192.168.1.12/isaac    Mapping: DENIED, Listing: N/A
+//192.168.1.12/jordi    Mapping: DENIED, Listing: N/A
+//192.168.1.12/fernando    Mapping: DENIED, Listing: N/A
+//192.168.1.12/victor    Mapping: DENIED, Listing: N/A
+//192.168.1.12/lina    Mapping: DENIED, Listing: N/A
+//192.168.1.12/jack    Mapping: DENIED, Listing: N/A
+//192.168.1.12/ju    Mapping: DENIED, Listing: N/A
+//192.168.1.12/andre    Mapping: DENIED, Listing: N/A
+//192.168.1.12/anton    Mapping: DENIED, Listing: N/A
+//192.168.1.12/juan    Mapping: DENIED, Listing: N/A
+//192.168.1.12/pe    Mapping: DENIED, Listing: N/A
+//192.168.1.12/IPC$    [E] Can't understand response:
+NT_STATUS_OBJECT_NAME_NOT_FOUND listing \*
+
+ ==================================================== 
+|    Password Policy Information for 192.168.1.12    |
+ ==================================================== 
+
+
+[+] Attaching to 192.168.1.12 using a NULL share
+
+[+] Trying protocol 139/SMB...
+
+    [!] Protocol failed: ('unpack requires a buffer of 1 bytes', 
+    "When unpacking field 'SecurityMode | <B | b''[:1]'")
+
+[+] Trying protocol 445/SMB...
+
+[+] Found domain(s):
+
+    [+] 1C144B1916EA
+    [+] Builtin
+
+[+] Password Info for Domain: 1C144B1916EA
+
+    [+] Minimum password length: 5
+    [+] Password history length: None
+    [+] Maximum password age: 37 days 6 hours 21 minutes 
+    [+] Password Complexity Flags: 000000
+
+        [+] Domain Refuse Password Change: 0
+        [+] Domain Password Store Cleartext: 0
+        [+] Domain Password Lockout Admins: 0
+        [+] Domain Password No Clear Change: 0
+        [+] Domain Password No Anon Change: 0
+        [+] Domain Password Complex: 0
+
+    [+] Minimum password age: None
+    [+] Reset Account Lockout Counter: 30 minutes 
+    [+] Locked Account Duration: 30 minutes 
+    [+] Account Lockout Threshold: None
+    [+] Forced Log off Time: 37 days 6 hours 21 minutes 
+
+
+[+] Retieved partial password policy with rpcclient:
+
+Password Complexity: Disabled
+Minimum Password Length: 5
+
+
+ ============================== 
+|    Groups on 192.168.1.12    |
+ ============================== 
+
+[+] Getting builtin groups:
+
+[+] Getting builtin group memberships:
+
+[+] Getting local groups:
+
+[+] Getting local group memberships:
+
+[+] Getting domain groups:
+
+[+] Getting domain group memberships:
+
+ ======================================================================= 
+|    Users on 192.168.1.12 via RID cycling (RIDS: 500-550,1000-1050)    |
+ ======================================================================= 
+[I] Found new SID: S-1-22-1
+[I] Found new SID: S-1-5-21-2112836514-3653563689-2825713174
+[I] Found new SID: S-1-5-32
+[+] Enumerating users using SID S-1-5-32 and logon username '', password ''
+S-1-5-32-544 BUILTIN\Administrators (Local Group)
+S-1-5-32-545 BUILTIN\Users (Local Group)
+S-1-5-32-546 BUILTIN\Guests (Local Group)
+S-1-5-32-547 BUILTIN\Power Users (Local Group)
+S-1-5-32-548 BUILTIN\Account Operators (Local Group)
+S-1-5-32-549 BUILTIN\Server Operators (Local Group)
+S-1-5-32-550 BUILTIN\Print Operators (Local Group)
+[+] Enumerating users using SID S-1-5-21-2112836514-3653563689-2825713174 
+and logon username '', password ''
+S-1-5-21-2112836514-3653563689-2825713174-500 *unknown*\*unknown* (8)
+S-1-5-21-2112836514-3653563689-2825713174-501 1C144B1916EA\nobody (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-513 1C144B1916EA\None (Domain Group)
+S-1-5-21-2112836514-3653563689-2825713174-1000 1C144B1916EA\marc (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1001 1C144B1916EA\michael (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1002 1C144B1916EA\ernest (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1003 1C144B1916EA\cosmin (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1004 1C144B1916EA\isaac (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1005 1C144B1916EA\jordi (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1006 1C144B1916EA\fernando (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1007 1C144B1916EA\victor (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1008 1C144B1916EA\lina (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1009 1C144B1916EA\jack (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1010 1C144B1916EA\ju (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1011 1C144B1916EA\andre (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1012 1C144B1916EA\anton (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1013 1C144B1916EA\juan (Local User)
+S-1-5-21-2112836514-3653563689-2825713174-1014 1C144B1916EA\pe (Local User)
+[+] Enumerating users using SID S-1-22-1 and logon username '', password ''
+S-1-22-1-1000 Unix User\marc (Local User)
+S-1-22-1-1001 Unix User\michael (Local User)
+S-1-22-1-1002 Unix User\ernest (Local User)
+S-1-22-1-1003 Unix User\cosmin (Local User)
+S-1-22-1-1004 Unix User\isaac (Local User)
+S-1-22-1-1005 Unix User\jordi (Local User)
+S-1-22-1-1006 Unix User\fernando (Local User)
+S-1-22-1-1007 Unix User\victor (Local User)
+S-1-22-1-1008 Unix User\lina (Local User)
+S-1-22-1-1009 Unix User\jack (Local User)
+S-1-22-1-1010 Unix User\ju (Local User)
+S-1-22-1-1011 Unix User\andre (Local User)
+S-1-22-1-1012 Unix User\anton (Local User)
+S-1-22-1-1013 Unix User\juan (Local User)
+S-1-22-1-1014 Unix User\pe (Local User)
+
+ ============================================= 
+|    Getting printer info for 192.168.1.12    |
+ ============================================= 
+Could not initialise spoolss. Error was NT_STATUS_OBJECT_NAME_NOT_FOUND
+
+
+enum4linux complete on Sun May 30 08:28:39 2021
+
+
+\end{minted}
+
+A nivell de web ve a mostra una mica el mateix, l'ús de l'eina no es molt complexa i extreu molta informació encara que sigui utilitzant enumeració bàsica. 
+
+\begin{minted}
+[
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{text}
+
+[-] Enum index web content: Something wrong
+HTTP/1.1 302 Found
+Location: https://192.168.1.12:443/
+Date: Sun, 30 May 2021 09:31:26 GMT
+Content-Length: 5
+Content-Type: text/plain; charset=utf-8
+
+Found
+[b] Enum versions webs: Running
+WhatWeb report for http://192.168.1.12
+Status    : 302 Found
+Title     : <None>
+IP        : 192.168.1.12
+Country   : RESERVED, ZZ
+
+Summary   : RedirectLocation[https://192.168.1.12:443/]
+
+Detected Plugins:
+[ RedirectLocation ]
+    HTTP Server string location. used with http-status 301 and 
+    302 
+
+    String       : https://192.168.1.12:443/ (from location)
+
+HTTP Headers:
+    HTTP/1.1 302 Found
+    Location: https://192.168.1.12:443/
+    Date: Sun, 30 May 2021 09:31:27 GMT
+    Content-Length: 5
+    Content-Type: text/plain; charset=utf-8
+    Connection: close
+    
+WhatWeb report for https://192.168.1.12/
+Status    : 404 Not Found
+Title     : <None>
+IP        : 192.168.1.12
+Country   : RESERVED, ZZ
+
+Summary   : UncommonHeaders[x-content-type-options]
+
+Detected Plugins:
+[ UncommonHeaders ]
+    Uncommon HTTP server headers. The blacklist includes all 
+    the standard headers and many non standard but common ones. 
+    Interesting but fairly common headers should have their own 
+    plugins, eg. x-powered-by, server and x-aspnet-version. 
+    Info about headers can be found at www.http-stats.com 
+
+    String       : x-content-type-options (from headers)
+
+HTTP Headers:
+    HTTP/1.1 404 Not Found
+    Content-Type: text/plain; charset=utf-8
+    X-Content-Type-Options: nosniff
+    Date: Sun, 30 May 2021 09:31:28 GMT
+    Content-Length: 19
+    Connection: close
+    
+
+[+] Nikto detect misconfiguration, risky files, etc.: Succesfully!
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          192.168.1.12
++ Target Hostname:    192.168.1.12
++ Target Port:        80
++ Start Time:         2021-05-30 09:31:30 (GMT0)
+---------------------------------------------------------------------------
++ Server: No banner retrieved
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Root page / redirects to: https://192.168.1.12:443/
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ 7915 requests: 0 error(s) and 3 item(s) reported on remote host
++ End Time:           2021-05-30 09:31:42 (GMT0) (12 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+
+[-] Fuzzing directories and files: Command timeout
+[-] SIGINT or CTRL-C detected.: Exiting gracefully
+
+\end{minted}
+\begin{minted}
+[
+baselinestretch=1.2,
+bgcolor=white,
+fontsize=\footnotesize,
+]
+{text}
+
+
+\end{minted}
     \section{Conclusions}
 
-    \section{Referecies bibliografiques}
+El principal objectiu d'aquest treball era tenir una eina que em permetés automatitzar l'enumeració d'un pentest, també ha set aprendre i entendre com desenvolupar una eina. Considerant que havia posat el llisto molt alt però no comptava amb el poc temps que he tingut. De totes maneres em sento molt content d'haver escollit aquest projecte, ja que m'ha ajudat molt a millorar aspectes tècnics de la programació i entendre el funcionament d'altres eines.
+\par
+Per això crec que és un bon inici per seguir desenvolupant aquestes habilitats, considero que crear-te les teves eines per automatitzar tasques et pot aportar molta més eficàcia i t'obliga a entendre molt més a baix nivell la tasca que s'ha de realitzar.
+\par
+Se que encara li falta molt perquè l'eina deixi de ser una versió beta però realment he aconseguit donar-li forma i a poc a poc podré anar implementant les millores que m'he proposat.
+\subsection{Línies de futur}
+Com he dit, jo vull seguir millorant les habilitats adquirides en aquest projecte, per tant, seguiré treballant per teure'l de la fase beta i deixar-lo d'utilitzar en entorns de laboratori. 
+
+\subsection{Problemes trobats}
+
+Per una banda, ha set bastant complicat el tema d'utilitzar alguns mòduls perquè no havia utilitzat mai, com ara el argsparse i subproces. Aquest dos son els que més m'ha costat implementar. Finalment he aconseguit fer que funcionin però en algunes comandes no ho agafa del tot bé i no executa la comanda.
+
+Un altre problema que vaig trobar que no hi contava era el tema de modificar els fitxers de configuració pensava que seria més fàcil i únicament hauria de buscar una llibreria que m'ho permetis però finalment ho vaig haver de preguntar quines alternatives podria utilitzar.
+\pagebreak
+
+\begin{thebibliography}{9}
+\bibitem{cme} 
+CrackMapExec is developed by @byt3bl33d3r and maintained by @mpgn
+\textit{Is a post-exploitation tool that helps automate assessing the security of large Active Directory networks}
+https://mpgn.gitbook.io/crackmapexec/
+
+\bibitem{autorecon} 
+Tib3rius 
+\textit{Penetration tester with 10 years experience, specializing in web application security. I have an MSc in #InfoSec, created AutoRecon and two popular PrivEsc courses for the #OSCP labs/exam. He's stream on Twitch and create #CyberSecurity}
+https://github.com/Tib3rius/AutoRecon
 
 
+\bibitem{argparse} 
+argparse
+\texttt{Parser for command-line options, arguments and sub-commands}
+https://docs.python.org/3/library/argparse.html
+
+\bibitem{subproces} 
+subprocess
+\texttt{Subprocess management}
+https://docs.python.org/3/library/subprocess.html
+
+\bibitem{os}
+os.path
+\texttt{Common pathname manipulations}
+https://docs.python.org/3/library/os.path.html
+
+\end{thebibliography}
 
 \end{document}
 

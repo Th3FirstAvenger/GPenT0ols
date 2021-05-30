@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{l+s+sb}{```yaml}
+\PYG{n+nt}{ldap\PYGZus{}nmap\PYGZus{}session}\PYG{p}{:}
+    \PYG{n+nt}{attack\PYGZus{}technique}\PYG{p}{:} \PYG{l+lScalar+lScalarPlain}{nmap}
+    \PYG{n+nt}{description}\PYG{p}{:} \PYG{l+s}{\PYGZdq{}Enum}\PYG{n+nv}{ }\PYG{l+s}{null}\PYG{n+nv}{ }\PYG{l+s}{sessions}\PYG{n+nv}{ }\PYG{l+s}{with}\PYG{n+nv}{ }\PYG{l+s}{nmap\PYGZdq{}}
+    \PYG{n+nt}{tags}\PYG{p}{:}
+        \PYG{p+pIndicator}{\PYGZhy{}} \PYG{l+lScalar+lScalarPlain}{nocreds}
+    \PYG{n+nt}{commands}\PYG{p}{:} \PYG{p+pIndicator}{|}
+        \PYG{n+no}{nmap \PYGZhy{}sV \PYGZhy{}p \PYGZdl{}\PYGZob{}\PYGZob{} port \PYGZcb{}\PYGZcb{} \PYGZhy{}\PYGZhy{}script=\PYGZdq{}banner,(ldap* or ssl*) and not}
+        \PYG{n+no}{(brute or broadcast or dos or external or fuzzer)\PYGZdq{} \PYGZhy{}oN \PYGZdq{}\PYGZdl{}\PYGZob{}\PYGZob{} out\PYGZus{}dir \PYGZcb{}\PYGZcb{}\PYGZdq{} \PYGZdl{}\PYGZob{}\PYGZob{} target \PYGZcb{}\PYGZcb{}}
+\PYG{l+s+sb}{```}
+\end{Verbatim}
