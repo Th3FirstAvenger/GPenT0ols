@@ -1,10 +1,10 @@
 # Fdb version 3
-["biber template"] 1622370776 "template.bcf" "template.bbl" "template" 1622372386
-  "template.bcf" 1622372386 106776 5817e2cb0ee7cfb258c9548e4881c5e4 "pdflatex"
+["biber template"] 1622370776 "template.bcf" "template.bbl" "template" 1622372725
+  "template.bcf" 1622372725 106776 5817e2cb0ee7cfb258c9548e4881c5e4 "pdflatex"
   (generated)
-  "template.blg"
   "template.bbl"
-["pdflatex"] 1622372383 "template.tex" "template.pdf" "template" 1622372386
+  "template.blg"
+["pdflatex"] 1622372723 "template.tex" "template.pdf" "template" 1622372725
   "/dev/null" 1622353617 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1616952564 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1616952564 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -164,17 +164,17 @@
   "data/img/Estructura_Script.png" 1622310287 167143 2e65f18952c8240042e8c38188f6f67c ""
   "data/img/ITB_Logo_417.png" 1619793339 15338 8f361517dabb44a7c072e7a36e6babb2 ""
   "data/img/Logo_ptls.png" 1621956204 174901 96af311d3c1b73f2d038d8b218f6a640 ""
-  "template.aux" 1622372386 6289 c41aa4b1be4dbe5677e81c6c129621ba "pdflatex"
+  "template.aux" 1622372725 6289 c41aa4b1be4dbe5677e81c6c129621ba "pdflatex"
   "template.bbl" 1622370777 0 d41d8cd98f00b204e9800998ecf8427e "biber template"
-  "template.out" 1622372386 910 e86ee58a79e28004d1398f118ec4c8ba "pdflatex"
-  "template.run.xml" 1622372386 2373 3a11c821cd23dae2cc668262da9b56fd "pdflatex"
-  "template.tex" 1622372380 83872 9a94b34edd10f12a057cd41be7d1b59c ""
-  "template.toc" 1622372386 1822 ff2700429c54f5a988500193a3e2d5b2 "pdflatex"
+  "template.out" 1622372725 910 e86ee58a79e28004d1398f118ec4c8ba "pdflatex"
+  "template.run.xml" 1622372725 2373 3a11c821cd23dae2cc668262da9b56fd "pdflatex"
+  "template.tex" 1622372715 83871 59ce55d3e604185be9749d2e83659d2f ""
+  "template.toc" 1622372725 1822 ff2700429c54f5a988500193a3e2d5b2 "pdflatex"
   (generated)
-  "template.pdf"
-  "template.bcf"
   "template.toc"
-  "template.out"
   "template.log"
+  "template.bcf"
   "template.run.xml"
+  "template.pdf"
   "template.aux"
+  "template.out"
